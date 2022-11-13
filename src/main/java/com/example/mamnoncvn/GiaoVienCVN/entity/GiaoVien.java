@@ -1,10 +1,9 @@
-package com.example.mamnoncvn.GiaoVienCVN;
+package com.example.mamnoncvn.GiaoVienCVN.entity;
 
-import com.example.mamnoncvn.GiaoVienCVN.DTO.GiaoVienDTO;
+import com.example.mamnoncvn.GiaoVienCVN.Models.DTO.GiaoVienDTO;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -15,19 +14,20 @@ public class GiaoVien {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotNull
+
     @Column(name = "ho_ten")
     private String hoTen;
 
-    @NotNull
+
     @Column(name = "dia_chi")
     private String diaChi;
 
-    @NotNull
     @Column(name = "so_dien_thoai")
     private String soDienThoai;
 
-    @NotNull
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "status")
     private boolean status;
 

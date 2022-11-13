@@ -1,16 +1,14 @@
 package com.example.mamnoncvn.GiaoVienCVN.controllers;
 
-import com.example.mamnoncvn.GiaoVienCVN.DTO.GiaoVienDTO;
-import com.example.mamnoncvn.GiaoVienCVN.GiaoVien;
-import com.example.mamnoncvn.GiaoVienCVN.GiaoVienRepository;
+import com.example.mamnoncvn.GiaoVienCVN.entity.GiaoVien;
 import com.example.mamnoncvn.GiaoVienCVN.service.GiaoVienService;
+import com.example.mamnoncvn.GiaoVienCVN.Models.request.CreateGiaoVienRequest;
+import com.example.mamnoncvn.GiaoVienCVN.Models.request.UpdateGiaoVienRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.w3c.dom.stylesheets.LinkStyle;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,8 +19,8 @@ public class GiaoVienController {
 
     @GetMapping("/createDB")
     public List<GiaoVien> createDB() {
-        for (int i = 0; i < 5; i++) {
-            GiaoVienDTO sampleData = new GiaoVienDTO("Nguyen Van A" + i*100, "Dia chi " + i+1, "0987" + i*12345 , true);
+        for (int i = 1; i < 5; i++) {
+            CreateGiaoVienRequest sampleData = new CreateGiaoVienRequest("Nguyễn Hoàng A" + i*100, "Dia chi " + i+1, "0987" + i*123451, i*345 + "@gmail.com" , true);
             giaoVienService.addNewGiaoVien(sampleData);
         }
         return giaoVienService.getAllGV();
@@ -32,5 +30,24 @@ public class GiaoVienController {
     public List<GiaoVien> showALlGV() {
         return giaoVienService.getAllGV();
     }
+
+    @PostMapping
+    public ResponseEntity<Object> insertNewGV(@Valid @RequestBody CreateGiaoVienRequest giaoVienRequest) {
+        //return giaoVienService.addNewGiaoVien(giaoVienDTO);
+        return ResponseEntity.ok(giaoVienService.addNewGiaoVien(giaoVienRequest));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteGiaoVien(@PathVariable Long id) {
+        giaoVienService.deleteGiaoVienById(id);
+        return ResponseEntity.ok("Deleted giaovien id: " + id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateGiaoVienProfile(@Valid @RequestBody UpdateGiaoVienRequest giaoVienRequest, @PathVariable Long id) {
+        return ResponseEntity.ok(giaoVienService.updateGiaoVien(giaoVienRequest, id));
+    }
+
+
 
 }

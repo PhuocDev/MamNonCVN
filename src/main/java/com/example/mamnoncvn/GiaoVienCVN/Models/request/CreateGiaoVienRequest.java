@@ -1,13 +1,16 @@
-package com.example.mamnoncvn.GiaoVienCVN.DTO;
+package com.example.mamnoncvn.GiaoVienCVN.Models.request;
 
-import lombok.Data;
+import lombok.*;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-@Data
-public class GiaoVienDTO {
-
+@NoArgsConstructor
+@Setter
+@Getter
+public class CreateGiaoVienRequest {
     @NotBlank(message = "Name is mandatory")
     private String hoTen;
 
@@ -15,22 +18,24 @@ public class GiaoVienDTO {
     @NotBlank(message = "Dia Chi can not be blank")
     private String diaChi;
 
-    @NotNull
+
+    @Pattern(regexp="(84|0[3|5|7|8|9])+([0-9]{8})\\b",message = "Số điện thoại không hợp lệ!")
     private String soDienThoai;
 
+    @NotBlank(message = "Email trống")
+    @Email(message = "Email không đúng định dạng")
+    private String email;
     @NotNull
     private boolean status;
 
-
-    public GiaoVienDTO(String hoTen, String diaChi, String soDienThoai, boolean status) {
-        this.diaChi = diaChi;
-        this.status = status;
-        this.hoTen = hoTen;
-        this.soDienThoai = soDienThoai;
+    public CreateGiaoVienRequest(String s, String s1, String s2, String email, boolean b) {
+        this.hoTen = s;
+        this.diaChi = s1;
+        this.soDienThoai = s2;
+        this.email = email;
+        this.status = b;
     }
-    public GiaoVienDTO() {
 
-    }
 
     public String getHoTen() {
         return hoTen;
