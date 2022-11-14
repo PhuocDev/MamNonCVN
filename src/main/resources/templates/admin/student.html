@@ -1,0 +1,241 @@
+<!doctype html>
+<!--
+* Bootstrap Simple Admin Template
+* Version: 2.1
+* Author: Alexis Luna
+* Website: https://github.com/alexis-luna/bootstrap-simple-admin-template
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin's Dashboard</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+        <!-- Content       -->
+        <div class="content">
+            <div class="container">
+                <div class="page-title" style="margin-bottom: 20px;">
+                    <h3>Student management</h3>
+                </div>
+                <div class="filterClass">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Input Class ID" aria-label="Username" aria-describedby="input-group-button-right">
+                        <button type="button" class="btn btn-outline-secondary" id="input-group-button-right">Filter</button>
+                    </div>
+                </div>
+
+
+                <!-- Form insert new student -->
+                <div id="insertForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Thêm học sinh mới</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin học sinh vào bên dưới:</h5>
+                            <form class="needs-validation" novalidate accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="text" class="form-label">Họ tên</label>
+                                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên" required>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="text" class="form-label">Số điện thoại</label>
+                                        <input type="number" class="form-control" name="sdt" placeholder="Số điện thoại" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="address" class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter your address.</div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="city" class="form-label">Trình độ</label>
+                                        <input type="text" class="form-control" name="trinhDo" placeholder="Mã trình độ" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="state" class="form-label">Trạng thái</label>
+                                        <select name="state" class="form-select" required>
+                                            <option value="" selected>Choose...</option>
+                                            <option value="1">Hoạt động</option>
+                                            <option value="2">Ngừng hoạt động</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="zip" class="form-label">Ngày đăng ký</label>
+                                        <input type="date" class="form-control" name="ngayDK" placeholder="29/03/2022" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form update new student -->
+                <div id="updateForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Cập nhật thông tin học sinh</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin cần cập nhật</h5>
+                            <form class="needs-validation" novalidate accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="text" class="form-label">Họ tên</label>
+                                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên" required>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="text" class="form-label">Số điện thoại</label>
+                                        <input type="number" class="form-control" name="sdt" placeholder="Số điện thoại" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="address" class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter your address.</div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="city" class="form-label">Trình độ</label>
+                                        <input type="text" class="form-control" name="trinhDo" placeholder="Mã trình độ" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="state" class="form-label">Trạng thái</label>
+                                        <select name="state" class="form-select" required>
+                                            <option value="" selected>Choose...</option>
+                                            <option value="1">Hoạt động</option>
+                                            <option value="2">Ngừng hoạt động</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="zip" class="form-label">Ngày đăng ký</label>
+                                        <input type="date" class="form-control" name="ngayDK" placeholder="29/03/2022" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">Student list</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Mã HV</th>
+                                            <th>Họ tên</th>
+                                            <th>Địa chỉ</th>
+                                            <th>SDT</th>
+                                            <th>Trình độ</th>
+                                            <th>Ngày đăng ký</th>
+                                            <th>Trạng thái</th>
+                                            <th> </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1235</th>
+                                            <td>Mark Zuck</td>
+                                            <td>Số 23, đường Hoàng Văn Thụ, Phường Long Bình, Quận 9 </td>
+                                            <td>0362103314</td>
+                                            <td>112233</td>
+                                            <th>29/03/2022</th>
+                                            <th>Đang học</th>
+                                            <th>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="button" id="updateStudentBtn" class="btn btn-primary">Fix</button>
+                                                    <button type="button" class="btn btn-danger deleteStudentBtn">Del</button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">6345</th>
+                                            <td>Mark Zuck</td>
+                                            <td>S111, Đường Tân Hiệp, Tân Long, Bình Thạnh</td>
+                                            <td>0362103314</td>
+                                            <td>112233</td>
+                                            <th>29/03/2022</th>
+                                            <th>Đang học</th>
+                                            <th>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="button" id="updateStudentBtn" class="btn btn-primary">Fix</button>
+                                                    <button type="button" class="btn btn-danger deleteStudentBtn">Del</button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" colspan="8" style="text-align: right;">
+                                                <button type="button" id="addStudentBtn" class="btn btn-primary">Thêm học sinh</button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/chartsjs/Chart.min.js}"></script>
+<script th:src="@{/js/dashboard-charts.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+    $(document).ready(function() {
+        $("#insertForm").hide();
+        $("#updateForm").hide();
+        $("#addStudentBtn").click(function() {
+            $("#updateForm").hide();
+            $("#insertForm").toggle(500);
+        });
+        $("#updateStudentBtn").click(function() {
+            $("#insertForm").hide();
+            $("#updateForm").toggle(500);
+        });
+
+        // Delete button
+        $(".deleteStudentBtn").click(function() {
+            //get infor of student to delete here
+            if (confirm("Do you want to delete student id: " + $(this).parent().parent().parent().first().children().first().text())) {
+                $(this).parent().parent().parent().remove();
+            }
+
+        });
+    });
+</script>
+
+</html>

@@ -1,12 +1,20 @@
 package com.example.mamnoncvn.controllers;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class MainController {
     @GetMapping("/")
-    public String hello() {
-        return "hello Mam non Cau Vong nho";
+    public String hello(Model model) {
+        return "index";
+    }
+    @GetMapping("/test")
+    public String test() {
+        return "layout/admin_layout";
+    }
+    @GetMapping("/student")
+    public String student() {
+        return "admin/student";
     }
 }
