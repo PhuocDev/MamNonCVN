@@ -40,7 +40,7 @@ public class MainController {
     public String addNewGV(@RequestParam String hoten, @RequestParam String sdt,@RequestParam String address,
                            @RequestParam String email, @RequestParam Boolean trangThai)
     {
-        CreateGiaoVienRequest giaoVienRequest = new CreateGiaoVienRequest(hoten, sdt, address,email,trangThai);
+        CreateGiaoVienRequest giaoVienRequest = new CreateGiaoVienRequest(hoten, address, sdt,email,trangThai);
         giaoVienService.addNewGiaoVien(giaoVienRequest);
         return "redirect:/teacher";
     }
