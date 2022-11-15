@@ -42,7 +42,7 @@
                             <div class="card-header">Thêm giáo viên mới</div>
                             <div class="card-body">
                                 <h5 class="card-title">Điền thông tin giáo viên vào bên dưới:</h5>
-                                <form action="#" th:action="@{/addGV}" th:object="${giaovienRequest}" method="post"  class="needs-validation" novalidate accept-charset="utf-8">
+                                <form action="#" th:action="@{/giaovien/addGV}" th:object="${giaovienRequest}" method="post"  class="needs-validation" novalidate accept-charset="utf-8">
                                     <div class="row g-2">
                                         <div class="mb-3 col-md-6">
                                             <label th:for="text" class="form-label">Họ tên</label>
@@ -85,7 +85,7 @@
                             <div class="card-header">Cập nhật giáo viên</div>
                             <div class="card-body">
                                 <h5 class="card-title">Cập nhật thông tin giáo viên vào bên dưới:</h5>
-                                <form action="#" th:action="@{/updateGV}" th:object="${updateGiaovienRequest}"  method="post" class="needs-validation" novalidate accept-charset="utf-8">
+                                <form action="#" th:action="@{/giaovien/updateGV}" th:object="${updateGiaovienRequest}"  method="post" class="needs-validation" novalidate accept-charset="utf-8">
                                     <div class="row g-2">
                                         <div class="mb-3 col-md-6">
                                             <label th:for="text" class="form-label">Họ tên</label>
@@ -210,7 +210,7 @@
             if (confirm("Do you want to delete student id: " + $(this).parent().parent().parent().first().children().first().text())) {
                 $(this).parent().parent().parent().remove();
                 $.ajax({
-                    url: "http://localhost:8080/deleteGV?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
+                    url: "http://localhost:8080/giaovien/deleteGV?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
                     success: function(response) {
                         //do something
                     },
