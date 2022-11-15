@@ -1,6 +1,6 @@
 package com.example.mamnoncvn.GiaoVienCVN.entity;
 
-import com.example.mamnoncvn.GiaoVienCVN.Models.DTO.GiaoVienDTO;
+import com.example.mamnoncvn.GiaoVienCVN.models.dto.GiaoVienDTO;
 import lombok.Data;
 
 import javax.persistence.*;

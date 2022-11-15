@@ -1,10 +1,7 @@
-package com.example.mamnoncvn.GiaoVienCVN.Models.DTO;
+package com.example.mamnoncvn.GiaoVienCVN.models.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

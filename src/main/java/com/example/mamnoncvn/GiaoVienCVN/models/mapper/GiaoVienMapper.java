@@ -1,7 +1,7 @@
-package com.example.mamnoncvn.GiaoVienCVN.Models.mapper;
+package com.example.mamnoncvn.GiaoVienCVN.models.mapper;
 
-import com.example.mamnoncvn.GiaoVienCVN.Models.DTO.GiaoVienDTO;
-import com.example.mamnoncvn.GiaoVienCVN.Models.request.CreateGiaoVienRequest;
+import com.example.mamnoncvn.GiaoVienCVN.models.dto.GiaoVienDTO;
+import com.example.mamnoncvn.GiaoVienCVN.models.request.CreateGiaoVienRequest;
 import com.example.mamnoncvn.GiaoVienCVN.entity.GiaoVien;
 
 public class GiaoVienMapper {

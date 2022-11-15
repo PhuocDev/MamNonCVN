@@ -1,4 +1,4 @@
-package com.example.mamnoncvn.GiaoVienCVN.Models.request;
+package com.example.mamnoncvn.GiaoVienCVN.models.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

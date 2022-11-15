@@ -2,9 +2,9 @@ package com.example.mamnoncvn.GiaoVienCVN.service;
 
 import com.example.mamnoncvn.GiaoVienCVN.entity.GiaoVien;
 import com.example.mamnoncvn.GiaoVienCVN.repository.GiaoVienRepository;
-import com.example.mamnoncvn.GiaoVienCVN.Models.mapper.GiaoVienMapper;
-import com.example.mamnoncvn.GiaoVienCVN.Models.request.CreateGiaoVienRequest;
-import com.example.mamnoncvn.GiaoVienCVN.Models.request.UpdateGiaoVienRequest;
+import com.example.mamnoncvn.GiaoVienCVN.models.mapper.GiaoVienMapper;
+import com.example.mamnoncvn.GiaoVienCVN.models.request.CreateGiaoVienRequest;
+import com.example.mamnoncvn.GiaoVienCVN.models.request.UpdateGiaoVienRequest;
 import com.example.mamnoncvn.exception.BadRequestException;
 import com.example.mamnoncvn.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
