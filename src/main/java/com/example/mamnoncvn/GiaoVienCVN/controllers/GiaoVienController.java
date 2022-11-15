@@ -31,8 +31,8 @@ public class GiaoVienController {
         return giaoVienService.getAllGV();
     }
 
-    @PostMapping
-    public ResponseEntity<Object> insertNewGV(@Valid @RequestBody CreateGiaoVienRequest giaoVienRequest) {
+    @PostMapping( consumes = "application/x-www-form-urlencoded")
+    public ResponseEntity<Object> insertNewGV(@Valid @ModelAttribute("giaovienRequest") CreateGiaoVienRequest giaoVienRequest) {
         //return giaoVienService.addNewGiaoVien(giaoVienDTO);
         return ResponseEntity.ok(giaoVienService.addNewGiaoVien(giaoVienRequest));
     }
@@ -45,7 +45,7 @@ public class GiaoVienController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateGiaoVienProfile(@Valid @RequestBody UpdateGiaoVienRequest giaoVienRequest, @PathVariable Long id) {
-        return ResponseEntity.ok(giaoVienService.updateGiaoVien(giaoVienRequest, id));
+        return ResponseEntity.ok(giaoVienService.updateGiaoVien(giaoVienRequest));
     }
 
 

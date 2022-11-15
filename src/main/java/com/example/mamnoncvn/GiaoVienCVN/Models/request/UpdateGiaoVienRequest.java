@@ -14,6 +14,9 @@ import javax.validation.constraints.Pattern;
 @Setter
 @Getter
 public class UpdateGiaoVienRequest {
+
+    private Long id;
+
     @NotBlank(message = "Name is mandatory")
     private String hoTen;
 
@@ -28,6 +31,7 @@ public class UpdateGiaoVienRequest {
     @NotBlank(message = "Email trống")
     @Email(message = "Email không đúng định dạng")
     private String email;
+    
     @NotNull
     private boolean status;
 }

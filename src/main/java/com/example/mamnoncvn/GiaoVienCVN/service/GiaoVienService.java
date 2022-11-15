@@ -45,17 +45,16 @@ public class GiaoVienService {
             giaoVienRepository.deleteById(id);
         } else throw new NotFoundException("Giao vien ID not found");
     }
-    public GiaoVien updateGiaoVien(UpdateGiaoVienRequest giaoVienDTO, Long id) {
-        GiaoVien oldGV = giaoVienRepository.findById(id).get();
-        if (oldGV == null) throw new NotFoundException("Not found giaovien id: " + id);
-
-            oldGV.setHoTen(giaoVienDTO.getHoTen());
-            oldGV.setDiaChi(giaoVienDTO.getDiaChi());
-            oldGV.setStatus(giaoVienDTO.isStatus());
-            oldGV.setSoDienThoai(giaoVienDTO.getSoDienThoai());
+    public GiaoVien updateGiaoVien(UpdateGiaoVienRequest updateGVrequest) {
+        if (!giaoVienRepository.existsById(updateGVrequest.getId())) throw new NotFoundException("Not found giaovien id: " + updateGVrequest.getId());
+        GiaoVien oldGV = giaoVienRepository.findById(updateGVrequest.getId()).get();
+            oldGV.setHoTen(updateGVrequest.getHoTen());
+            oldGV.setDiaChi(updateGVrequest.getDiaChi());
+            oldGV.setStatus(updateGVrequest.isStatus());
+            oldGV.setSoDienThoai(updateGVrequest.getSoDienThoai());
+            oldGV.setEmail(updateGVrequest.getEmail());
             giaoVienRepository.saveAndFlush(oldGV);
-
-            return giaoVienRepository.findById(id).get();
+            return giaoVienRepository.findById(oldGV.getId()).get();
     }
 
 

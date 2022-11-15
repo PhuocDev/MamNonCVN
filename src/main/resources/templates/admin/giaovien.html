@@ -5,7 +5,7 @@
 * Author: Alexis Luna
 * Website: https://github.com/alexis-luna/bootstrap-simple-admin-template
 -->
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -42,31 +42,32 @@
                             <div class="card-header">Thêm giáo viên mới</div>
                             <div class="card-body">
                                 <h5 class="card-title">Điền thông tin giáo viên vào bên dưới:</h5>
-                                <form action="#" th:action="@{/addGV}" class="needs-validation" novalidate accept-charset="utf-8">
+                                <form action="#" th:action="@{/addGV}" th:object="${giaovienRequest}" method="post"  class="needs-validation" novalidate accept-charset="utf-8">
                                     <div class="row g-2">
                                         <div class="mb-3 col-md-6">
                                             <label th:for="text" class="form-label">Họ tên</label>
-                                            <input type="text" class="form-control" name="hoten" placeholder="Họ tên" required>
+                                            <input th:field="*{hoTen}" type="text" class="form-control" name="hoten" placeholder="Họ tên" required>
+
                                         </div>
                                         <div class="mb-3 col-md-3">
                                             <label th:for="text" class="form-label">Số điện thoại</label>
-                                            <input type="number" class="form-control" name="sdt" placeholder="Số điện thoại" required>
+                                            <input th:field="*{soDienThoai}" type="tel" class="form-control" name="sdt" placeholder="Số điện thoại" required>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label th:for="address" class="form-label">Địa chỉ</label>
-                                        <input type="text" class="form-control" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" required>
+                                        <input th:field="*{diaChi}" type="text" class="form-control" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" required>
                                     </div>
                                     <div class="row g-2">
                                         <div class="mb-3 col-md-4">
                                             <label th:for="city" class="form-label">E-MAIL</label>
-                                            <input type="email" class="form-control" name="email" placeholder="name@gmail.com" required>
+                                            <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="name@gmail.com" required>
                                         </div>
                                         <div class="mb-3 col-md-3">
                                             <label th:for="city" class="form-label">Trạng thái</label>
                                             <!-- <input type="text" class="form-control" name="thoiGianRanh" placeholder="" required> -->
-                                            <select name="trangThai"  class="form-control">
-                                                <option value="true">Hoạt động</option>
+                                            <select th:field="*{status}" name="trangThai"  class="form-control">
+                                                <option value="true" >Hoạt động</option>
                                                 <option value="false">Ngừng hoạt động</option>
                                             </select>
                                         </div>
@@ -81,35 +82,39 @@
                     <!-- Form update new student -->
                     <div id="updateForm" class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">Cập nhật giáo viên mới</div>
+                            <div class="card-header">Cập nhật giáo viên</div>
                             <div class="card-body">
                                 <h5 class="card-title">Cập nhật thông tin giáo viên vào bên dưới:</h5>
-                                <form class="needs-validation" novalidate accept-charset="utf-8">
+                                <form action="#" th:action="@{/updateGV}" th:object="${updateGiaovienRequest}"  method="post" class="needs-validation" novalidate accept-charset="utf-8">
                                     <div class="row g-2">
                                         <div class="mb-3 col-md-6">
                                             <label th:for="text" class="form-label">Họ tên</label>
-                                            <input type="text" class="form-control" name="hoten" placeholder="Họ tên" id="hoTenUpdate" required>
+                                            <input th:field="*{hoTen}" type="text" class="form-control" name="hoten" placeholder="Họ tên" id="hoTenUpdate" required>
                                         </div>
                                         <div class="mb-3 col-md-3">
                                             <label th:for="text" class="form-label">Số điện thoại</label>
-                                            <input type="number" class="form-control" name="sdt" placeholder="Số điện thoại" id="sdtUpdate" required>
+                                            <input th:field="*{soDienThoai}" type="tel" class="form-control" name="sdt" placeholder="Số điện thoại" id="sdtUpdate" required>
+                                        </div>
+                                        <div id="showIdUpdate" class="mb-3 col-md-2">
+                                            <label th:for="text" class="form-label">ID</label>
+                                            <input th:field="*{id}" type="number" class="form-control" name="sdt" placeholder="00" id="idUpdate" required>
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label th:for="address" class="form-label">Địa chỉ</label>
-                                        <input type="text" class="form-control" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" id="diaChiUpdate" required>
+                                        <input th:field="*{diaChi}" type="text" class="form-control" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" id="diaChiUpdate" required>
                                     </div>
                                     <div class="row g-2">
                                         <div class="mb-3 col-md-4">
                                             <label th:for="city" class="form-label">E-MAIL</label>
-                                            <input type="email" class="form-control" name="email" placeholder="name@gmail.com" id="emailUpdate" required>
+                                            <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="name@gmail.com" id="emailUpdate" required>
                                         </div>
                                         <div class="mb-3 col-md-3">
                                             <label th:for="city" class="form-label">Trạng thái</label>
                                             <!-- <input type="text" class="form-control" name="thoiGianRanh" placeholder="" required> -->
-                                            <select name="trangThai" class="form-control" id="statusUpdate">
-                                                <option value="true">Hoạt động</option>
+                                            <select th:field="*{status}" name="trangThai" class="form-control" id="statusUpdate">
+                                                <option value="true" >Hoạt động</option>
                                                 <option value="false">Ngừng hoạt động</option>
                                             </select>
                                         </div>
@@ -178,6 +183,7 @@
 <script th:src="@{/js/script.js}"></script>
 </body>
 <script>
+
     $(document).ready(function() {
         $("#insertForm").hide();
         $("#updateForm").hide();
@@ -189,9 +195,11 @@
         $(".updateStudentBtn").click(function() {
             $("#insertForm").hide();
             $("#updateForm").show(100);
+            $("#idUpdate").val($(this).parent().parent().parent().first().children().first().text());
+            $("#showIdUpdate").hide();
             $("#hoTenUpdate").val($(this).parent().parent().parent().first().children().first().next().text());
             $("#diaChiUpdate").val($(this).parent().parent().parent().first().children().first().next().next().text());
-            $("#sdtUpdate").val(parseInt($(this).parent().parent().parent().first().children().first().next().next().next().text()));
+            $("#sdtUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().text());
             $("#emailUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().text());
             $("#statusUpdate").val(($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text() == 'Đang hoạt động')?'true':'false');
         });
