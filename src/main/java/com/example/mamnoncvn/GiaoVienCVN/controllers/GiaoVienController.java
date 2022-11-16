@@ -1,9 +1,7 @@
 package com.example.mamnoncvn.GiaoVienCVN.controllers;
-
+import com.example.mamnoncvn.GiaoVienCVN.models.request.*;
 import com.example.mamnoncvn.GiaoVienCVN.entity.GiaoVien;
 import com.example.mamnoncvn.GiaoVienCVN.service.GiaoVienService;
-import com.example.mamnoncvn.GiaoVienCVN.models.request.CreateGiaoVienRequest;
-import com.example.mamnoncvn.GiaoVienCVN.models.request.UpdateGiaoVienRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
