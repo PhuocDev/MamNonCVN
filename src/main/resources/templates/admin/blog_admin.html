@@ -96,6 +96,14 @@
                                         <label th:for="text" class="form-label">ID</label>
                                         <input th:field="*{id}" type="number" class="form-control" id="idUpdate" name="idUpdate" placeholder="00" required>
                                     </div>
+                                    <div class="mb-3 col-md-2" hidden>
+                                        <label th:for="text" class="form-label">dateCreated</label>
+                                        <input th:field="*{dateCreated}" type="text" class="form-control" id="dateCreatedUpdate" name="dateCreatedUpdate" placeholder="00" >
+                                    </div>
+                                    <div class="mb-3 col-md-2" hidden>
+                                        <label th:for="text" class="form-label">dateModified</label>
+                                        <input th:field="*{dateModified}" type="text" class="form-control" id="dateModifiedUpdate" name="dateModifiedUpdate" placeholder="00" >
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label  th:for="address" class="form-label">Mô tả</label>
@@ -113,8 +121,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label  th:for="content" class="form-label">Nội dung bài viết</label>
-                                    <textarea th:field="*{content}" name="content" id="editorUpdate" class="form-control" >
-                                            &lt;p&gt;This is updating content.&lt;/p&gt;
+                                    <textarea th:field="*{content}" name="content" id="editorUpdate" style="height: 150px" class="form-control" >
                                     </textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
@@ -123,7 +130,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Content                   -->
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
@@ -188,11 +194,7 @@
         .catch( error => {
             console.error( error );
         } );
-    ClassicEditor
-        .create( document.querySelector( '#editorUpdate' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+
 </script>
 <script>
 
@@ -220,11 +222,34 @@
             $("#authorUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
             $("#thumbnailUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().text());
             var content = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text();
-            jQuery("textarea#editorUpdate").append($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
-            $('#editorUpdate').append($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
-            alert($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
-        });
+            ClassicEditor
+                .create( document.querySelector( '#editorUpdate' ), {
+                    htmlEmbed: {
+                        showPreviews: true,
+                        sanitizeHtml: ( inputHtml ) => {
+                            // Strip unsafe elements and attributes, e.g.:
+                            // the `<script>` elements and `on*` attributes.
+                            const outputHtml = sanitize( inputHtml );
 
+                            return {
+                                html: outputHtml,
+                                // true or false depending on whether the sanitizer stripped anything.
+                                hasChanged: true
+                            };
+                        }
+                    }
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+            document.getElementById('editorUpdate').innerHTML = content;
+            //console.log("number of textarea: " + $("textarea").length);
+            //console.log($("#editorUpdate").next().prop("tagName"));
+            if ($("#editorUpdate").next().prop("tagName") === 'DIV') {
+                $("#editorUpdate").next().remove();
+            }
+            //alert($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
+        });
         // Delete button
         $(".deleteBlogBtn").click(function() {
             //get infor of  Blog to delete here
@@ -253,8 +278,6 @@
         $("#cancelInsert").click(function (){
             $("#insertForm").hide();
         });
-
-
     });
 </script>
 

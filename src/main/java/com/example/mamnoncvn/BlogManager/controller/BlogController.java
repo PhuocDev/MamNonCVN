@@ -67,7 +67,7 @@ public class BlogController {
     }
 
     @PostMapping(path = "/updateBlog", consumes = "application/x-www-form-urlencoded")
-    public String updateBlog(@Valid @ModelAttribute("updateBlogRequest")UpdateBlogRequest updateBlogRequest){
+    public String updateBlog(@Valid @ModelAttribute("updateBlogRequest") UpdateBlogRequest updateBlogRequest){
         blogService.update(updateBlogRequest);
         return "redirect:/blog/all";
     }

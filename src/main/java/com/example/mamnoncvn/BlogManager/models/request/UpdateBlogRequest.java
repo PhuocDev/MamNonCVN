@@ -39,6 +39,7 @@ public class UpdateBlogRequest {
     private String author;
 
     public UpdateBlogRequest(){
+        this.dateCreated = LocalDate.now();
         this.dateModified = LocalDate.now();
     }
 
