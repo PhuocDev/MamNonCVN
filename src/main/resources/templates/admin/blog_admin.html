@@ -46,7 +46,15 @@
                                     </div>
                                     <div class="mb-3 col-md-3">
                                         <label  th:for="text" class="form-label">Phân loại</label>
-                                        <input  th:field="*{category}" type="text" class="form-control" name="category" placeholder="Phân loại" required>
+                                        <select th:field="*{category}" name="category"  class="form-control" required>
+                                            <option value="thongbao">Thông báo</option>
+                                            <option value="tintuc">Tin tức - Sự kiện</option>
+                                            <option value="suckhoe">Sức khỏe</option>
+                                            <option value="giaoduc">Giáo dục</option>
+                                            <option value="giaoduc">Giáo dục</option>
+                                            <option value="tuyendung">Tuyển dụng</option>
+                                            <option value="khac">Khác</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -90,7 +98,15 @@
                                     </div>
                                     <div class="mb-3 col-md-3">
                                         <label  th:for="text" class="form-label">Phân loại</label>
-                                        <input  th:field="*{category}" type="text" class="form-control" id="categoryUpdate" name="category" placeholder="Phân loại" required>
+                                        <select th:field="*{category}" name="category" id="categoryUpdate"  class="form-control" required>
+                                            <option value="thongbao">Thông báo</option>
+                                            <option value="tintuc">Tin tức - Sự kiện</option>
+                                            <option value="suckhoe">Sức khỏe</option>
+                                            <option value="giaoduc">Giáo dục</option>
+                                            <option value="giaoduc">Giáo dục</option>
+                                            <option value="tuyendung">Tuyển dụng</option>
+                                            <option value="khac">Khác</option>
+                                        </select>
                                     </div>
                                     <div id="showIdUpdate" class="mb-3 col-md-2">
                                         <label th:for="text" class="form-label">ID</label>
