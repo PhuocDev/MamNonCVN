@@ -10,8 +10,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class CreateBlogRequest {
-
+public class UpdateBlogRequest {
+    @NotNull
+    private Long id;
     @Column
     @NotBlank(message = "Title cannot be blank")
     private String title;
@@ -37,19 +38,19 @@ public class CreateBlogRequest {
     @NotBlank(message = "author cannot be blank")
     private String author;
 
-    public CreateBlogRequest(){
-        this.dateCreated = LocalDate.now();
+    public UpdateBlogRequest(){
         this.dateModified = LocalDate.now();
     }
 
-    public CreateBlogRequest(String title, String description, String category, String thumbnail, String content, LocalDate dateCreated, LocalDate dateModified, String author) {
+
+    public UpdateBlogRequest(String title, String description, String category, String thumbnail, String content, LocalDate dateCreated, String author) {
         this.title = title;
         this.description = description;
         this.category = category;
         this.thumbnail = thumbnail;
         this.content = content;
         this.dateCreated = dateCreated;
-        this.dateModified = dateModified;
+        this.dateModified = LocalDate.now();
         this.author = author;
     }
 }

@@ -38,7 +38,7 @@
                         <div class="card-header">Thêm blog mới</div>
                         <div class="card-body">
                             <h5 class="card-title">Điền thông tin blog vào bên dưới:</h5>
-                            <form action="#"  th:action="@{/blog/add}"  th:object="${createBlogRequest}" method="post" name="insertForm" accept-charset="utf-8">
+                            <form th:action="@{/blog/add}"  th:object="${createBlogRequest}" method="post" name="insertForm" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-9">
                                         <label  th:for="text" class="form-label">Tiêu đề</label>
@@ -56,7 +56,7 @@
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-4">
                                         <label  th:for="formFile" class="form-label">Ảnh bìa</label>
-                                        <input  th:field="*{thumbnail}" type="file" class="form-control" name="thumbnail" accept="image/png, image/jpeg" placeholder="anhBia.jpeg" required>
+                                        <input  th:field="*{thumbnail}" type="text" class="form-control" name="thumbnail" placeholder="image address" required>
                                     </div>
                                     <div class="mb-3 col-md-3">
                                         <label  th:for="text" class="form-label">Tác giả</label>
@@ -64,10 +64,10 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label  th:for="content" class="form-label">Mô tả</label>
-                                    <textarea name="content" id="editor"  class="form-control" th:field="*{content}" required>
+                                    <label  th:for="content" class="form-label">Nội dung bài viết</label>
+                                    <textarea name="content" id="editor"  class="form-control" th:field="*{content}">
                                             &lt;p&gt;This is some sample content.&lt;/p&gt;
-                                        </textarea>
+                                    </textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
                                 <button type="button" id="cancelInsert" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
@@ -76,53 +76,53 @@
                     </div>
                 </div>
 
-<!--                &lt;!&ndash; Form update new  Blog &ndash;&gt;-->
-<!--                <div id="updateForm" class="col-lg-12">-->
-<!--                    <div class="card">-->
-<!--                        <div class="card-header">Cập nhật  blog</div>-->
-<!--                        <div class="card-body">-->
-<!--                            <h5 class="card-title">Cập nhật thông tin  blog vào bên dưới:</h5>-->
-<!--                            <form action="#"  th:action="@{/blog/updateBlog}"  object="${update blogRequest}"  method="post" name="updateForm" accept-charset="utf-8">-->
-<!--                                <div class="row g-2">-->
-<!--                                    <div class="mb-3 col-md-7">-->
-<!--                                        <label  th:for="text" class="form-label">Tiêu đề</label>-->
-<!--                                        <input  th:field="*{title}" type="text" class="form-control" id="titleUpdate" name="title" minlength="5" placeholder="Tiêu đề" required>-->
-<!--                                    </div>-->
-<!--                                    <div class="mb-3 col-md-3">-->
-<!--                                        <label  th:for="text" class="form-label">Phân loại</label>-->
-<!--                                        <input  th:field="*{category}" type="text" class="form-control" id="categoryUpdate" name="category" placeholder="Phân loại" required>-->
-<!--                                    </div>-->
-<!--                                    <div id="showIdUpdate" class="mb-3 col-md-2">-->
-<!--                                        <label th:for="text" class="form-label">ID</label>-->
-<!--                                        <input th:field="*{id}" type="number" class="form-control" id="idUpdate" name="idUpdate" placeholder="00" id="idUpdate" required>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="mb-3">-->
-<!--                                    <label  th:for="address" class="form-label">Mô tả</label>-->
-<!--                                    <input  th:field="*{description}" type="text" class="form-control" id="descriptionUpdate" name="description" minlength="10" placeholder="Tóm tắt thông tin bài viết" required>-->
-<!--                                </div>-->
-<!--                                <div class="row g-2">-->
-<!--                                    <div class="mb-3 col-md-4">-->
-<!--                                        <label  th:for="formFile" class="form-label">Ảnh bìa</label>-->
-<!--                                        <input  th:field="*{thumbnail}" type="file" class="form-control" id="thumbnailUpdate" name="thumbnail" placeholder="anhBia.jpeg" required>-->
-<!--                                    </div>-->
-<!--                                    <div class="mb-3 col-md-3">-->
-<!--                                        <label  th:for="text" class="form-label">Tác giả</label>-->
-<!--                                        <input  th:field="*{author}" type="text" class="form-control" id="authorUpdate" name="author" placeholder="Tên tác giả" required>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="mb-3">-->
-<!--                                    <label  th:for="content" class="form-label">Mô tả</label>-->
-<!--                                    <textarea name="content" id="editorUpdate"  class="form-control"  th:field="*{content}" required>-->
-<!--                                            &lt;p&gt;This is updating content.&lt;/p&gt;-->
-<!--                                        </textarea>-->
-<!--                                </div>-->
-<!--                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>-->
-<!--                                <button type="button" id="cancelUpdate" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!-- Form update new  Blog -->
+                <div id="updateForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Cập nhật  blog</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Cập nhật thông tin  blog vào bên dưới:</h5>
+                            <form action="#"  th:action="@{/blog/updateBlog}"  th:object="${updateBlogRequest}"  method="post" name="updateForm" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-7">
+                                        <label  th:for="text" class="form-label">Tiêu đề</label>
+                                        <input  th:field="*{title}" type="text" class="form-control" id="titleUpdate" name="title" minlength="5" placeholder="Tiêu đề" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label  th:for="text" class="form-label">Phân loại</label>
+                                        <input  th:field="*{category}" type="text" class="form-control" id="categoryUpdate" name="category" placeholder="Phân loại" required>
+                                    </div>
+                                    <div id="showIdUpdate" class="mb-3 col-md-2">
+                                        <label th:for="text" class="form-label">ID</label>
+                                        <input th:field="*{id}" type="number" class="form-control" id="idUpdate" name="idUpdate" placeholder="00" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label  th:for="address" class="form-label">Mô tả</label>
+                                    <input  th:field="*{description}" type="text" class="form-control" id="descriptionUpdate" name="description" minlength="10" placeholder="Tóm tắt thông tin bài viết" required>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-4">
+                                        <label  th:for="formFile" class="form-label">Ảnh bìa</label>
+                                        <input  th:field="*{thumbnail}" type="text" class="form-control" id="thumbnailUpdate" name="thumbnailUpdate" placeholder="image address" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label  th:for="text" class="form-label">Tác giả</label>
+                                        <input  th:field="*{author}" type="text" class="form-control" id="authorUpdate" name="author" placeholder="Tên tác giả" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label  th:for="content" class="form-label">Nội dung bài viết</label>
+                                    <textarea th:field="*{content}" name="content" id="editorUpdate" class="form-control" >
+                                            &lt;p&gt;This is updating content.&lt;/p&gt;
+                                    </textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="button" id="cancelUpdate" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Content                   -->
                 <div class="row">
@@ -147,11 +147,13 @@
 
                                         <tr  th:each=" blog : ${blogList}">
                                             <th scope="row"  th:text="*{blog.getId()}"></th>
-                                            <td  th:text="*{blog.getTitle()}"></td>
-                                            <td  th:text="*{blog.getDescription()}" style="width: 500px;height: auto;overflow: hidden;text-overflow: ellipsis;"></td>
+                                            <td  th:text="*{blog.getTitle()}" style="width: 200px"></td>
+                                            <td  th:text="*{blog.getDescription()}" style="width: 500px;height: 50px;overflow: hidden;text-overflow: ellipsis;"></td>
                                             <td  th:text="*{blog.getCategory()}"></td>
                                             <td  th:text="*{blog.getDateCreated()}"></td>
                                             <td  th:text="*{blog.getAuthor()}"></td>
+                                            <td  th:text="*{blog.getThumbnail()}" hidden></td>
+                                            <td  th:text="*{blog.getContent()}" hidden></td>
                                             <th>
                                                 <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
                                                     <button type="button" class="btn btn-outline-success viewBlogBtn"><i class="fas fa-eye"></i></button>
@@ -216,6 +218,11 @@
             $("#descriptionUpdate").val($(this).parent().parent().parent().first().children().first().next().next().text());
             $("#categoryUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().text());
             $("#authorUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
+            $("#thumbnailUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().text());
+            var content = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text();
+            jQuery("textarea#editorUpdate").append($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
+            $('#editorUpdate').append($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
+            alert($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
         });
 
         // Delete button
@@ -233,6 +240,11 @@
                     }
                 });
             }
+        });
+        // View button
+        $(".viewBlogBtn").click(function() {
+            var url = "http://localhost:8080/blog/viewBlog?id=" + $(this).parent().parent().parent().first().children().first().text();
+            window.open(url, '_blank');
         });
 
         $("#cancelUpdate").click(function (){

@@ -48,6 +48,7 @@ public class Blog {
         this.dateCreated = LocalDate.now();
         this.dateModified = LocalDate.now();
     }
+
     public Blog(String title, String description, String category, String thumbnail, String content, LocalDate dateCreated, LocalDate dateModified, String author) {
         this.title = title;
         this.description = description;
