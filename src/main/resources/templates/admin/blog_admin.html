@@ -238,6 +238,7 @@
             $("#authorUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
             $("#thumbnailUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().text());
             var content = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text();
+            // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html
             ClassicEditor
                 .create( document.querySelector( '#editorUpdate' ), {
                     htmlEmbed: {
