@@ -150,7 +150,7 @@
                 <!--                search box-->
                 <div class="row" style="margin-bottom: 20px">
                     <form  th:action="@{/blog/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
-                        <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                        <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                         <button th:field="*{keyword}" type="submit" class="btn btn-secondary">search</button>
                     </form>
                 </div>
