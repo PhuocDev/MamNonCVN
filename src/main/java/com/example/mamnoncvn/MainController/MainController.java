@@ -1,4 +1,4 @@
-package com.example.mamnoncvn.controllers;
+package com.example.mamnoncvn.MainController;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
