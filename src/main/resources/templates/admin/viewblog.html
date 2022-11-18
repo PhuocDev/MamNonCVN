@@ -40,7 +40,7 @@
                 <div class="row" th:object="${blog}">
                     <h1 style="font-weight:bold" th:text="*{title}"></h1>
                     <h3 th:text="*{description}"></h3>
-                    <img style="height: 300px; width:auto;display: block; margin: auto;" th:src="*{thumbnail}" src="https://image.vietnamlawmagazine.vn/uploadvietnamlaw/2019/4/26/trang-42jpg164324432.jpg" alt="thumbnailImg">
+                    <img width="100%" style="display: block; margin: auto;" th:src="*{thumbnail}" alt="thumbnailImg">
                     <p th:text="*{content}" id="blogContent" style="margin: 30px; display: none"></p>
                     <div id="convertBlogContent"></div>
                     <h4 th:text="*{author}" style="text-align: right;"></h4>
