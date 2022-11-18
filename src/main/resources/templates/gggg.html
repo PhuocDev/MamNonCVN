@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+<div class="main">
+
+  <form th:action="@{/feedback/add}" th:object="${feedback}" method="POST" class="form" id="form-1">
+    <h3 class="heading">Feedback</h3>
+    <p class="desc"></p>
+
+    <div class="spacer"></div>
+
+    <div class="form-group">
+      <label for="fullname" class="form-label">Tên đầy đủ</label>
+      <input th:field="*{tenNguoiGui}" id="fullname" name="fullname" type="text" placeholder="VD: PDP" class="form-control">
+      <span class="form-message"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="email" class="form-label">Email</label>
+      <input th:field="*{email}" id="email" name="email" type="text" placeholder="VD: phuocxl77@gmail.com" class="form-control">
+      <span class="form-message"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="fullname" class="form-label">Số điện thoại</label>
+      <input th:field="*{soDT}" id="phone" name="fullname" type="number" placeholder="+84..." class="form-control">
+      <span class="form-message"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="email" class="form-label">Nội dung</label>
+      <textarea th:field="*{noiDung}" style="height: 120px" id="content" name="comment"  class="form-control" placeholder="Enter text here..." ></textarea>
+      <span class="form-message"></span>
+    </div>
+    <button type="submit" class="form-submit">Gửi</button>
+  </form>
+
+</div>
+<script th:src="@{/js/validation.js}"></script>
+
+</body>
+</html>
