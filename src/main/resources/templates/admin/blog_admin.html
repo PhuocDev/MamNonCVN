@@ -32,6 +32,7 @@
                 <div class="page-title" style="margin-bottom: 20px;">
                     <h2>Blog management</h2>
                 </div>
+
 <!--                 Form insert new  Blog -->
                 <div id="insertForm" class="col-lg-12">
                     <div class="card">
@@ -83,7 +84,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Form update new  Blog -->
                 <div id="updateForm" class="col-lg-12">
                     <div class="card">
@@ -145,6 +145,14 @@
                             </form>
                         </div>
                     </div>
+                </div>
+
+                <!--                search box-->
+                <div class="row" style="margin-bottom: 20px">
+                    <form  th:action="@{/blog/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                        <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                        <button th:field="*{keyword}" type="submit" class="btn btn-secondary">search</button>
+                    </form>
                 </div>
                 <!-- Content                   -->
                 <div class="row">
@@ -247,7 +255,6 @@
                             // Strip unsafe elements and attributes, e.g.:
                             // the `<script>` elements and `on*` attributes.
                             const outputHtml = sanitize( inputHtml );
-
                             return {
                                 html: outputHtml,
                                 // true or false depending on whether the sanitizer stripped anything.

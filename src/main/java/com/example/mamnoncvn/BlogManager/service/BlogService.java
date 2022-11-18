@@ -30,8 +30,11 @@ public class BlogService {
         blogRepository.save(blog);
         return blog;
     }
-    public List<Blog> findAllBlogs() {
-        return blogRepository.findAll();
+    public List<Blog> findAllBlogs(String keyword) {
+        if (keyword != null || !keyword.equals("")) {
+            return  blogRepository.findAllByKeyword(keyword);
+        }
+        else return blogRepository.findAll();
     }
 
     public Blog findBlogById(Long id) {
@@ -58,5 +61,9 @@ public class BlogService {
         blog.setCategory(updateBlogRequest.getCategory());
         blogRepository.saveAndFlush(blog);
         return blog;
+    }
+
+    public List<Blog> findAll() {
+        return blogRepository.findAll();
     }
 }

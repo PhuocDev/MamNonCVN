@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/blog")
 public class BlogController {
@@ -29,11 +30,9 @@ public class BlogController {
         blogService.save(sampleData);
         return "admin/blog_admin";
     }
-
-
-    @GetMapping(path = {"/", "/all"})
-    public String showBlogs(Model model) {
-        List<Blog> blogList = blogService.findAllBlogs();
+    @GetMapping
+    public String index(Model model){
+        List<Blog> blogList = blogService.findAll();
         model.addAttribute("blogList", blogList);
         CreateBlogRequest createBlogRequest = new CreateBlogRequest();
         createBlogRequest.setDateCreated(LocalDate.now());
@@ -43,6 +42,27 @@ public class BlogController {
         updateBlogRequest.setDateModified(LocalDate.now());
         model.addAttribute("createBlogRequest", createBlogRequest);
         model.addAttribute("updateBlogRequest", updateBlogRequest);
+        String searchKeyword = null;
+        model.addAttribute("keyword", searchKeyword);
+        return "admin/blog_admin";
+    }
+
+    @GetMapping(path = {"/", "/all", })
+    public String showBlogs(Model model, @RequestParam(required = false) String keyword) {
+        List<Blog> blogList = blogService.findAll();
+        if (keyword != null) blogList = blogService.findAllBlogs(keyword);
+        model.addAttribute("blogList", blogList);
+        CreateBlogRequest createBlogRequest = new CreateBlogRequest();
+        createBlogRequest.setDateCreated(LocalDate.now());
+        createBlogRequest.setDateModified(LocalDate.now());
+        UpdateBlogRequest updateBlogRequest = new UpdateBlogRequest();
+        updateBlogRequest.setDateCreated(LocalDate.now());
+        updateBlogRequest.setDateModified(LocalDate.now());
+        model.addAttribute("createBlogRequest", createBlogRequest);
+        model.addAttribute("updateBlogRequest", updateBlogRequest);
+
+        String searchKeyword = null;
+        model.addAttribute("keyword", searchKeyword);
         return "admin/blog_admin";
     }
     @PostMapping(path = "/add", consumes = "application/x-www-form-urlencoded")
