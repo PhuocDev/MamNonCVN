@@ -59,4 +59,8 @@ public class CVN_ClassService {
         }
         return cvn_classRepository.findById(id).get();
     }
+
+    public List<CVN_Class> findAllByKeyword(String keyword) {
+        return cvn_classRepository.findAllByKeyword(keyword);
+    }
 }

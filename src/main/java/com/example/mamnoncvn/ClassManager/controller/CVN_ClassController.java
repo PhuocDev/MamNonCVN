@@ -28,9 +28,13 @@ public class CVN_ClassController {
     @Autowired
     GiaoVienService giaoVienService;
 
-    @GetMapping("/")
-    public String index(Model model){
+    @GetMapping(path = "/")
+    public String index(Model model, @RequestParam(required = false) String keyword) {
         List<CVN_Class> cvn_classes = classService.getAll();
+        if (keyword != null) {
+            cvn_classes = classService.findAllByKeyword(keyword);
+        }
+
         model.addAttribute("classes", cvn_classes);
         CreateClassRequest createClassRequest = new CreateClassRequest();
         model.addAttribute("createClassRequest", createClassRequest);
@@ -41,6 +45,10 @@ public class CVN_ClassController {
         //Lấy danh sách giáo viên đang hoạt động
         List<GiaoVien> giaoVienList = giaoVienService.getAllGVisWorking();
         model.addAttribute("giaoVienList", giaoVienList);
+
+        //searching function
+        String searchKeyword = null;
+        model.addAttribute("keyword", searchKeyword);
         return "/admin/class";
     }
 
