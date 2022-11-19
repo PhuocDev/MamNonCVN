@@ -58,5 +58,7 @@ public class GiaoVienService {
     }
 
 
-
+    public List<GiaoVien> getAllGVisWorking() {
+        return giaoVienRepository.findAllByStatus(true);
+    }
 }

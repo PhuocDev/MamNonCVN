@@ -72,17 +72,26 @@
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Giáo viên 1</label>
-                                        <input th:field="*{tenGiaoVien1}" type="text" class="form-control" name="giaoVien1" minlength="4" placeholder="Nguyễn Thị Hà" required>
+                                        <select th:field="*{tenGiaoVien1}" name="giaoVienList" id="giaoVienList1"  class="form-control" required>
+                                            <option th:each="giaovien : ${giaoVienList}"
+                                                    th:text="${giaovien.getHoTen()}"
+                                                    th:value="${giaovien.getHoTen()}"></option>
+                                        </select>
                                     </div>
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Giáo viên 2</label>
-                                        <input th:field="*{tenGiaoVien2}" type="text" class="form-control" name="giaoVien2" minlength="4" placeholder="Trần Thu Lệ" required>
+                                        <select th:field="*{tenGiaoVien2}" name="giaoVienList" id="giaoVienList2"  class="form-control" required>
+                                            <option value="Không có">Không có</option>
+                                            <option th:each="giaovien : ${giaoVienList}"
+                                                    th:text=" ${giaovien.getHoTen()}"
+                                                    th:value="${giaovien.getHoTen()}"></option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-4">
                                         <label th:for="hocPhi" class="form-label">Học phí</label>
-                                        <input th:field="*{tuition}" id="tuitionInsert" type="number" class="form-control" min="1000000" name="hocPhi" placeholder="" required>
+                                        <input th:field="*{tuition}" id="tuitionInsert" type="number" class="form-control" min="1000000" max="12000000" name="hocPhi" placeholder="" required>
                                     </div>
                                     <div class="mb-3 col-md-2">
                                         <label th:for="totalStudent" class="form-label">Sỉ số</label>
@@ -148,17 +157,27 @@
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Giáo viên 1</label>
-                                        <input th:field="*{tenGiaoVien1}" id="giaovien1Update" type="text" class="form-control" name="giaoVien1" minlength="4" placeholder="Nguyễn Thị Hà" required>
+                                        <select th:field="*{tenGiaoVien1}" name="giaoVienList" id="giaovien1Update"  class="form-control" required>
+                                            <option th:each="giaovien : ${giaoVienList}"
+                                                    th:text="${giaovien.getHoTen()}"
+                                                    th:value="${giaovien.getHoTen()}"></option>
+                                        </select>
                                     </div>
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Giáo viên 2</label>
-                                        <input th:field="*{tenGiaoVien2}" id="giaovien2Update" type="text" class="form-control" name="giaoVien2" minlength="4" placeholder="Trần Thu Lệ" required>
+                                        <select th:field="*{tenGiaoVien2}" name="giaoVienList" id="giaovien2Update"  class="form-control" required>
+                                            <option value="Không có">Không có</option>
+                                            <option th:each="giaovien : ${giaoVienList}"
+                                                    th:text="${giaovien.getHoTen()}"
+                                                    th:value="${giaovien.getHoTen()}">
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-4">
                                         <label th:for="hocPhi" class="form-label">Học phí</label>
-                                        <input th:field="*{tuition}" id="hocPhiUpdate" type="number" class="form-control" name="hocPhi" min="1000000" placeholder="" required>
+                                        <input th:field="*{tuition}" id="hocPhiUpdate" type="number" class="form-control" name="hocPhi" min="1000000" max="12000000" placeholder="" required>
                                     </div>
                                     <div class="mb-3 col-md-2">
                                         <label th:for="totalStudent" class="form-label">Sỉ số</label>
@@ -224,7 +243,7 @@
 
                                         <tr>
                                             <th scope="row" colspan="10" style="text-align: right;">
-                                                <button type="button" id="addClassBtn" class="btn btn-primary">Thêm lớp học</button>
+                                                <button type="button" id="addClassBtn" href="#" class="btn btn-primary">Thêm lớp học</button>
                                             </th>
                                         </tr>
                                         </tbody>
@@ -307,6 +326,9 @@
             } else if ($("#tuitionInsert").val() %50000 !== 0) {
                 alert("Học phí nên là số chẵn")
                 return false;
+            } else if ($("#giaoVienList1 option:selected").val() === $("#giaoVienList2 option:selected").val()) {
+                alert("Giáo viên 2 phải khác giáo viên 1");
+                return false;
             }
             else return true;
         });
@@ -317,6 +339,9 @@
                 return false;
             } else if ($("#hocPhiUpdate").val() %50000 !== 0) {
                 alert("Học phí nên là số chẵn")
+                return false;
+            } else if ($("#giaovien1Update option:selected").val() === $("#giaovien2Update option:selected").val()) {
+                alert("Giáo viên 2 phải khác giáo viên 1");
                 return false;
             }
             else return true;

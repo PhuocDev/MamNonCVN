@@ -6,6 +6,8 @@ import com.example.mamnoncvn.ClassManager.models.mapper.CVN_ClassMapper;
 import com.example.mamnoncvn.ClassManager.models.request.CreateClassRequest;
 import com.example.mamnoncvn.ClassManager.models.request.UpdateClassRequest;
 import com.example.mamnoncvn.ClassManager.service.CVN_ClassService;
+import com.example.mamnoncvn.GiaoVienCVN.entity.GiaoVien;
+import com.example.mamnoncvn.GiaoVienCVN.service.GiaoVienService;
 import com.example.mamnoncvn.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ import java.util.List;
 public class CVN_ClassController {
     @Autowired
     CVN_ClassService classService;
+    @Autowired
+    GiaoVienService giaoVienService;
 
     @GetMapping("/")
     public String index(Model model){
@@ -33,6 +37,10 @@ public class CVN_ClassController {
 
         UpdateClassRequest updateClassRequest = new UpdateClassRequest();
         model.addAttribute("updateClassRequest", updateClassRequest);
+
+        //Lấy danh sách giáo viên đang hoạt động
+        List<GiaoVien> giaoVienList = giaoVienService.getAllGVisWorking();
+        model.addAttribute("giaoVienList", giaoVienList);
         return "/admin/class";
     }
 
@@ -59,7 +67,6 @@ public class CVN_ClassController {
                     "giao vien " + i+10, false);
             classService.save(newClass);
         }
-
         return classService.getAll();
     }
 
