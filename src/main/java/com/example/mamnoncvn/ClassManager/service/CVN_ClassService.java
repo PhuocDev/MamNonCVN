@@ -5,6 +5,7 @@ import com.example.mamnoncvn.ClassManager.models.mapper.CVN_ClassMapper;
 import com.example.mamnoncvn.ClassManager.models.request.CreateClassRequest;
 import com.example.mamnoncvn.ClassManager.models.request.UpdateClassRequest;
 import com.example.mamnoncvn.ClassManager.repository.CVN_ClassRepository;
+import com.example.mamnoncvn.exception.BadRequestException;
 import com.example.mamnoncvn.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class CVN_ClassService {
 
     public CVN_Class save(CreateClassRequest createClassRequest) {
         CVN_Class cvn_class = CVN_ClassMapper.convertRequestCreateToEntity(createClassRequest);
+        if (cvn_class.getDateStarted().isAfter(cvn_class.getDateEnded())){
+            throw new BadRequestException("Date created must be before date ended");
+        }
         cvn_classRepository.save(cvn_class);
         return cvn_class;
     }
@@ -49,5 +53,10 @@ public class CVN_ClassService {
     }
 
 
-
+    public CVN_Class findClassByID(Long id) {
+        if (!cvn_classRepository.existsById(id)) {
+            throw new NotFoundException("Not found class id: " + id);
+        }
+        return cvn_classRepository.findById(id).get();
+    }
 }

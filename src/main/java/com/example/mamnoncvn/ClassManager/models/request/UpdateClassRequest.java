@@ -1,6 +1,7 @@
 package com.example.mamnoncvn.ClassManager.models.request;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Min;
@@ -21,9 +22,11 @@ public class UpdateClassRequest {
 
     @Column(name = "date_started")
     @NotNull(message = "date cannot be null")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateStarted;
 
     @Column(name = "date_ended")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateEnded;
 
     @Column(name = "tuition")

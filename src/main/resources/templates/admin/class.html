@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Teacher</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/airdatepicker/css/datepicker.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+
+        <!-- end of navbar navigation -->
+        <div class="content">
+            <div class="container">
+                <div class="page-title" style="margin-bottom: 20px;">
+                    <h3>Class management</h3>
+                </div>
+                <!-- Form insert new student -->
+                <div id="insertForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Thêm lớp học mới</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin lớp học vào bên dưới:</h5>
+                            <form th:action="@{/class/add}" th:object="${createClassRequest}" method="post" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Tên lớp</label>
+                                        <input th:field="*{name}" type="text" class="form-control" name="hoten" minlength="4" placeholder="Lớp mầm,chồi,..." required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="city" class="form-label">Độ tuổi</label>
+                                        <select th:field="*{age}" name="doTuoi" id="doTuoi" class="form-control" required>
+                                            <option value="2">Từ 2 - 3 tuổi</option>
+                                            <option value="3">Từ 3 - 4 tuổi</option>
+                                            <option value="4">Từ 4 - 5 tuổi</option>
+                                            <option value="1">Dưới 2 tuổi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày khai giảng</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{dateStarted}" type="date" id="insertDateForm1" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Khai giảng" required>
+                                            <small class="form-text text-muted">You can change the month, year, and date</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày kết thúc</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{dateEnded}" type="date" id="insertDateForm2" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Kết thúc" required>
+                                            <small class="form-text text-muted">You can change the month, year, and date</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Giáo viên 1</label>
+                                        <input th:field="*{tenGiaoVien1}" type="text" class="form-control" name="giaoVien1" minlength="4" placeholder="Nguyễn Thị Hà" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Giáo viên 2</label>
+                                        <input th:field="*{tenGiaoVien2}" type="text" class="form-control" name="giaoVien2" minlength="4" placeholder="Trần Thu Lệ" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="hocPhi" class="form-label">Học phí</label>
+                                        <input th:field="*{tuition}" id="tuitionInsert" type="number" class="form-control" min="1000000" name="hocPhi" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="totalStudent" class="form-label">Sỉ số</label>
+                                        <input th:field="*{totalStudent}" type="number" class="form-control" name="totalStudent" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="status" class="form-label">Trạng thái</label>
+                                        <select th:field="*{status}" name="status" id="status" class="form-control" required>
+                                            <option value="false">Kết thúc</option>
+                                            <option value="true">Hoạt động</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button id="insertNewClassBtn" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form update new Class -->
+                <div id="updateForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Cập nhật lớp học mới</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Cập nhật thông tin lớp học vào bên dưới:</h5>
+                            <form th:action="@{/class/update}"  th:object="${updateClassRequest}" method="post" name="updateForm" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Tên lớp</label>
+                                        <input th:field="*{name}" id="tenLopUpdate" type="text" class="form-control" name="tenLopUpdate" minlength="4" placeholder="Lớp mầm,chồi,..." required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Độ tuổi</label>
+                                        <select th:field="*{age}" name="age" id="doTuoiUpdate" class="form-control" required>
+                                            <option value="2">Từ 2 - 3 tuổi</option>
+                                            <option value="3">Từ 3 - 4 tuổi</option>
+                                            <option value="4">Từ 4 - 5 tuổi</option>
+                                            <option value="1">Dưới 2 tuổi</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-3" hidden>
+                                        <label th:for="text" class="form-label">ID</label>
+                                        <input th:field="*{id}" id="idUpdate" type="text" class="form-control" name="idUpdate" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày khai giảng</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{dateStarted}" id="khaiGiangUpdate" type="text" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Khai giảng" required>
+                                            <small class="form-text text-muted">You can change the month, year, and date</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày kết thúc</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{dateEnded}" type="text" id="ketThucUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Kết thúc" required>
+                                            <small class="form-text text-muted">You can change the month, year, and date</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Giáo viên 1</label>
+                                        <input th:field="*{tenGiaoVien1}" id="giaovien1Update" type="text" class="form-control" name="giaoVien1" minlength="4" placeholder="Nguyễn Thị Hà" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Giáo viên 2</label>
+                                        <input th:field="*{tenGiaoVien2}" id="giaovien2Update" type="text" class="form-control" name="giaoVien2" minlength="4" placeholder="Trần Thu Lệ" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="hocPhi" class="form-label">Học phí</label>
+                                        <input th:field="*{tuition}" id="hocPhiUpdate" type="number" class="form-control" name="hocPhi" min="1000000" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="totalStudent" class="form-label">Sỉ số</label>
+                                        <input th:field="*{totalStudent}" id="totalStudentUpdate" type="number" class="form-control" name="totalStudent" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="status" class="form-label">Trạng thái</label>
+                                        <select th:field="*{status}" name="status" id="statusUpdate" class="form-control" required>
+                                            <option value="true">Hoạt động</option>
+                                            <option value="false">Kết thúc</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">Class list</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Mã lớp</th>
+                                            <th>Tên lớp</th>
+                                            <th>Độ tuổi</th>
+                                            <th>Ngày khai giảng</th>
+                                            <th>Học phí</th>
+                                            <th>Sỉ số</th>
+                                            <th>Giáo viên 1</th>
+                                            <th>Giáo viên 2</th>
+                                            <th>Trạng thái</th>
+                                            <th hidden>Ngày kết thúc</th>
+                                            <th> </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" class : ${classes}">
+                                            <th scope="row" th:text="*{class.getId()}"></th>
+                                            <td th:text="*{class.getName()}"></td>
+                                            <td th:text="*{class.getAge()}"></td>
+                                            <td th:text="*{class.getDateStarted()}"></td>
+                                            <td th:text="*{class.getTuition()}"></td>
+                                            <td th:text="*{class.getTotalStudent()}">15</td>
+                                            <td th:text="*{class.getTenGiaoVien1()}">Nguyễn Thị Ngọc</td>
+                                            <td th:text="*{class.getTenGiaoVien2()}">Trần Thị Lệ</td>
+                                            <td th:text="*{class.isStatus()==true}? 'Đang hoạt động':'Kết thúc'"></td>
+                                            <td th:text="*{class.getDateEnded()}" hidden>2023-03-29</td>
+                                            <th>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="button" class="btn btn-primary updateClassBtn">Fix</button>
+                                                    <button type="button" class="btn btn-danger deleteClassBtn">Del</button>
+                                                </div>
+                                            </th>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row" colspan="10" style="text-align: right;">
+                                                <button type="button" id="addClassBtn" class="btn btn-primary">Thêm lớp học</button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/datepicker.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/i18n/datepicker.en.js}"></script>
+<script th:src="@{/vendor/mdtimepicker/mdtimepicker.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+    $(document).ready(function() {
+        $("#insertForm").hide();
+        $("#updateForm").hide();
+        $("#addClassBtn").click(function() {
+            $("#updateForm").hide();
+            $("#insertForm").toggle(500);
+            $("#insertDateForm").val('2022-12-12');
+        });
+        $(".updateClassBtn").click(function() {
+            $("#insertForm").hide();
+            $("#updateForm").show();
+            $("#idUpdate").val($(this).parent().parent().parent().first().children().first().text());
+            $("#tenLopUpdate").val($(this).parent().parent().parent().first().children().first().next().text());
+            $("#khaiGiangUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().text());
+            $("#hocPhiUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().text());
+            $("#totalStudentUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
+            $("#giaovien1Update").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().text());
+            $("#giaovien2Update").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
+            //$("#statusUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().text());
+            $("#statusUpdate").val(($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().text() === 'Đang hoạt động')?'true':'false');
+            $("#ketThucUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().text());
+            var tuoiUpdate = $(this).parent().parent().parent().first().children().first().next().next().text();
+            $("#doTuoiUpdate").val(tuoiUpdate);
+        });
+
+        // Delete button
+        $(".deleteClassBtn").click(function() {
+            //get infor of Class to delete here
+            if (confirm("Bạn có muốn xoá class id: " + $(this).parent().parent().parent().first().children().first().text())) {
+                $(this).parent().parent().parent().remove();
+                $.ajax({
+                    url: "http://localhost:8080/class/deleteClass?id=" + $(this).parent().parent().parent().first().children().first().text() ,
+                    success: function(response) {
+                        //do something
+                    },
+                    error: function(xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        });
+        $('#insertDateForm1').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#insertDateForm2').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#khaiGiangUpdate').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#ketThucUpdate').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+
+        $("#insertForm").submit(function(e){
+            if (Date.parse($('#insertDateForm1').val()) >= Date.parse($('#insertDateForm2').val())) {
+                alert("Ngày khai giảng phải diễn ra trước ngày kết thúc");
+                return false;
+            } else if ($("#tuitionInsert").val() %50000 !== 0) {
+                alert("Học phí nên là số chẵn")
+                return false;
+            }
+            else return true;
+        });
+
+        $("#updateForm").submit(function(e){
+            if (Date.parse($('#khaiGiangUpdate').val()) >= Date.parse($('#ketThucUpdate').val())) {
+                alert("Ngày khai giảng phải diễn ra trước ngày kết thúc");
+                return false;
+            } else if ($("#hocPhiUpdate").val() %50000 !== 0) {
+                alert("Học phí nên là số chẵn")
+                return false;
+            }
+            else return true;
+        });
+    });
+
+</script>
+
+</html>

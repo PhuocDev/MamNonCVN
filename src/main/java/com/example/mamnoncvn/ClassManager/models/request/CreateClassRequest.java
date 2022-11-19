@@ -1,6 +1,7 @@
 package com.example.mamnoncvn.ClassManager.models.request;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Min;
@@ -19,10 +20,12 @@ public class CreateClassRequest {
     private int age;
 
     @Column(name = "date_started")
-    @NotNull(message = "date cannot be null")
+    @NotNull(message = "date started cannot be null")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateStarted;
 
     @Column(name = "date_ended")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateEnded;
 
     @Column(name = "tuition")
@@ -30,7 +33,7 @@ public class CreateClassRequest {
     private Long tuition;
 
     @Column(name ="total_student" )
-    @NotBlank(message = "total student cannot be blank")
+    @NotNull(message = "Total student can not be null")
     private int totalStudent;
 
     @Column(name = "ten_giao_vien1")
