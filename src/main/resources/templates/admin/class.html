@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                                 <button id="insertNewClassBtn" type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                                <button type="submit" class="btn btn-danger cancelBtnInsert"><i class="fas fa-undo"></i> Cancel</button>
                             </form>
                         </div>
                     </div>
@@ -192,7 +192,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                                <button type="submit" class="btn btn-danger cancelBtnUpdate"><i class="fas fa-undo"></i> Cancel</button>
                             </form>
                         </div>
                     </div>
@@ -295,7 +295,12 @@
             var tuoiUpdate = $(this).parent().parent().parent().first().children().first().next().next().text();
             $("#doTuoiUpdate").val(tuoiUpdate);
         });
-
+        $("#cancelBtnUpdate").click(function (){
+            $("#updateForm").hide();
+        });
+        $("#cancelBtnInsert").click(function (){
+            $("#insertForm").hide();
+        });
         // Delete button
         $(".deleteClassBtn").click(function() {
             //get infor of Class to delete here
