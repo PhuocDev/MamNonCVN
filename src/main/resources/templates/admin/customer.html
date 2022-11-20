@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Customer manager</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/airdatepicker/css/datepicker.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+
+        <!-- end of navbar navigation -->
+        <div class="content">
+            <div class="container">
+                <div class="page-title" style="margin-bottom: 20px;">
+                    <h3>KHÁCH HÀNG CẦN TƯ VẤN</h3>
+                </div>
+                <!-- Form insert new student -->
+                <div id="insertForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">ĐĂNG KÝ NHẬN TƯ VẤN</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Anh chị cần tư vấn điền thông tin vào bên dưới nhé!</h5>
+                            <form th:action="@{/customer/add}" th:object="${createCustomerRequest}" method="post" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Họ tên của bé</label>
+                                        <input th:field="*{tenBe}" type="text" class="form-control" name="tenBeInsert" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="age" class="form-label">Độ tuổi</label>
+                                        <select th:field="*{tuoiBe}" name="tuoiBeInsert" id="tuoiBeInsert" class="form-control">
+                                            <option value="2">Từ 2 - 3 tuổi</option>
+                                            <option value="3">Từ 3 - 4 tuổi</option>
+                                            <option value="4">Từ 4 - 5 tuổi</option>
+                                            <option value="1">Dưới 2 tuổi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Họ tên phụ huynh</label>
+                                        <input th:field="*{tenPhuHuynh}" type="text" class="form-control" id="tenPhuHuynhInsert" name="tenPhuHuynh" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Nghề nghiệp</label>
+                                        <input th:field="*{ngheNghiep}" type="text" class="form-control" id="ngheNghiepInsert" name="ngheNghiep" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="text" class="form-label">Số điện thoại</label>
+                                        <input th:field="*{soDienThoai}" type="tel" class="form-control" id="soDienThoaiInsert" name="sdt" placeholder="0987654321" minlength="10" maxlength="10"  required>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="text" class="form-label">Email</label>
+                                        <input th:field="*{email}" type="email" class="form-control" id="emailInsert" name="emailInsert" placeholder="hoTen@gmail.com" >
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="address" class="form-label">Địa chỉ</label>
+                                    <input th:field="*{diaChi}" type="text" class="form-control" id="diaChiInsert" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" minlength="10" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="note" class="form-label">Ghi chú</label>
+                                    <input th:field="*{diaChi}" type="text" class="form-control" id="ghiChuInsert" name="ghiChuInsert" placeholder="Thông tin bổ sung" >
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-mail-bulk"></i> Đăng ký nhận tư vấn</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form update student -->
+                <div id="updateForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Cập nhật thông tin</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Cập nhật thông tin tư vấn khách hàng</h5>
+                            <form th:action="@{/customer/update}"  th:object="${updateCustomerRequest}" method="post" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Họ tên của bé</label>
+                                        <input type="text" class="form-control" id="tenBeUpdate" name="tenBeUpdate'" minlength="4" placeholder="" disabled>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="age" class="form-label">Độ tuổi</label>
+                                        <select name="tuoiBeUpdate'" id="tuoiBeUpdate" class="form-control" >
+                                            <option value="2">Từ 2 - 3 tuổi</option>
+                                            <option value="3">Từ 3 - 4 tuổi</option>
+                                            <option value="4">Từ 4 - 5 tuổi</option>
+                                            <option value="1">Dưới 2 tuổi</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-3" hidden>
+                                        <label th:for="text" class="form-label">ID</label>
+                                        <input th:field="*{id}" type="text" class="form-control" id="idUpdate" name="idUpdate" minlength="4" placeholder=""  >
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Họ tên phụ huynh</label>
+                                        <input type="text" class="form-control" id="tenPhuHuynhUpdate" name="tenPhuHuynh" minlength="4" placeholder="" disabled>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Nghề nghiệp</label>
+                                        <input type="text" class="form-control" id="ngheNghiepUpdate" name="ngheNghiep" minlength="4" placeholder="" disabled>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="text" class="form-label">Số điện thoại</label>
+                                        <input type="tel" class="form-control" id="soDienThoaiUpdate" name="sdt" placeholder="0987654321" minlength="10" maxlength="10" disabled>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="text" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="emailUpdate" name="emailUpdate" placeholder="hoTen@gmail.com" disabled>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="address" class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="diaChiUpdate" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" minlength="10"  disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="note" class="form-label">Ghi chú</label>
+                                    <input th:field="*{ghiChu}" type="text" class="form-control" id="ghiChuUpdate" name="ghiChuUpdate" placeholder="Thông tin bổ sung" >
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày đăng ký</label>
+                                        <input type="date" class="form-control" id="ngayDangKyUpdate" name="ngayDangKyUpdate" placeholder="" disabled> </input>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="age" class="form-label">Status</label>
+                                        <select th:field="*{status}" name="statusUpdate'" id="statusUpdate" class="form-control">
+                                            <option value="true">Đã Tư vấn</option>
+                                            <option value="false">Chưa tư vấn</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="button" id="cancelBtnUpdate" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--                search box-->
+                <div class="row" style="margin-bottom: 20px">
+                    <form  th:action="@{/customer/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                        <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="30" aria-label="Search" aria-describedby="search-addon" />
+                        <button th:field="*{keyword}" type="submit" class="btn btn-secondary">search</button>
+                    </form>
+                </div>
+                <!-- Content -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">Danh sách phụ huynh cần tư vấn</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Tên bé</th>
+                                            <th>Tuổi</th>
+                                            <th>Tên phụ huynh</th>
+                                            <th>Nghề nghiệp</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Email</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Ghi chú</th>
+                                            <th>Ngày ĐKTV</th>
+                                            <th>Trạng thái</th>
+                                            <th> </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" customer : ${customerList}">
+                                            <th scope="row" th:text="*{customer.getId()}"></th>
+                                            <td th:text="*{customer.getTenBe()}"></td>
+                                            <td th:text="*{customer.getTuoiBe()}"></td>
+                                            <td th:text="*{customer.getTenPhuHuynh()}"></td>
+                                            <td th:text="*{customer.getNgheNghiep()}">Bác sĩ</td>
+                                            <td th:text="*{customer.getSoDienThoai()}">0987654321</td>
+                                            <td th:text="*{customer.getEmail()}">bao@gmail.com</td>
+                                            <td th:text="*{customer.getDiaChi()}">Số 14, Kha Vạn Cân, Thủ Đức</td>
+                                            <td th:text="*{customer.getGhiChu()}">không có</td>
+                                            <td th:text="*{customer.getNgayDK()}" >2022-11-22</td>
+                                            <td th:text="*{customer.getStatus()==true}? 'Đã TV':'Chưa TV'">Chưa TV</td>
+                                            <th>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="button" class="btn btn-primary updateClassBtn">Fix</button>
+                                                    <button type="button" class="btn btn-danger deleteClassBtn">Del</button>
+                                                </div>
+                                            </th>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row" colspan="12" style="text-align: right;">
+                                                <button type="button" id="addClassBtn" class="btn btn-primary">Thêm lớp học</button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/datepicker.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/i18n/datepicker.en.js}"></script>
+<script th:src="@{/vendor/mdtimepicker/mdtimepicker.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+    $(document).ready(function() {
+        $("#insertForm").hide();
+        $("#updateForm").hide();
+        $("#addClassBtn").click(function() {
+            $("#updateForm").hide();
+            $("#insertForm").toggle(500);
+        });
+
+        $(".updateClassBtn").click(function() {
+            var idUpdate = $(this).parent().parent().parent().first().children().first().text();
+            var tenBeUpdate = $(this).parent().parent().parent().first().children().first().next().text();
+            var tuoiBeUpdate = $(this).parent().parent().parent().first().children().first().next().next().text();
+            var tenPhuHuynhUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().text();
+            var ngheNghiepUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().next().text();
+            var soDienThoaiUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().text();
+            var emailUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().text();
+            var diaChiUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text();
+            var ghiChuUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().text();
+            var ngayDangKyUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().text();
+            var statusUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().next().text();
+
+            $("#insertForm").hide();
+            $("#updateForm").show();
+            $("#idUpdate").val(idUpdate);
+            $("#tenBeUpdate").val(tenBeUpdate);
+            $("#tenPhuHuynhUpdate").val(tenPhuHuynhUpdate);
+            $("#ngheNghiepUpdate").val(ngheNghiepUpdate);
+            $("#soDienThoaiUpdate").val(soDienThoaiUpdate);
+            $("#emailUpdate").val(emailUpdate);
+            $("#diaChiUpdate").val(diaChiUpdate);
+            $("#statusUpdate").val((statusUpdate == 'Chưa TV')? "false" : "true");
+            $("#ngayDangKyUpdate").val(ngayDangKyUpdate);
+            $("#ghiChuUpdate").val(ghiChuUpdate);
+            $("#tuoiBeUpdate").val(tuoiBeUpdate);
+        });
+            $("#cancelBtnUpdate").click(function (){
+                $("#updateForm").hide();
+            });
+            $("#cancelBtnInsert").click(function (){
+                $("#insertForm").hide();
+            });
+
+        // Delete button
+        $(".deleteClassBtn").click(function() {
+            //get infor of Class to delete here
+            if (confirm("Do you want to delete Class id: " + $(this).parent().parent().parent().first().children().first().text())) {
+                $(this).parent().parent().parent().remove();
+                $.ajax({
+                    url: "http://localhost:8080/customer/deleteCustomer?id=" + $(this).parent().parent().parent().first().children().first().text() ,
+                    success: function(response) {
+                        //do something
+                    },
+                    error: function(xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        });
+    });
+
+    // $(document).ready(function() {
+    //     $("#insertForm").hide();
+    //     $("#updateForm").hide();
+    //     $("#addClassBtn").click(function() {
+    //         $("#updateForm").hide();
+    //         $("#insertForm").toggle(500);
+    //         $("#insertDateForm").val('2022-12-12');
+    //     });
+    //     $(".updateClassBtn").click(function() {
+    //         $("#insertForm").hide();
+    //         $("#updateForm").show();
+    //         $("#idUpdate").val($(this).parent().parent().parent().first().children().first().text());
+    //         $("#tenLopUpdate").val($(this).parent().parent().parent().first().children().first().next().text());
+    //         $("#khaiGiangUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().text());
+    //         $("#hocPhiUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().text());
+    //         $("#totalStudentUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
+    //         $("#giaovien1Update").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().text());
+    //         $("#giaovien2Update").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
+    //         //$("#statusUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().text());
+    //         $("#statusUpdate").val(($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().text() === 'Đang hoạt động')?'true':'false');
+    //         $("#ketThucUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().text());
+    //         var tuoiUpdate = $(this).parent().parent().parent().first().children().first().next().next().text();
+    //         $("#doTuoiUpdate").val(tuoiUpdate);
+    //     });
+    //     $("#cancelBtnUpdate").click(function (){
+    //         $("#updateForm").hide();
+    //     });
+    //     $("#cancelBtnInsert").click(function (){
+    //         $("#insertForm").hide();
+    //     });
+    //
+    //     $("#insertForm").submit(function(e){
+    //         if (Date.parse($('#insertDateForm1').val()) >= Date.parse($('#insertDateForm2').val())) {
+    //             alert("Ngày khai giảng phải diễn ra trước ngày kết thúc");
+    //             return false;
+    //         } else if ($("#tuitionInsert").val() %50000 !== 0) {
+    //             alert("Học phí nên là số chẵn")
+    //             return false;
+    //         } else if ($("#giaoVienList1 option:selected").val() === $("#giaoVienList2 option:selected").val()) {
+    //             alert("Giáo viên 2 phải khác giáo viên 1");
+    //             return false;
+    //         }
+    //         else return true;
+    //     });
+    //
+    //     $("#updateForm").submit(function(e){
+    //         if (Date.parse($('#khaiGiangUpdate').val()) >= Date.parse($('#ketThucUpdate').val())) {
+    //             alert("Ngày khai giảng phải diễn ra trước ngày kết thúc");
+    //             return false;
+    //         } else if ($("#hocPhiUpdate").val() %50000 !== 0) {
+    //             alert("Học phí nên là số chẵn")
+    //             return false;
+    //         } else if ($("#giaovien1Update option:selected").val() === $("#giaovien2Update option:selected").val()) {
+    //             alert("Giáo viên 2 phải khác giáo viên 1");
+    //             return false;
+    //         }
+    //         else return true;
+    //     });
+    // });
+
+</script>
+
+</html>
