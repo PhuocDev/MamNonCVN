@@ -1,3 +1,4 @@
+
 package com.example.mamnoncvn.exception;
 
 import org.springframework.http.HttpStatus;
@@ -10,3 +11,4 @@ public class NotFoundException extends RuntimeException{
         super(message);
     }
 }
+

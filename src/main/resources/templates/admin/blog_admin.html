@@ -1,0 +1,308 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Teacher</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+
+        <!-- end of navbar navigation -->
+        <div class="content">
+            <div class="container">
+                <div class="page-title" style="margin-bottom: 20px;">
+                    <h2>Blog management</h2>
+                </div>
+
+<!--                 Form insert new  Blog -->
+                <div id="insertForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Thêm blog mới</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin blog vào bên dưới:</h5>
+                            <form th:action="@{/blog/add}"  th:object="${createBlogRequest}" method="post" name="insertForm" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-9">
+                                        <label  th:for="text" class="form-label">Tiêu đề</label>
+                                        <input  th:field="*{title}" type="text" class="form-control" name="title" minlength="5" placeholder="Tiêu đề" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label  th:for="text" class="form-label">Phân loại</label>
+                                        <select th:field="*{category}" name="category"  class="form-control" required>
+                                            <option value="thongbao">Thông báo</option>
+                                            <option value="tintuc">Tin tức - Sự kiện</option>
+                                            <option value="suckhoe">Sức khỏe</option>
+                                            <option value="giaoduc">Giáo dục</option>
+                                            <option value="giaoduc">Giáo dục</option>
+                                            <option value="tuyendung">Tuyển dụng</option>
+                                            <option value="khac">Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label  th:for="address" class="form-label">Mô tả</label>
+                                    <input  th:field="*{description}" type="text" class="form-control" name="description" minlength="10" placeholder="Tóm tắt thông tin bài viết" required>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-4">
+                                        <label  th:for="formFile" class="form-label">Ảnh bìa</label>
+                                        <input  th:field="*{thumbnail}" type="text" class="form-control" name="thumbnail" placeholder="image address" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label  th:for="text" class="form-label">Tác giả</label>
+                                        <input  th:field="*{author}" type="text" class="form-control" name="author" placeholder="Tên tác giả" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label  th:for="content" class="form-label">Nội dung bài viết</label>
+                                    <textarea name="content" id="editor"  class="form-control" th:field="*{content}">
+                                            &lt;p&gt;This is some sample content.&lt;/p&gt;
+                                    </textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="button" id="cancelInsert" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form update new  Blog -->
+                <div id="updateForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Cập nhật  blog</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Cập nhật thông tin  blog vào bên dưới:</h5>
+                            <form action="#"  th:action="@{/blog/updateBlog}"  th:object="${updateBlogRequest}"  method="post" name="updateForm" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-7">
+                                        <label  th:for="text" class="form-label">Tiêu đề</label>
+                                        <input  th:field="*{title}" type="text" class="form-control" id="titleUpdate" name="title" minlength="5" placeholder="Tiêu đề" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label  th:for="text" class="form-label">Phân loại</label>
+                                        <select th:field="*{category}" name="category" id="categoryUpdate"  class="form-control" required>
+                                            <option value="thongbao">Thông báo</option>
+                                            <option value="tintuc">Tin tức - Sự kiện</option>
+                                            <option value="suckhoe">Sức khỏe</option>
+                                            <option value="giaoduc">Giáo dục</option>
+                                            <option value="giaoduc">Giáo dục</option>
+                                            <option value="tuyendung">Tuyển dụng</option>
+                                            <option value="khac">Khác</option>
+                                        </select>
+                                    </div>
+                                    <div id="showIdUpdate" class="mb-3 col-md-2">
+                                        <label th:for="text" class="form-label">ID</label>
+                                        <input th:field="*{id}" type="number" class="form-control" id="idUpdate" name="idUpdate" placeholder="00" required>
+                                    </div>
+                                    <div class="mb-3 col-md-2" hidden>
+                                        <label th:for="text" class="form-label">dateCreated</label>
+                                        <input th:field="*{dateCreated}" type="text" class="form-control" id="dateCreatedUpdate" name="dateCreatedUpdate" placeholder="00" >
+                                    </div>
+                                    <div class="mb-3 col-md-2" hidden>
+                                        <label th:for="text" class="form-label">dateModified</label>
+                                        <input th:field="*{dateModified}" type="text" class="form-control" id="dateModifiedUpdate" name="dateModifiedUpdate" placeholder="00" >
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label  th:for="address" class="form-label">Mô tả</label>
+                                    <input  th:field="*{description}" type="text" class="form-control" id="descriptionUpdate" name="description" minlength="10" placeholder="Tóm tắt thông tin bài viết" required>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-4">
+                                        <label  th:for="formFile" class="form-label">Ảnh bìa</label>
+                                        <input  th:field="*{thumbnail}" type="text" class="form-control" id="thumbnailUpdate" name="thumbnailUpdate" placeholder="image address" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label  th:for="text" class="form-label">Tác giả</label>
+                                        <input  th:field="*{author}" type="text" class="form-control" id="authorUpdate" name="author" placeholder="Tên tác giả" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label  th:for="content" class="form-label">Nội dung bài viết</label>
+                                    <textarea th:field="*{content}" name="content" id="editorUpdate" style="height: 150px" class="form-control" >
+                                    </textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="button" id="cancelUpdate" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--                search box-->
+                <div class="row" style="margin-bottom: 20px">
+                    <form  th:action="@{/blog/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                        <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
+                        <button th:field="*{keyword}" type="submit" class="btn btn-secondary">search</button>
+                    </form>
+                </div>
+                <!-- Content                   -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">Blog list</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Mã Blog</th>
+                                            <th>Tiêu đề</th>
+                                            <th>Mô tả</th>
+                                            <th>Phân loại</th>
+                                            <th>Ngày đăng</th>
+                                            <th>Tác giả</th>
+                                            <th> </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <tr  th:each=" blog : ${blogList}">
+                                            <th scope="row"  th:text="*{blog.getId()}"></th>
+                                            <td  th:text="*{blog.getTitle()}" style="width: 200px"></td>
+                                            <td  th:text="*{blog.getDescription()}" style="width: 500px;height: 50px;overflow: hidden;text-overflow: ellipsis;"></td>
+                                            <td  th:text="*{blog.getCategory()}"></td>
+                                            <td  th:text="*{blog.getDateCreated()}"></td>
+                                            <td  th:text="*{blog.getAuthor()}"></td>
+                                            <td  th:text="*{blog.getThumbnail()}" hidden></td>
+                                            <td  th:text="*{blog.getContent()}" hidden></td>
+                                            <th>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="button" class="btn btn-outline-success viewBlogBtn"><i class="fas fa-eye"></i></button>
+                                                    <button type="button" class="btn btn-primary updateBlogBtn"><i class="fas fa-pen"></i></button>
+                                                    <button type="button" class="btn btn-danger deleteBlogBtn"><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" colspan="8" style="text-align: right;">
+                                                <button type="button" id="addBlogBtn" class="btn btn-primary">Thêm  blog</button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+
+</script>
+<script>
+
+    $(document).ready(function() {
+        $("#showText").click(function() {
+            var thought = jQuery("textarea#editorUpdate").val();
+            console.log(thought);
+            alert(thought);
+        })
+        $("#insertForm").hide();
+        $("#updateForm").hide();
+        $("#addBlogBtn").click(function() {
+            $("#updateForm").hide();
+            $("#insertForm").toggle(500);
+        });
+
+        $(".updateBlogBtn").click(function() {
+            $("#insertForm").hide();
+            $("#updateForm").show(100);
+            $("#idUpdate").val($(this).parent().parent().parent().first().children().first().text());
+            $("#showIdUpdate").hide();
+            $("#titleUpdate").val($(this).parent().parent().parent().first().children().first().next().text());
+            $("#descriptionUpdate").val($(this).parent().parent().parent().first().children().first().next().next().text());
+            $("#categoryUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().text());
+            $("#authorUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
+            $("#thumbnailUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().text());
+            var content = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text();
+            // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html
+            ClassicEditor
+                .create( document.querySelector( '#editorUpdate' ), {
+                    htmlEmbed: {
+                        showPreviews: true,
+                        sanitizeHtml: ( inputHtml ) => {
+                            // Strip unsafe elements and attributes, e.g.:
+                            // the `<script>` elements and `on*` attributes.
+                            const outputHtml = sanitize( inputHtml );
+                            return {
+                                html: outputHtml,
+                                // true or false depending on whether the sanitizer stripped anything.
+                                hasChanged: true
+                            };
+                        }
+                    }
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+            document.getElementById('editorUpdate').innerHTML = content;
+            //console.log("number of textarea: " + $("textarea").length);
+            //console.log($("#editorUpdate").next().prop("tagName"));
+            if ($("#editorUpdate").next().prop("tagName") === 'DIV') {
+                $("#editorUpdate").next().remove();
+            }
+            //alert($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
+        });
+        // Delete button
+        $(".deleteBlogBtn").click(function() {
+            //get infor of  Blog to delete here
+            if (confirm("Do you want to delete  Blog id: " + $(this).parent().parent().parent().first().children().first().text())) {
+                $(this).parent().parent().parent().remove();
+                $.ajax({
+                    url: "http://localhost:8080/blog/deleteBlog?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
+                    success: function(response) {
+                        //do something
+                    },
+                    error: function(xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        });
+        // View button
+        $(".viewBlogBtn").click(function() {
+            var url = "http://localhost:8080/blog/viewBlog?id=" + $(this).parent().parent().parent().first().children().first().text();
+            window.open(url, '_blank');
+        });
+
+        $("#cancelUpdate").click(function (){
+            $("#updateForm").hide();
+        });
+        $("#cancelInsert").click(function (){
+            $("#insertForm").hide();
+        });
+    });
+</script>
+
+</html>

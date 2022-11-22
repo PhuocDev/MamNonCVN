@@ -1,3 +1,4 @@
+
 package com.example.mamnoncvn.exception;
 
 import lombok.AllArgsConstructor;
@@ -14,3 +15,4 @@ public class ErrorResponse {
     private HttpStatus status;
     private String message;
 }
+

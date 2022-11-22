@@ -1,3 +1,4 @@
+
 package com.example.mamnoncvn.exception;
 
 import org.springframework.http.HttpStatus;
@@ -9,3 +10,4 @@ public class BadRequestException extends RuntimeException{
         super(message);
     }
 }
+

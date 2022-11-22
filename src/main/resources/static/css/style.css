@@ -15,7 +15,7 @@
     justify-content: center;
   }
   .form {
-    width: 360px;
+    width: 1200px;
     min-height: 100px;
     padding: 32px 24px;
     text-align: center;
@@ -66,7 +66,7 @@
   }
   
   .form-control:hover {
-    border-color: #1dbfaf;
+    border-color: #333;
   }
   
   .form-group.invalid .form-control {
@@ -85,20 +85,20 @@
   
   .form-submit {
     outline: none;
-    background-color: #1dbfaf;
+    background-color: #0d6efd;
     margin-top: 12px;
     padding: 12px 16px;
     font-weight: 600;
     color: #fff;
     border: none;
-    width: 100%;
+    width: 340px;
     font-size: 14px;
     border-radius: 8px;
     cursor: pointer;
   }
   
   .form-submit:hover {
-    background-color: #1ac7b6;
+    background-color: #2774e5;
   }
   
   .spacer {
