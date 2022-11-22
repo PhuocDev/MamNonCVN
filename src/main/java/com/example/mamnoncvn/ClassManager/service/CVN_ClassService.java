@@ -63,4 +63,8 @@ public class CVN_ClassService {
     public List<CVN_Class> findAllByKeyword(String keyword) {
         return cvn_classRepository.findAllByKeyword(keyword);
     }
+
+    public List<CVN_Class> findAllWorkingClass() {
+        return cvn_classRepository.findAllByStatus(true);
+    }
 }

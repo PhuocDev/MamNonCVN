@@ -19,4 +19,6 @@ public interface CVN_ClassRepository extends JpaRepository<CVN_Class, Long> {
             " or c.ten_giao_vien1 like %?1% or c.ten_giao_vien2 like %?1% " +
             " order by c.id desc  ", nativeQuery = true)
     List<CVN_Class> findAllByKeyword(String keyword);
+
+    List<CVN_Class> findAllByStatus(boolean status);
 }
