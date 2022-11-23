@@ -5,11 +5,15 @@ import com.example.mamnoncvn.ClassManager.entity.CVN_Class;
 import com.example.mamnoncvn.ClassManager.models.mapper.CVN_ClassMapper;
 import com.example.mamnoncvn.ClassManager.models.request.CreateClassRequest;
 import com.example.mamnoncvn.ClassManager.models.request.UpdateClassRequest;
+import com.example.mamnoncvn.ClassManager.repository.CVN_ClassRepository;
 import com.example.mamnoncvn.ClassManager.service.CVN_ClassService;
 import com.example.mamnoncvn.GiaoVienCVN.entity.GiaoVien;
 import com.example.mamnoncvn.GiaoVienCVN.service.GiaoVienService;
 import com.example.mamnoncvn.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,15 +30,19 @@ public class CVN_ClassController {
     @Autowired
     CVN_ClassService classService;
     @Autowired
+    CVN_ClassRepository classRepository;
+    @Autowired
     GiaoVienService giaoVienService;
 
     @GetMapping(path = "/")
     public String index(Model model, @RequestParam(required = false) String keyword) {
+
         List<CVN_Class> cvn_classes = classService.getAll();
         if (keyword != null) {
             cvn_classes = classService.findAllByKeyword(keyword);
         }
 
+        //Old
         model.addAttribute("classes", cvn_classes);
         CreateClassRequest createClassRequest = new CreateClassRequest();
         model.addAttribute("createClassRequest", createClassRequest);
