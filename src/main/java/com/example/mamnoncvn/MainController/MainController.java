@@ -15,7 +15,7 @@ public class MainController {
     public String test() {
         return "layout/admin_layout";
     }
-    @GetMapping("/student")
+    @GetMapping("/studentDemo")
     public String student() {
         return "admin/student";
     }

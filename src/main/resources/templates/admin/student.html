@@ -1,199 +1,279 @@
 <!doctype html>
-<!--
-* Bootstrap Simple Admin Template
-* Version: 2.1
-* Author: Alexis Luna
-* Website: https://github.com/alexis-luna/bootstrap-simple-admin-template
--->
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin's Dashboard</title>
+    <title>Student management</title>
     <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
     <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
     <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
     <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/airdatepicker/css/datepicker.min.css}" rel="stylesheet">
     <link th:href="@{/css/master.css}" rel="stylesheet">
     <link th:href="@{/css/main.css}" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 </head>
 
 <body>
 <div class="wrapper">
     <!-- SIDEBAR -->
     <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
-
     <div id="body" class="active">
         <!-- navbar navigation component -->
         <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
-        <!-- Content       -->
+        <!-- end of navbar navigation -->
         <div class="content">
             <div class="container">
                 <div class="page-title" style="margin-bottom: 20px;">
                     <h3>Student management</h3>
                 </div>
-                <div class="filterClass">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Input Class ID" aria-label="Username" aria-describedby="input-group-button-right">
-                        <button type="button" class="btn btn-outline-secondary" id="input-group-button-right">Filter</button>
-                    </div>
-                </div>
-
-
                 <!-- Form insert new student -->
                 <div id="insertForm" class="col-lg-12">
                     <div class="card">
                         <div class="card-header">Thêm học sinh mới</div>
                         <div class="card-body">
-                            <h5 class="card-title">Điền thông tin học sinh vào bên dưới:</h5>
-                            <form class="needs-validation" novalidate accept-charset="utf-8">
-                                <div class="row g-2">
-                                    <div class="mb-3 col-md-6">
-                                        <label th:for="text" class="form-label">Họ tên</label>
-                                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên" required>
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label th:for="text" class="form-label">Số điện thoại</label>
-                                        <input type="number" class="form-control" name="sdt" placeholder="Số điện thoại" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label th:for="address" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" required>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Please enter your address.</div>
-                                </div>
+                            <h5 class="card-title">Điền thông tin học sinh mới vào bên dưới:</h5>
+                            <form th:action="@{/student/add}"  th:object="${createStudentRequest}" method="post" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
-                                        <label th:for="city" class="form-label">Trình độ</label>
-                                        <input type="text" class="form-control" name="trinhDo" placeholder="Mã trình độ" required>
+                                        <label th:for="text" class="form-label">Tên học sinh</label>
+                                        <input th:field="*{tenHocSinh}" type="text" class="form-control" name="tenHocSinh" minlength="4" placeholder="HocSinh lớp chồi tuần 23" required>
                                     </div>
                                     <div class="mb-3 col-md-3">
-                                        <label th:for="state" class="form-label">Trạng thái</label>
-                                        <select name="state" class="form-select" required>
-                                            <option value="" selected>Choose...</option>
-                                            <option value="1">Hoạt động</option>
-                                            <option value="2">Ngừng hoạt động</option>
-                                        </select>
+                                        <label th:for="text" class="form-label">Ngày sinh</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{ngaySinh}" type="text" id="insertNgaySinh" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="2020-01-01">
+                                        </div>
                                     </div>
                                     <div class="mb-3 col-md-2">
-                                        <label th:for="zip" class="form-label">Ngày đăng ký</label>
-                                        <input type="date" class="form-control" name="ngayDK" placeholder="29/03/2022" required>
+                                        <label th:for="gioiTinh" class="form-label">Giới tính</label>
+                                        <select th:field="*{gioiTinh}" name="gioiTinh" id="gioiTinhInsert" class="form-control">
+                                            <option value="nữ">Nữ</option>
+                                            <option value="nam">Nam</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="maLop" class="form-label">Mã lớp</label>
+                                        <select th:field="*{maLop}" name="maLop" id="maLop" class="form-control">
+                                            <option th:each="cvnClass : ${danhSachLop}"
+                                                    th:text="${cvnClass.getId()+ ' - ' + cvnClass.getName()}"
+                                                    th:value="${cvnClass.getId()}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="hotenPhuHuynh" class="form-label">Họ tên PH</label>
+                                        <input th:field="*{tenPhuHuynh}" type="text" class="form-control" name="hotenPhuHuynh" minlength="5" placeholder="Nguyễn Văn ..." required>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="soDienThoai" class="form-label">Số điện thoại</label>
+                                        <input th:field="*{soDienThoai}" type="number" class="form-control" name="hotenPhuHuynh" minlength="10" maxlength="10" placeholder="0987654321" required>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="email" class="form-label">Email</label>
+                                        <input th:field="*{email}" type="email" class="form-control" name="email" minlength="5" placeholder="abc@gmail.com">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="diaChi" class="form-label">Địa chỉ</label>
+                                        <input th:field="*{diaChi}" type="text" class="form-control" name="diaChi" minlength="5" placeholder="Số 12, đường Linh Trung, Thủ Đức" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="chieuCao" class="form-label">Chiều cao của bé (cm)</label>
+                                        <input th:field="*{chieuCao}" type="number" class="form-control" name="chieuCao" min="20" max="120">
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="canNang" class="form-label">Cân nặng của bé (kg)</label>
+                                        <input th:field="*{canNang}" type="number" class="form-control" min="5" max="60">
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="text" class="form-label">Ngày nhập học</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{ngayNhapHoc}" type="text" id="insertNgayNhapHoc" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" placeholder="01/01/2022" aria-describedby="datepicker">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="ghiChu" class="form-label">Ghi chú</label>
+                                        <input th:field="*{ghiChu}" type="text" class="form-control" placeholder="Lưu ý cho trẻ">
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="status" class="form-label">Trạng thái</label>
+                                        <select th:field="*{status}" name="status" id="status" class="form-control">
+                                            <option value="false">Tạm ngưng</option>
+                                            <option value="true">Đang đi học</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                                <button id="cancelBtnInsert" type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
                             </form>
                         </div>
                     </div>
                 </div>
 
-                <!-- Form update new student -->
+                <!-- Form update new HocSinh -->
                 <div id="updateForm" class="col-lg-12">
                     <div class="card">
                         <div class="card-header">Cập nhật thông tin học sinh</div>
                         <div class="card-body">
-                            <h5 class="card-title">Điền thông tin cần cập nhật</h5>
-                            <form class="needs-validation" novalidate accept-charset="utf-8">
-                                <div class="row g-2">
-                                    <div class="mb-3 col-md-6">
-                                        <label th:for="text" class="form-label">Họ tên</label>
-                                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên" required>
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label th:for="text" class="form-label">Số điện thoại</label>
-                                        <input type="number" class="form-control" name="sdt" placeholder="Số điện thoại" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label th:for="address" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" required>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Please enter your address.</div>
-                                </div>
+                            <h5 class="card-title">Cập nhật thông tin vào bên dưới:</h5>
+                            <form th:action="@{/student/update}"  th:object="${updateStudentRequest}" method="post" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
-                                        <label th:for="city" class="form-label">Trình độ</label>
-                                        <input type="text" class="form-control" name="trinhDo" placeholder="Mã trình độ" required>
+                                        <label th:for="text" class="form-label">Tên học sinh</label>
+                                        <input th:field="*{tenHocSinh}" id="tenHocSinhUpdate" type="text" class="form-control" name="tenHocSinh" minlength="4" placeholder="HocSinh lớp chồi tuần 23" required>
                                     </div>
                                     <div class="mb-3 col-md-3">
-                                        <label th:for="state" class="form-label">Trạng thái</label>
-                                        <select name="state" class="form-select" required>
-                                            <option value="" selected>Choose...</option>
-                                            <option value="1">Hoạt động</option>
-                                            <option value="2">Ngừng hoạt động</option>
-                                        </select>
+                                        <label th:for="text" class="form-label">Ngày sinh</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{ngaySinh}" type="text" id="ngaySinhUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="2020-01-01">
+                                        </div>
                                     </div>
                                     <div class="mb-3 col-md-2">
-                                        <label th:for="zip" class="form-label">Ngày đăng ký</label>
-                                        <input type="date" class="form-control" name="ngayDK" placeholder="29/03/2022" required>
+                                        <label th:for="gioiTinh" class="form-label">Giới tính</label>
+                                        <select th:field="*{gioiTinh}" name="gioiTinh" id="gioiTinhUpdate" class="form-control">
+                                            <option value="nữ">Nữ</option>
+                                            <option value="nam">Nam</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="maLop" class="form-label">Mã lớp</label>
+                                        <select th:field="*{maLop}" name="maLop" id="maLopUpdate" class="form-control">
+                                            <option th:each="cvnClass : ${danhSachLop}"
+                                                    th:text="${cvnClass.getId()+ ' - ' + cvnClass.getName()}"
+                                                    th:value="${cvnClass.getId()}">
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="hotenPhuHuynh" class="form-label">Họ tên PH</label>
+                                        <input th:field="*{tenPhuHuynh}" id="tenPhuHuynhUpdate" type="text" class="form-control" name="hotenPhuHuynh" minlength="5" placeholder="Nguyễn Văn ..." required>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="soDienThoai" class="form-label">Số điện thoại</label>
+                                        <input th:field="*{soDienThoai}" id="soDienThoaiUpdate" type="number" class="form-control" minlength="10" maxlength="10" placeholder="0987654321" required>
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="email" class="form-label">Email</label>
+                                        <input th:field="*{email}" id="emailUpdate" type="email" class="form-control" name="email" minlength="5" placeholder="abc@gmail.com">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="diaChi" class="form-label">Địa chỉ</label>
+                                        <input th:field="*{diaChi}" id="diaChiUpdate" type="text" class="form-control" name="diaChi" minlength="5" placeholder="Số 12, đường Linh Trung, Thủ Đức" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="chieuCao" class="form-label">Chiều cao của bé (cm)</label>
+                                        <input th:field="*{chieuCao}" id="chieuCaoUpdate" type="number" class="form-control" name="chieuCao" min="20" max="120">
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="canNang" class="form-label">Cân nặng của bé (kg)</label>
+                                        <input th:field="*{canNang}" id="canNangUpdate" type="number" class="form-control" min="5" max="60">
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label th:for="text" class="form-label">Ngày nhập học</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{ngayNhapHoc}" type="text" id="ngayNhapHocUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" placeholder="01/01/2022" aria-describedby="datepicker">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="ghiChu" class="form-label">Ghi chú</label>
+                                        <input th:field="*{ghiChu}" id="ghiChuUpdate" type="text" class="form-control" placeholder="Lưu ý cho trẻ">
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="status" class="form-label">Trạng thái</label>
+                                        <select th:field="*{status}" name="status" id="statusUpdate" class="form-control">
+                                            <option value="false">Tạm ngưng</option>
+                                            <option value="true">Đang học</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-3" hidden>
+                                        <label class="form-label">ID</label>
+                                        <input th:field="*{id}" id="idUpdate" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary "><i class="fas fa-save"></i> Save</button>
+                                <button id="cancleBtnUpdate" type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
                             </form>
                         </div>
                     </div>
                 </div>
 
-
+                <!--                search box-->
+                <div class="row" style="margin-bottom: 20px">
+                    <form  th:action="@{/student/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                        <input type="search" name="keyword"  class="form-control" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
+                        <button th:field="*{keyword}" type="submit" class="btn btn-secondary">Search</button>
+                    </form>
+                </div>
+                <!-- Content                -->
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
                         <div class="card">
-                            <div class="card-header">Student list</div>
+                            <div class="card-header">HocSinh list</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th>Mã HV</th>
-                                            <th>Họ tên</th>
-                                            <th>Địa chỉ</th>
-                                            <th>SDT</th>
-                                            <th>Trình độ</th>
-                                            <th>Ngày đăng ký</th>
-                                            <th>Trạng thái</th>
+                                            <th>Mã HS</th>
+                                            <th>Tên HS</th>
+                                            <th>Ngày sinh</th>
+                                            <th>Giới tính</th>
+                                            <th>Họ tên PH</th>
+                                            <th>SĐT</th>
+                                            <th>Mã lớp</th>
+                                            <th hidden>Email</th>
+                                            <th hidden>Địa chỉ</th>
+                                            <th hidden>Chiều cao</th>
+                                            <th hidden>Cân nặng</th>
+                                            <th hidden>Ngày nhập học</th>
+                                            <th hidden>Ghi chú</th>
+                                            <th hidden>Trạng thái</th>
                                             <th> </th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">1235</th>
-                                            <td>Mark Zuck</td>
-                                            <td>Số 23, đường Hoàng Văn Thụ, Phường Long Bình, Quận 9 </td>
-                                            <td>0362103314</td>
-                                            <td>112233</td>
-                                            <th>29/03/2022</th>
-                                            <th>Đang học</th>
+                                        <tr th:each="student : ${studentList}">
+                                            <th scope="row" th:text="*{student.getId()}">123</th>
+                                            <td th:text="*{student.getTenHocSinh()}">Nguyễn Thị Thu Hiền</td>
+                                            <td th:text="*{student.getNgaySinh()}">2019-09-03</td>
+                                            <td th:text="*{student.getGioiTinh()}">nữ</td>
+                                            <td th:text="*{student.getTenPhuHuynh()}">Nguyễn Văn Nam</td>
+                                            <td th:text="*{student.getSoDienThoai()}">0987654321</td>
+                                            <td th:text="*{student.getCvn_class().getId()}">66</td>
+                                            <td th:text="*{student.getEmail()}" hidden>vanNam@gmail.com</td>
+                                            <td th:text="*{student.getDiaChi()}" hidden>Số 12 đường Linh Trung, Thủ Đức</td>
+                                            <td th:text="*{student.getChieuCao()}" hidden>90</td>
+                                            <td th:text="*{student.getCanNang()}" hidden>30</td>
+                                            <td th:text="*{student.getNgayNhapHoc()}" hidden>2022-09-09</td>
+                                            <td th:text="*{student.getGhiChu()}" hidden>Không có ghi chú gì</td>
+                                            <td th:text="*{student.getStatus()} == true ? 'Đang học': 'Tạm ngưng'" hidden>Đang học</td>
                                             <th>
                                                 <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                                                    <button type="button" id="updateStudentBtn" class="btn btn-primary">Fix</button>
+                                                    <button type="button" class="btn btn-primary updateStudentBtn">Fix</button>
                                                     <button type="button" class="btn btn-danger deleteStudentBtn">Del</button>
                                                 </div>
                                             </th>
                                         </tr>
+
                                         <tr>
-                                            <th scope="row">6345</th>
-                                            <td>Mark Zuck</td>
-                                            <td>S111, Đường Tân Hiệp, Tân Long, Bình Thạnh</td>
-                                            <td>0362103314</td>
-                                            <td>112233</td>
-                                            <th>29/03/2022</th>
-                                            <th>Đang học</th>
-                                            <th>
-                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                                                    <button type="button" id="updateStudentBtn" class="btn btn-primary">Fix</button>
-                                                    <button type="button" class="btn btn-danger deleteStudentBtn">Del</button>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" colspan="8" style="text-align: right;">
-                                                <button type="button" id="addStudentBtn" class="btn btn-primary">Thêm học sinh</button>
+                                            <th scope="row" colspan="10" style="text-align: right;">
+                                                <button type="button" id="addStudentBtn" class="btn btn-primary">Thêm học sinh mới</button>
                                             </th>
                                         </tr>
                                         </tbody>
@@ -210,8 +290,9 @@
 </div>
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/vendor/chartsjs/Chart.min.js}"></script>
-<script th:src="@{/js/dashboard-charts.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/datepicker.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/i18n/datepicker.en.js}"></script>
+<script th:src="@{/vendor/mdtimepicker/mdtimepicker.min.js}"></script>
 <script th:src="@{/js/script.js}"></script>
 </body>
 <script>
@@ -219,21 +300,96 @@
         $("#insertForm").hide();
         $("#updateForm").hide();
         $("#addStudentBtn").click(function() {
+            $('body,html').animate({
+                scrollTop: 30
+            });
             $("#updateForm").hide();
-            $("#insertForm").toggle(500);
+            $("#insertForm").show(500);
+            //scroll to top
+
         });
-        $("#updateStudentBtn").click(function() {
+        $(".updateStudentBtn").click(function() {
+            $('body,html').animate({
+                scrollTop: 30
+            });
             $("#insertForm").hide();
-            $("#updateForm").toggle(500);
+            $("#updateForm").show();
+            $("#idUpdate").val($(this).parent().parent().parent().first().children().first().text());
+            $("#tenHocSinhUpdate").val($(this).parent().parent().parent().first().children().first().next().text());
+            $("#ngaySinhUpdate").val($(this).parent().parent().parent().first().children().first().next().next().text());
+            $("#tenPhuHuynhUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().text());
+            $("#maLopUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().text());
+            $("#soDienThoaiUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
+            $("#emailUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
+            $("#gioiTinhUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().text());
+            $("#diaChiUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().text());
+            $("#chieuCaoUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().text());
+            $("#canNangUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().next().text());
+            $("#ngayNhapHocUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().next().next().text());
+            $("#ghiChuUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().next().next().next().text());
+
+             var statusUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().next().next().next().next().text();
+             $("#statusUpdate").val((statusUpdate == 'Đang học') ? "true" : "false");
         });
 
+        $('#insertNgaySinh').datepicker({
+                dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#insertNgayKetThuc').datepicker({
+                dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#updateDateForm').datepicker({
+                dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $("#cancelBtnUpdate").click(function (){
+            $("#updateForm").hide();
+        });
+        $("#cancelBtnInsert").click(function (){
+            $("#insertForm").hide();
+        });
         // Delete button
         $(".deleteStudentBtn").click(function() {
             //get infor of student to delete here
-            if (confirm("Do you want to delete student id: " + $(this).parent().parent().parent().first().children().first().text())) {
+            if (confirm("Bạn có muốn xoá student id: " + $(this).parent().parent().parent().first().children().first().text())) {
                 $(this).parent().parent().parent().remove();
+                $.ajax({
+                    url: "http://localhost:8080/student/deleteStudent?id=" + $(this).parent().parent().parent().first().children().first().text() ,
+                    success: function(response) {
+                        //do something
+                    },
+                    error: function(xhr) {
+                        //Do Something to handle error
+                    }
+                });
             }
+        });
+        $('#ngaySinhUpdate').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#insertNgaySinh').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#ngayNhapHocUpdate').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#insertNgayNhapHoc').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
 
+        $("#insertForm").submit(function(e){
+            if (Date.parse($('#insertNgaySinh').val()) >= Date.parse($('#insertNgayNhapHoc').val())) {
+                alert("Ngày sinh phải diễn ra trước ngày nhập học");
+                return false;
+            }
+            else return true;
+        });
+
+        $("#updateForm").submit(function(e){
+            if (Date.parse($('#ngaySinhUpdate').val()) >= Date.parse($('#ngayNhapHocUpdate').val())) {
+                alert("Ngày sinh phải diễn ra trước ngày nhập học");
+                return false;
+            }
+            else return true;
         });
     });
 </script>
