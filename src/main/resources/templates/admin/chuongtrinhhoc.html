@@ -273,6 +273,11 @@
         $("#addCTHBtn").click(function() {
             $("#updateForm").hide();
             $("#insertForm").toggle(500);
+
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
         });
         $(".updateCTHBtn").click(function() {
             $("#insertForm").hide();
@@ -313,6 +318,11 @@
             if ($("#editorUpdate").next().prop("tagName") === 'DIV') {
                 $("#editorUpdate").next().remove();
             }
+
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
         });
         $("#cancelBtnUpdate").click(function (){
             $("#updateForm").hide();
