@@ -54,10 +54,12 @@ public class StudentController {
     @GetMapping("/")
     public String index(Model model, @RequestParam(required = false) String keyword,@RequestParam(required = false) String category ) {
         List<Student> studentList = studentService.getAll();
-        if (keyword != null) {
+        if (keyword != null && "all".equals(category)) {
             studentList = studentService.findAllByKeyword(keyword);
         }
-
+        if(keyword != null && !"all".equals(category)) {
+            studentList = studentService.findAllByCategory(keyword,category);
+        }
         model.addAttribute("studentList", studentList);
 
         CreateStudentRequest createStudentRequest = new CreateStudentRequest();

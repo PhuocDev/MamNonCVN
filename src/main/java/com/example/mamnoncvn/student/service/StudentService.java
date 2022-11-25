@@ -48,4 +48,15 @@ public class StudentService {
             return studentRepository.findAllByKeyword(keyword);
         } else return studentRepository.findAll();
     }
+
+    public List<Student> findAllByCategory(String keyword, String category) {
+        if ("class_id".equals(category)) {
+            return studentRepository.findAllByCategoryClassId(keyword);
+        } else if ("gioi_tinh".equals(category)) {
+            return studentRepository.findAllByCategoryGioiTinh(keyword);
+        } else if ("ten_phu_huynh".equals(category)) {
+            return studentRepository.findAllByCategoryTenPH(keyword);
+        } else
+        return studentRepository.findAllByKeyword(keyword);
+    }
 }

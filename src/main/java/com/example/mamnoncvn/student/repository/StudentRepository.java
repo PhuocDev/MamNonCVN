@@ -19,4 +19,22 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             " or t.so_dien_thoai like %?1% " +
             " order by t.id asc  ", nativeQuery = true)
     List<Student> findAllByKeyword(String keyword);
+
+    @Transactional
+    @Modifying
+    @Query(value = "select * from student t where t.gioi_tinh like %?1% " +
+            " order by t.id asc  ", nativeQuery = true)
+    List<Student> findAllByCategoryGioiTinh(String keyword);
+
+    @Transactional
+    @Modifying
+    @Query(value = "select * from student t where t.class_id like %?1% " +
+            " order by t.id asc  ", nativeQuery = true)
+    List<Student> findAllByCategoryClassId(String keyword);
+
+    @Transactional
+    @Modifying
+    @Query(value = "select * from student t where t.ten_phu_huynh like %?1% " +
+            " order by t.id asc  ", nativeQuery = true)
+    List<Student> findAllByCategoryTenPH(String keyword);
 }

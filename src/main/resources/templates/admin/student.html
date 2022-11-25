@@ -87,11 +87,11 @@
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
                                         <label th:for="chieuCao" class="form-label">Chiều cao của bé (cm)</label>
-                                        <input th:field="*{chieuCao}" type="number" class="form-control" name="chieuCao" min="20" max="120">
+                                        <input id="chieuCaoInsert" th:field="*{chieuCao}" type="number" class="form-control" name="chieuCao" min="20" max="120">
                                     </div>
                                     <div class="mb-3 col-md-3">
                                         <label th:for="canNang" class="form-label">Cân nặng của bé (kg)</label>
-                                        <input th:field="*{canNang}" type="number" class="form-control" min="5" max="60">
+                                        <input id="canNangInsert" th:field="*{canNang}" type="number" class="form-control" min="5" max="60">
                                     </div>
                                     <div class="mb-3 col-md-2">
                                         <label th:for="text" class="form-label">Ngày nhập học</label>
@@ -217,6 +217,13 @@
                 <div class="row" style="margin-bottom: 20px">
                     <form  th:action="@{/student/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
                         <input type="search" name="keyword"  class="form-control" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
+                        <select th:object="${category}" name="category" id="category" class="form-control">
+                            <option th:value="all">Tìm kiếm theo</option>
+                            <option th:value="class_id">Mã lớp</option>
+                            <option th:value="gioi_tinh">Giới tính</option>
+                            <option th:value="ten_phu_huynh">Tên phụ huynh</option>
+                            <option th:value="all">Tất cả</option>
+                        </select>
                         <button th:field="*{keyword}" type="submit" class="btn btn-secondary">Search</button>
                     </form>
                 </div>
@@ -376,11 +383,14 @@
             dateFormat: 'yyyy-mm-dd'
         }).val();
 
+
         $("#insertForm").submit(function(e){
             if (Date.parse($('#insertNgaySinh').val()) >= Date.parse($('#insertNgayNhapHoc').val())) {
                 alert("Ngày sinh phải diễn ra trước ngày nhập học");
                 return false;
-            }
+            } else if ( parseInt($("#chieuCaoInsert").text()) < parseInt($("#canNangInsert").text())) {
+                return false;
+            } 
             else return true;
         });
 
