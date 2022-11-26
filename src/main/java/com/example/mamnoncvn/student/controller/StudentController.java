@@ -30,6 +30,7 @@ public class StudentController {
 
     @GetMapping("/createDB")
     public List<Student> createDB() {
+        String id = classService.getAll().get(0).getId().toString();
         for (int i = 1; i < 5; i++) {
             CreateStudentRequest createStudentRequest = new CreateStudentRequest(
                     "Ten hoc sinh " + i,
@@ -43,7 +44,7 @@ public class StudentController {
                     "Dia chi " + i,
                     LocalDate.now().minusMonths(i),
                     "ghi chu tam thoi",
-                    "52",
+                    id,
                     true
             );
             System.out.println(createStudentRequest.toString());

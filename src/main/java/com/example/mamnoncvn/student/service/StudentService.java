@@ -37,9 +37,9 @@ public class StudentService {
     public Student updateStudent(UpdateStudentRequest updateStudentRequest){
         Student oldStudent = studentRepository.findById(updateStudentRequest.getId()).get();
         oldStudent = StudentMapper.convertUpdateStudentRequestToEntity(oldStudent, updateStudentRequest);
-
+        //System.out.println(updateStudentRequest.getMaLop());
+        oldStudent.setCvn_class(classService.findClassByID(Long.parseLong(updateStudentRequest.getMaLop())));
         studentRepository.saveAndFlush(oldStudent);
-
         return oldStudent;
     }
 

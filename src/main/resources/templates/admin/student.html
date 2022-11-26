@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label th:for="maLop" class="form-label">Mã lớp</label>
-                                        <select th:field="*{maLop}" name="maLop" id="maLop" class="form-control">
+                                        <select th:field="*{maLop}" name="maLop" id="maLopInsert" class="form-control">
                                             <option th:each="cvnClass : ${danhSachLop}"
                                                     th:text="${cvnClass.getId()+ ' - ' + cvnClass.getName()}"
                                                     th:value="${cvnClass.getId()}">
@@ -337,6 +337,7 @@
 
              var statusUpdate = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().next().next().next().next().text();
              $("#statusUpdate").val((statusUpdate == 'Đang học') ? "true" : "false");
+             //alert($("#maLopUpdate").val());
         });
 
         $('#insertNgaySinh').datepicker({
