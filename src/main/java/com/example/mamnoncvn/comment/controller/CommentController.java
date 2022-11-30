@@ -31,7 +31,7 @@ public class CommentController {
                             "Customer " + i,
                             "Email" + i + "@gmail.com",
                             "Content for " + i*123,
-                            "32"
+                            "23"
                     );
             commentService.save(createCommentRequest);
         }
