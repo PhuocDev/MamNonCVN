@@ -1,5 +1,6 @@
 package com.example.mamnoncvn.accountManager.accountPH.entity;
 
+import com.example.mamnoncvn.accountManager.accountPH.service.PhuHuynhAccountService;
 import com.example.mamnoncvn.accountManager.roles.ERole;
 import com.example.mamnoncvn.accountManager.roles.Roles;
 import lombok.Data;
@@ -24,10 +25,8 @@ public class PhuHuynhAccount {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-
     @Column(name = "username")
     @NotBlank(message = "username cannot be null/blank")
-    @Size(max = 10)
     private String username;
 
     @Column(name = "password")
@@ -39,7 +38,7 @@ public class PhuHuynhAccount {
     private String tenPhuHuynh;
 
     @Column(name = "email")
-    @Size(max = 50)
+    @Size(max = 30)
     @Email
     private String email;
 
@@ -49,14 +48,12 @@ public class PhuHuynhAccount {
     @Column(name = "dia_chi")
     private String diaChi;
 
+    @Column(name = "student_id")
     @NotNull(message = "student id cannot be null")
     private Long studentId;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "ph_role",
-            joinColumns = @JoinColumn(name = "phu_huynh_account_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Roles> roles = new HashSet<>();
+
+    private String role;
 
     @Column(name = "is_enable")
     private boolean isEnable;
@@ -70,20 +67,9 @@ public class PhuHuynhAccount {
     }
 
     public PhuHuynhAccount(){
-        this.roles.add(new Roles(ERole.ROLE_USER));
+        this.role = String.valueOf(ERole.ROLE_USER);
     }
 
-    public PhuHuynhAccount(String username, String password, String tenPhuHuynh, String email, String soDienThoai, String diaChi, Long studentId, Set<Roles> roles, boolean isEnable) {
-        this.username = username;
-        this.password = password;
-        this.tenPhuHuynh = tenPhuHuynh;
-        this.email = email;
-        this.soDienThoai = soDienThoai;
-        this.diaChi = diaChi;
-        this.studentId = studentId;
-        this.roles = roles;
-        this.isEnable = isEnable;
-    }
 
     public String getUsername() {
         return username;
@@ -141,12 +127,12 @@ public class PhuHuynhAccount {
         this.studentId = studentId;
     }
 
-    public Set<Roles> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Roles> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public boolean isEnable() {
@@ -155,5 +141,17 @@ public class PhuHuynhAccount {
 
     public void setEnable(boolean enable) {
         isEnable = enable;
+    }
+
+    public PhuHuynhAccount(String username, String password, String tenPhuHuynh, String email, String soDienThoai, String diaChi, Long studentId, String roles, boolean isEnable) {
+        this.username = username;
+        this.password = password;
+        this.tenPhuHuynh = tenPhuHuynh;
+        this.email = email;
+        this.soDienThoai = soDienThoai;
+        this.diaChi = diaChi;
+        this.studentId = studentId;
+        this.role = roles;
+        this.isEnable = isEnable;
     }
 }
