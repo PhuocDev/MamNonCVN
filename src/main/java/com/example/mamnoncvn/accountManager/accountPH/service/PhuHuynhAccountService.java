@@ -55,4 +55,11 @@ public class PhuHuynhAccountService {
     }
 
 
+    public boolean haveUsername(String username) {
+        return phuHuynhRepository.existsByUsername(username);
+    }
+
+    public boolean havePassword(String password) {
+        return phuHuynhRepository.existsByPassword(password);
+    }
 }

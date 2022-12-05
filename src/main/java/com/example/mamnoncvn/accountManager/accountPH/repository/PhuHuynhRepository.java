@@ -21,6 +21,10 @@ public interface PhuHuynhRepository extends JpaRepository<PhuHuynhAccount, Long>
             " or t.so_dien_thoai like %?1% or t.student_id like %?1% " +
             " order by t.id asc ", nativeQuery = true)
     List<PhuHuynhAccount> findAllByKeyword(String keyword);
+
+    boolean existsByUsername(String username);
+
+    boolean existsByPassword(String password);
 //
 //    @Transactional
 //    @Modifying
