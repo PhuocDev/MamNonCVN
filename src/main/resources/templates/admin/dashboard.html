@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CTH management</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/airdatepicker/css/datepicker.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+
+        <!-- end of navbar navigation -->
+        <div class="content" >
+            <div class="container" th:object="${report}">
+                <div class="row">
+                    <div class="col-md-12 page-header">
+                        <div class="page-pretitle">Overview</div>
+                        <h2 class="page-title">Dashboard</h2>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="icon-big text-center">
+                                            <i class="teal fas fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="detail">
+                                            <p class="detail-subtitle ">Số học sinh mới</p>
+                                            <span class="number" th:text="*{getTotalStudentThisMonth()}">234</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="fas fa-calendar"></i> Trong tháng này
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="icon-big text-center">
+                                            <i class="olive fas fa-money-bill-alt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="detail">
+                                            <p class="detail-subtitle ">Tổng thu nhập</p>
+                                            <span class="number" th:text="*{getMonthlyIncome()}">$180,900</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="fas fa-calendar"></i> Trong tháng này
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="icon-big text-center">
+                                            <i class="violet fas fa-eye"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="detail">
+                                            <p class="detail-subtitle ">Khách hàng tiềm năng</p>
+                                            <span class="number" th:text="*{getPotentailCustomer()}">28,210</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="fas fa-stopwatch"></i> Trong tháng này
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="icon-big text-center">
+                                            <i class="orange fas fa-envelope"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="detail">
+                                            <p class="detail-subtitle">Hỗ trợ khách hàng</p>
+                                            <span class="number" th:text="*{getSupportRequest()}">75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="fas fa-envelope-open-text"></i> Trong tháng này
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="icon-big text-center">
+                                            <i class="olive fas fa-user-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="detail">
+                                            <p class="detail-subtitle ">Tổng giáo viên</p>
+                                            <span class="number" th:text="*{getTotalTeacher()}">$180,900</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="fas fa-shopping-bag"></i> Đang hoạt động
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="icon-big text-center">
+                                            <i class="violet fas fa-pen-alt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="detail">
+                                            <p class="detail-subtitle ">Tổng số bài viết</p>
+                                            <span class="number" th:text="*{getTotalBlogs()}">28,210</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="fas fa-eye"></i> Đang hiển thị
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="dfd text-center">
+                                        <i class="blue large-icon mb-2 fas fa-thumbs-up"></i>
+                                        <h4 class="mb-0">+21,900</h4>
+                                        <p class="text-muted">FACEBOOK PAGE LIKES</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="dfd text-center">
+                                        <i class="orange large-icon mb-2 fas fa-reply-all"></i>
+                                        <h4 class="mb-0">+22,566</h4>
+                                        <p class="text-muted">INSTAGRAM FOLLOWERS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="dfd text-center">
+                                        <i class="grey large-icon mb-2 fas fa-envelope"></i>
+                                        <h4 class="mb-0">+15,566</h4>
+                                        <p class="text-muted">E-MAIL SUBSCRIBERS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="dfd text-center">
+                                        <i class="olive large-icon mb-2 fas fa-dollar-sign"></i>
+                                        <h4 class="mb-0">+98,601</h4>
+                                        <p class="text-muted">TOTAL SALES</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/datepicker.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/i18n/datepicker.en.js}"></script>
+<script th:src="@{/vendor/mdtimepicker/mdtimepicker.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+
+</script>
+<script>
+    $(document).ready(function() {
+        $("#insertForm").hide();
+        $("#updateForm").hide();
+        $("#addCTHBtn").click(function() {
+            $("#updateForm").hide();
+            $("#insertForm").toggle(500);
+
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
+        });
+        $(".updateCTHBtn").click(function() {
+            $("#insertForm").hide();
+            $("#updateForm").show();
+            $("#idCTHUpdate").val($(this).parent().parent().parent().first().children().first().text());
+            $("#tenCTHUpdate").val($(this).parent().parent().parent().first().children().first().next().text());
+            $("#descriptionUpdate").val($(this).parent().parent().parent().first().children().first().next().next().text());
+            $("#ngayBatDauUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().text());
+            $("#ngayKetThucUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().text());
+            $("#maLopUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
+            $("#ngayDangUpdate").val( $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().text());
+            $("#trangThaiUpdate").val("true");
+            $("#anhBiaUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
+            //content update here
+            var content = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().text();
+            ClassicEditor
+                .create( document.querySelector( '#editorUpdate' ), {
+                    htmlEmbed: {
+                        showPreviews: true,
+                        sanitizeHtml: ( inputHtml ) => {
+                            // Strip unsafe elements and attributes, e.g.:
+                            // the `<script>` elements and `on*` attributes.
+                            const outputHtml = sanitize( inputHtml );
+                            return {
+                                html: outputHtml,
+                                // true or false depending on whether the sanitizer stripped anything.
+                                hasChanged: true
+                            };
+                        }
+                    }
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+            document.getElementById('editorUpdate').innerHTML = content;
+            //console.log("number of textarea: " + $("textarea").length);
+            //console.log($("#editorUpdate").next().prop("tagName"));
+            if ($("#editorUpdate").next().prop("tagName") === 'DIV') {
+                $("#editorUpdate").next().remove();
+            }
+
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
+        });
+        $("#cancelBtnUpdate").click(function (){
+            $("#updateForm").hide();
+        });
+        $("#cancelBtnInsert").click(function (){
+            $("#insertForm").hide();
+        });
+        // Delete button
+        $(".deleteCTHBtn").click(function() {
+            //get infor of Class to delete here
+            if (confirm("Bạn có muốn xoá class id: " + $(this).parent().parent().parent().first().children().first().text())) {
+                $(this).parent().parent().parent().remove();
+                $.ajax({
+                    url: "http://localhost:8080/cth/deleteCTH?id=" + $(this).parent().parent().parent().first().children().first().text() ,
+                    success: function(response) {
+                        //do something
+                    },
+                    error: function(xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        });
+        $('#insertNgayBatDau').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#insertNgayKetThuc').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#ngayBatDauUpdate').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#ngayKetThucUpdate').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+
+        $("#insertForm").submit(function(e){
+            if (Date.parse($('#insertNgayBatDau').val()) >= Date.parse($('#insertNgayKetThuc').val())) {
+                alert("Ngày bắt đầu phải diễn ra trước ngày kết thúc");
+                return false;
+            }
+            else return true;
+        });
+
+        $("#updateForm").submit(function(e){
+            if (Date.parse($('#ngayBatDauUpdate').val()) >= Date.parse($('#ngayKetThucUpdate').val())) {
+                alert("Ngày bat dau phải diễn ra trước ngày kết thúc");
+                return false;
+            }
+            else return true;
+        });
+    });
+
+</script>
+
+</html>

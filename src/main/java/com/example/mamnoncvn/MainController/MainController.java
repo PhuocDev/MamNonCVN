@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
     @GetMapping("/")
     public String hello(Model model) {
-        return "layout/admin_layout";
-    }
-    @GetMapping("/test")
-    public String test() {
-        return "layout/admin_layout";
+        return "redirect:/admin/dashboard";
     }
     @GetMapping("/studentDemo")
     public String student() {
