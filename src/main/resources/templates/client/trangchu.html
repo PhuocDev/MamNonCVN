@@ -145,58 +145,30 @@
                     toàn diện và đồng hành cùng các bé từ những bước đầu tiên
                 </p>
             </div>
-            <div class="course-main">
-                <div class="course-main-item">
-                    <a href="" class="course-main-link">
+            <div  class="course-main">
+                <div th:each="cth : ${cthList}" class="course-main-item">
+                    <a href="#" class="course-main-link ">
                         <img
                                 style="height: 240px; object-fit: cover;"
-                                th:src="@{/img/c1.jpg}"
-                                alt=""
+                                th:src="*{cth.getAnhBia()}"
+                                alt="anhbiaCTH"
                                 class="course-main-link-img"
                         />
-                        <h2 class="course-main-link-heading">PRE NURSERY 12 – 24</h2>
+                        <h2 th:text="*{cth.getTenCTH()}" class="course-main-link-heading viewCthDetailBtn">PRE NURSERY 12 – 24</h2>
+                        <p th:text="*{cth.getId()}" hidden></p>
                     </a>
                 </div>
-                <div class="course-main-item">
-                    <a href="" class="course-main-link">
-                        <img
-                                th:src="@{/img/student1.jpeg}"
-                                alt=""
-                                class="course-main-link-img"
-                        />
-                        <h2 class="course-main-link-heading">NURSERY 24 – 36</h2>
-                    </a>
-                </div>
-                <div class="course-main-item">
-                    <a href="" class="course-main-link">
-                        <img
-                                th:src="@{/img/student2.jpeg}"
-                                alt=""
-                                class="course-main-link-img"
-                        />
-                        <h2 class="course-main-link-heading">PRE SCHOOL 3 – 4</h2>
-                    </a>
-                </div>
-                <div class="course-main-item">
-                    <a href="" class="course-main-link">
-                        <img
-                                th:src="@{/img/student3.jpeg}"
-                                alt=""
-                                class="course-main-link-img"
-                        />
-                        <h2 class="course-main-link-heading">PRE KINDER 4 – 5</h2>
-                    </a>
-                </div>
-                <div class="course-main-item">
-                    <a href="" class="course-main-link">
-                        <img style="height: 240px; object-fit: cover;"
-                             th:src="@{/img/student4.jpeg}"
-                             alt=""
-                             class="course-main-link-img"
-                        />
-                        <h2 class="course-main-link-heading">PRE KINDER 5 – 6</h2>
-                    </a>
-                </div>
+<!--                <div class="course-main-item">-->
+<!--                    <a href="" class="course-main-link">-->
+<!--                        <img-->
+<!--                                th:src="@{/img/student1.jpeg}"-->
+<!--                                alt=""-->
+<!--                                class="course-main-link-img"-->
+<!--                        />-->
+<!--                        <h2 class="course-main-link-heading">NURSERY 24 – 36</h2>-->
+<!--                    </a>-->
+<!--                </div>-->
+
             </div>
         </section>
 
@@ -434,60 +406,23 @@
                     phương pháp giảng dạy cho toàn thể giáo viên trong hệ thống
                     nhằm bắt kịp xu hướng dạy và học tiên tiến trên thế giới.</h5>
             </div>
-            <div class="row row-cols-1 row-cols-sm-3 g-5 m-2 news-main">
-                <div class="col">
-                    <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
+            <!-- blog list -->
+            <div class="row row-cols-1 row-cols-md-4 row-cols-sm-auto g-4 m-2 news-main" style="padding-right: 90px; padding-left: 90px;">
+                <div th:each="blog : ${blogList}" class="col">
+                    <div class="card" >
+                        <img style="height: 200px; object-fit: cover"
+                                th:src="*{blog.getThumbnail()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h2 class="card-title">Card title</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h2 th:text="*{blog.getTitle()}" style="font-size: 1.5rem;" class="card-title">Card title</h2>
+                            <p th:text="*{blog.getDescription()}" style=" font-size: 1.3rem; margin-bottom: 5px" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/28-02-2022_14_50_06_giao-duc-cam-xuc-cho-tre-mam-non.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">Card title</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/080911caugian_20998.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">Card title</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/07/289590893_177316168009200_8289850621438250448_n.jpg  " class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">Card title</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/08/z3601128932506_83058334bf1451bf9f8f3bec381ddde8-2048x1152.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">Card title</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
+                            <p th:text="*{blog.getId()}" hidden></p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col text-center">
-                <a href="#" id="btn-xem-them" type="button" class="btn btn-danger">Xem thêm nhiều tin tức khác </a>
+                <a href="/client/blog_all" id="btn-xem-them" type="button" class="btn btn-danger">Xem thêm nhiều tin tức khác </a>
             </div>
         </section>
         <!-- end of tin tức        -->
@@ -502,13 +437,18 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"
 ></script>
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        $("#insertForm").submit(function(e){-->
-<!--            //validate form before submitting here-->
-<!--            alert("Cảm ơn quý phụ huynh đã phản hồi")-->
-<!--            return true;-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
+<script>
+    $(document).ready(function (){
+        $(".viewBlogDetailBtn").click(function() {
+            var url = "http://localhost:8080/client/viewBlogDetail?id=" + $(this).next().text();
+            //window.open(url, '_blank');
+            window.location.href = url;
+        });
+        $(".viewCthDetailBtn").click(function() {
+            var url = "http://localhost:8080/client/viewCthDetail?id=" + $(this).next().text();
+            //window.open(url, '_blank');
+            window.location.href = url;
+        });
+    });
+</script>
 </html>

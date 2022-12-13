@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.websocket.server.PathParam;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,10 +31,23 @@ public class ClientController {
     BlogService blogService;
 
 
-    @GetMapping(path = {"/", })
-    public String trangchu(Model model) {
+    @GetMapping(path = {"/" })
+    public String showTrangchu(Model model) {
         //CreateFeedbackRequest createFeedbackRequest = new CreateFeedbackRequest();
         //model.addAttribute("createFeedbackRequest", new CreateFeedbackRequest());
+        List<Blog> allBlog = blogService.findAll();
+        List<Blog> blogList = new ArrayList<>();
+        for (int i = 0; i < Math.min(6, allBlog.size()); i++) {
+            blogList.add(allBlog.get(i));
+        }
+        model.addAttribute("blogList", blogList);
+
+        List<ChuongTrinhHoc> allCTH = chuongTrinhHocService.getAll();
+        List<ChuongTrinhHoc> cthList = new ArrayList<>();
+        for (int i = 0; i < Math.min(6, allCTH.size()); i++) {
+            cthList.add(allCTH.get(i));
+        }
+        model.addAttribute("cthList", cthList);
         return "client/trangchu";
     }
 
