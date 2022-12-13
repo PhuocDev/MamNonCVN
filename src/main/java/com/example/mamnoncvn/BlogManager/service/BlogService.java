@@ -66,4 +66,11 @@ public class BlogService {
     public List<Blog> findAll() {
         return blogRepository.findAll();
     }
+
+    public List<Blog> findAllByCategory(String category) {
+        return blogRepository.findAllByCategory(category);
+    }
+    public List<Blog> findAllInOneCategory(String category, String keyword) {
+        return blogRepository.findAllInOneCategory(keyword, category);
+    }
 }

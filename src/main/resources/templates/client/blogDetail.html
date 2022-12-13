@@ -33,32 +33,25 @@
 <!-- SIDEBAR -->
 <th:block th:replace="~{fragment/header :: ${header}}"></th:block>
 <!--Blog start here -->
-<div class="content h-200" style="height: auto; padding: 50px;padding-top: 70px; width: 100%; box-sizing: border-box;">
+<div th:object="${blog}" class="content h-200" style="height: auto; padding: 50px;padding-top: 70px; width: 100%; box-sizing: border-box;">
     <div class="row">
-        <h1 style="padding:10px;">LỄ TỐT NGHIỆP VÀ TỔNG KẾT NĂM HỌC 2021 – 2022</h1>
-        <p class="fs-3"> <i class="fas fa-pen"></i> By: <b>Admin</b> &nbsp;&nbsp;&nbsp; <i class="fas fa-folder"></i> Category: <b>Tin tức</b> &nbsp;&nbsp; <i class="fas fa-calendar"></i> Ngày đăng: <b>29/03/2022</b> </p>
+        <h1 th:text="*{getTitle()}" style="padding:10px;">LỄ TỐT NGHIỆP VÀ TỔNG KẾT NĂM HỌC 2021 – 2022</h1>
+        <p class="fs-3"> <i class="fas fa-pen"></i> By: <b th:text="*{getAuthor()}">Admin</b> &nbsp;&nbsp;&nbsp; <i class="fas fa-folder"></i> Category: <b th:text="*{getCategory()}">Tin tức</b> &nbsp;&nbsp; <i class="fas fa-calendar"></i> Ngày đăng: <b th:text="*{getDateModified()}">29/03/2022</b> </p>
     </div>
     <div class="row text-center">
-        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/08/z3601128932506_83058334bf1451bf9f8f3bec381ddde8-2048x1152.jpg"
-             alt="image demo">
+        <img th:src="*{getThumbnail()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/08/z3601128932506_83058334bf1451bf9f8f3bec381ddde8-2048x1152.jpg"
+             alt="image demo"
+            style="width: 60%"
+        >
     </div>
     <div class="row">
-        <h3 class="m-5 p-5" style="background-color: antiquewhite; width: 90%;">
+        <h3 th:text="*{getDescription()}" class="m-5 p-5" style="background-color: antiquewhite; width: 90%;">
             Description here: Ngày 27/07/2022, Koi Nursery Quận 8 đã tổ chức buổi lễ tốt nghiệp và Lễ Tổng Kết năm học 2021-2022 với sự tham gia của Ban Lãnh Đạo Công ty, Ban Giám Hiệu, đội ngũ cán bộ nhân viên và Quý Phụ Huynh học sinh.
         </h3>
     </div>
     <div class="row">
-        <p class="fs-3">Below is the content: </p>
-        <p class="fs-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta molestiae quisquam at harum possimus pariatur ut eos, modi corrupti, quod deleniti doloribus, quasi fuga sit iste facilis iusto reprehenderit ratione.
-            Quod consequuntur non dolore nostrum dolores qui? Nam modi omnis blanditiis laudantium quis iste exercitationem, molestias commodi alias dolorem facere neque officiis natus ratione sint, quo pariatur maiores. Perferendis, quos!
-            Iste nemo dolor quae architecto aliquid libero soluta ex sed ipsum molestiae, dicta amet voluptas quaerat nobis quos ab mollitia est eum deleniti nulla molestias expedita animi debitis. Nisi, impedit?
-            Ducimus expedita cumque assumenda voluptas magni nulla quis quas a eius? Architecto placeat, veniam optio iure sapiente, necessitatibus ratione obcaecati consequuntur, nobis incidunt consectetur fuga. Vel repellat est quasi minima?
-            Veniam sed quae minus nam debitis deleniti ab consequuntur obcaecati adipisci quam alias minima cum, nostrum itaque perspiciatis iste voluptatum fugit necessitatibus officiis totam. Minus a tempora dolorum illo deleniti?
-            Asperiores hic fuga inventore dolores eligendi facilis repellendus vitae officiis reprehenderit esse ea magnam laborum quibusdam iste quo consequuntur commodi eius, nisi deserunt, blanditiis, perferendis id eveniet dicta? Similique, quae!
-            Ipsum recusandae ipsa quos doloribus voluptatum deserunt fuga quam quis dolore laboriosam minus maiores quas iure laudantium nobis quaerat officiis molestiae, soluta ad, voluptatem totam ratione sapiente mollitia. Reiciendis, quo!
-            Tempore, neque. Saepe atque aspernatur asperiores, vel a magni molestias natus, recusandae nesciunt cum facilis. Magni facilis ad reprehenderit adipisci et. Rerum mollitia molestias, ipsa magni ea ducimus soluta nobis?
-            Reiciendis, ea autem eos, placeat odio adipisci doloribus at illo facere deserunt magnam, repudiandae ad eius delectus quod atque rerum illum velit enim sequi in. Obcaecati modi aliquid voluptas tenetur.
-            Quod tenetur officiis veritatis, a repellat necessitatibus est cumque corrupti, unde voluptatum, quibusdam consequatur. Minima consectetur, aperiam quod possimus asperiores eveniet voluptates ex molestias magni delectus exercitationem nesciunt enim doloribus.</p>
+        <p th:text="*{getContent()}" id="blogContent" class="fs-3" hidden>Raw content hidden </p>
+        <div id="convertBlogContent" class="fs-3" style="width: 80%;"></div>
     </div>
 </div>
 <th:block th:replace="~{fragment/footer :: ${footer}}"></th:block>
@@ -68,4 +61,11 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"
 ></script>
+<script>
+    $(document).ready(function (){
+        //convert textarea to html
+        var content = $("#blogContent").text();
+        $("#convertBlogContent").html(content);
+    });
+</script>
 </html>

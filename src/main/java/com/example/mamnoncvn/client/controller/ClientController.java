@@ -1,5 +1,7 @@
 package com.example.mamnoncvn.client.controller;
 
+import com.example.mamnoncvn.BlogManager.entity.Blog;
+import com.example.mamnoncvn.BlogManager.service.BlogService;
 import com.example.mamnoncvn.chuongTrinhHoc.entity.ChuongTrinhHoc;
 import com.example.mamnoncvn.chuongTrinhHoc.service.ChuongTrinhHocService;
 import com.example.mamnoncvn.customer.models.request.CreateCustomerRequest;
@@ -23,6 +25,10 @@ public class ClientController {
     CustomerService customerService;
     @Autowired
     ChuongTrinhHocService chuongTrinhHocService;
+    @Autowired
+    BlogService blogService;
+
+
     @GetMapping(path = {"/", "/trangchu"})
     public String trangchu() {
         return "client/trangchu";
@@ -35,7 +41,7 @@ public class ClientController {
         model.addAttribute("createCustomerRequest", createCustomerRequest);
         return "client/tuvan";
     }
-
+    // đã hoàn thành
     @GetMapping("/chuongtrinhhoc")
     public String chuongtrinhhoc(Model model, @RequestParam(required = false) String keyword) {
         List<ChuongTrinhHoc> chuongTrinhHocList = chuongTrinhHocService.getAll();
@@ -49,15 +55,6 @@ public class ClientController {
         model.addAttribute("keyword", searchKeyword);
         return "client/chuongtrinhhoc";
     }
-
-    @GetMapping("/blog")
-    public String blog(Model model) {
-        return "client/blog";
-    }
-    @GetMapping("/blogDetail")
-    public String blogDetail(Model model) {
-        return "client/blogDetail";
-    }
     @GetMapping("/viewCthDetail")
     public String viewCthDetail(Model model, @PathParam("id") Long id) {
         ChuongTrinhHoc chuongTrinhHoc = chuongTrinhHocService.findChuongTrinhHocByID(id);
@@ -65,6 +62,36 @@ public class ClientController {
         model.addAttribute("chuongtrinhhoc", chuongTrinhHoc);
         return "client/cthDetail";
     }
+
+
+    @GetMapping("/blog_thongbao")
+    public String blog(Model model, @RequestParam(required = false) String keyword) {
+        List<Blog> blogList = blogService.findAllByCategory("thongbao");
+        if (keyword != null) blogList = blogService.findAllInOneCategory("thongbao", keyword);
+        model.addAttribute("blogList", blogList);
+        String searchKeyword = null;
+        model.addAttribute("keyword", searchKeyword);
+        return "client/blog";
+    }
+    @GetMapping("/blog_all")
+    public String blogAll(Model model, @RequestParam(required = false) String keyword) {
+        List<Blog> blogList = blogService.findAll();
+        if (keyword != null) blogList = blogService.findAllBlogs(keyword);
+        model.addAttribute("blogList", blogList);
+        String searchKeyword = null;
+        model.addAttribute("keyword", searchKeyword);
+        return "client/blog";
+    }
+    @GetMapping("/viewBlogDetail")
+    public String viewBlogDetail(Model model, @PathParam("id") Long id) {
+        Blog blog = blogService.findBlogById(id);
+        if (blog == null)  throw new NotFoundException("Cannot found blog id: " + id);
+        model.addAttribute("blog", blog);
+        return "client/blogDetail";
+    }
+
+
+
     @GetMapping("contact")
     public String contact(){
         return "client/contact";

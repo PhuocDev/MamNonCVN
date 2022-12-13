@@ -48,13 +48,13 @@
             </div>
 
             <!-- blog list -->
-            <div  class="row row-cols-1 row-cols-sm-4 g-5 m-2 news-main">
+            <div  class="row row-cols-1 row-cols-sm-4 g-5 m-2 news-main" style="padding-right: 90px; padding-left: 90px;">
                 <div th:each="cth : ${chuongTrinhHocList}" class="col">
                     <div class="card">
                         <img th:src="*{cth.getAnhBia()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h2 th:text="*{cth.getTenCTH()}" class="card-title">Chương trình ABC</h2>
-                            <p th:text="*{cth.getDescription()}" style="font-size: 16px;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
+                            <h2 th:text="*{cth.getTenCTH()}" class="card-title" style="font-size: 2rem">Chương trình ABC</h2>
+                            <p th:text="*{cth.getDescription()}" style="font-size: 1.6rem;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
                             <a href="#" class="btn btn-danger viewCthDetailBtn"><h5>Xem chi tiết</h5></a>
                             <p th:text="*{cth.getId()}" hidden></p>
                         </div>
