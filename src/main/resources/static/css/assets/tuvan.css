@@ -1,0 +1,19 @@
+
+#insertForm {
+    padding: 0px 50px;
+}
+#insertForm .card {
+    padding: 20px;
+}
+
+#insertForm input {
+    font-size: 16px;
+    height: fit-content;
+}
+#insertForm select{
+    font-size: 16px;
+    height: fit-content;
+}
+#insertForm button{
+    font-size: 16px;
+}

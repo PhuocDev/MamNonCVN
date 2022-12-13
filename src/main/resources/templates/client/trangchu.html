@@ -1,0 +1,507 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+<!--    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/css/master.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/css/main.css}" rel="stylesheet">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+<!--    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>-->
+
+    <link rel="stylesheet" th:href="@{/css/assets/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/assets/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/assets/contactUs.css}">
+<!--    for  bootstrap-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css" />
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous" />
+    <title>Trang chủ</title>
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/header :: ${header}}"></th:block>
+    <div class="main">
+        <section class="slide">
+            <div
+                    id="carouselExampleIndicators"
+                    class="carousel slide"
+                    data-bs-ride="carousel"
+            >
+                <div class="carousel-indicators">
+                    <button
+                            type="button"
+                            data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide-to="0"
+                            class="active"
+                            aria-current="true"
+                            aria-label="Slide 1"
+                    ></button>
+                    <button
+                            type="button"
+                            data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide-to="1"
+                            aria-label="Slide 2"
+                    ></button>
+                    <!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img
+                                th:src="@{/img/slider1.png}"
+                                class="d-block w-100"
+                                alt="slider image 1"
+                        />
+                    </div>
+                    <div class="carousel-item">
+                        <img
+                                th:src="@{/img/silde2.png}"
+                                class="d-block w-100"
+                                alt="slider image 2"
+                        />
+                    </div>
+                    <!-- <div class="carousel-item">
+                            <img src="..." class="d-block w-100" alt="...">
+                          </div> -->
+                </div>
+                <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev"
+                >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next"
+                >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+        <section class="about">
+            <h1 class="heading">VỀ CHÚNG TÔI</h1>
+            <p class="about-title">
+                <b> Trường mầm non CẦU VÒNG NHỎ</b> – Môi trường học thân thiện, năng
+                động, chế độ chăm sóc tốt với những trang thiết bị cao cấp, đầy đủ
+                tiện nghi không những đảm bảo an toàn tuyệt đối cho bé mà còn đảm bảo
+                cho công tác nuôi dưỡng, chăm sóc, giáo dục trẻ toàn diện.
+
+                <br />Luôn hoàn thành tốt nhiệm vụ nặng nề và vinh quang của người kỹ
+                sư tâm hồn, mỗi cô giáo trong nhà trường đều cố gắng học tập nâng cao
+                trình độ chuyên môn, rèn luyện phẩm chất đạo đức, lối sống. Ban Giám
+                hiệu nhà trường luôn tạo điều kiện cho cán bộ, giáo viên, nhân viên
+                học tập các lớp bồi dưỡng nâng chuẩn. 100% cán bộ, giáo viên, nhà
+                trường đã đạt trình độ trên chuẩn. Các cô giáo còn tích cực tham gia
+                học các lớp âm nhạc, tin học, để phục vụ công tác giảng dạy. Trong
+                thời đại công nghệ thông tin, đội ngũ giáo viên nhà trường đã tích cực
+                học các lớp bồi dưỡng tin học. 100% giáo viên, nhân viên có trình độ
+                tin học A, B, nhiều cô giáo đã soạn, giảng được giáo án điện tử. Không
+                ít kiến thức, bài hát, câu chuyện, tranh ảnh minh hoạ đã được các cô
+                giáo của trường cập nhật, khai thác từ mạng Internet.
+
+                <br />Mầm non CẦU VÒNG NHỎ thường xuyên tổ chức khám, cân, đo, theo
+                dõi sức khoẻ vào biểu đồ tăng trưởng cho trẻ, để có chế độ nuôi dưỡng,
+                chăm sóc hợp lý. Các cô giáo, nhân viên phối hợp với gia đình luôn
+                quan tâm đảm bảo an toàn tuyệt đối cho các cháu. Chế độ dinh dưỡng và
+                vệ sinh an toàn thực phẩm cho trẻ được nhà trường đặc biệt quan tâm.
+                Lương thực, thực phẩm cung cấp cho nhà trường đều rõ nguồn gốc, thường
+                xuyên được cơ quan y tế kiểm tra, giám sát. Bếp ăn của nhà trường luôn
+                đảm bảo vệ sinh an toàn thực phẩm….
+            </p>
+            <a href="gioithieu.html" class="btn-size-s">Xem chi tiết</a>
+        </section>
+        <section class="course">
+            <div class="course-top">
+                <h1 class="heading">CHƯƠNG TRÌNH HỌC</h1>
+                <p class="course-title">
+                    Với đội ngũ giáo viên giàu kinh nghiệm, trình độ chuyên môn cao, CẦU
+                    VÒNG NHỎ mang đến cho các bé cơ hội trải nghiệm môi trường giáo dục
+                    toàn diện và đồng hành cùng các bé từ những bước đầu tiên
+                </p>
+            </div>
+            <div class="course-main">
+                <div class="course-main-item">
+                    <a href="" class="course-main-link">
+                        <img
+                                style="height: 240px; object-fit: cover;"
+                                th:src="@{/img/c1.jpg}"
+                                alt=""
+                                class="course-main-link-img"
+                        />
+                        <h2 class="course-main-link-heading">PRE NURSERY 12 – 24</h2>
+                    </a>
+                </div>
+                <div class="course-main-item">
+                    <a href="" class="course-main-link">
+                        <img
+                                th:src="@{/img/student1.jpeg}"
+                                alt=""
+                                class="course-main-link-img"
+                        />
+                        <h2 class="course-main-link-heading">NURSERY 24 – 36</h2>
+                    </a>
+                </div>
+                <div class="course-main-item">
+                    <a href="" class="course-main-link">
+                        <img
+                                th:src="@{/img/student2.jpeg}"
+                                alt=""
+                                class="course-main-link-img"
+                        />
+                        <h2 class="course-main-link-heading">PRE SCHOOL 3 – 4</h2>
+                    </a>
+                </div>
+                <div class="course-main-item">
+                    <a href="" class="course-main-link">
+                        <img
+                                th:src="@{/img/student3.jpeg}"
+                                alt=""
+                                class="course-main-link-img"
+                        />
+                        <h2 class="course-main-link-heading">PRE KINDER 4 – 5</h2>
+                    </a>
+                </div>
+                <div class="course-main-item">
+                    <a href="" class="course-main-link">
+                        <img style="height: 240px; object-fit: cover;"
+                             th:src="@{/img/student4.jpeg}"
+                             alt=""
+                             class="course-main-link-img"
+                        />
+                        <h2 class="course-main-link-heading">PRE KINDER 5 – 6</h2>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- image library      -->
+        <section class="contents">
+            <!-- Gallery -->
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img
+                            th:src="@{/img/student5.jpeg}"
+                            class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Boat on Calm Water"
+                    />
+
+                    <img
+                            th:src="@{/img/student6.jpeg}"
+                            class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Wintry Mountain Landscape"
+                    />
+                </div>
+
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <img
+                            th:src="@{/img/student7.jpeg}"
+                            class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Mountains in the Clouds"
+                    />
+
+                    <img
+                            th:src="@{/img/student8.jpeg}"
+                            class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Boat on Calm Water"
+                    />
+                </div>
+
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <img
+                            th:src="@{/img/teacherAndStudent2.jpeg}"
+                            class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Waves at Sea"
+                    />
+                    <img
+                            th:src="@{/img/student10.jpeg}"
+                            class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Yosemite National Park"
+                    />
+                </div>
+            </div>
+        </section>
+        <!-- end of image library      -->
+
+        <!-- customer review        -->
+        <section id="customer-review" class="gradient-custom">
+            <h1 class="heading">PHỤ HUYNH NÓI GÌ VỀ CHÚNG TÔI</h1>
+            <div class="container my-5 py-5 mb-0 pb-0">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12">
+                        <div class="text-center mb-4 pb-2">
+                            <i class="fas fa-quote-left fa-3x text-white"></i>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body px-4 py-5">
+                                <!-- Carousel wrapper -->
+                                <div
+                                        id="carouselDarkVariant"
+                                        class="carousel slide carousel-dark"
+                                        data-mdb-ride="carousel"
+                                >
+                                    <!-- Indicators -->
+                                    <div class="carousel-indicators mb-0">
+                                        <button
+                                                data-mdb-target="#carouselDarkVariant"
+                                                data-mdb-slide-to="0"
+                                                class="active"
+                                                aria-current="true"
+                                                aria-label="Slide 1"
+                                        ></button>
+                                        <button
+                                                data-mdb-target="#carouselDarkVariant"
+                                                data-mdb-slide-to="1"
+                                                aria-label="Slide 1"
+                                        ></button>
+                                        <button
+                                                data-mdb-target="#carouselDarkVariant"
+                                                data-mdb-slide-to="2"
+                                                aria-label="Slide 1"
+                                        ></button>
+                                    </div>
+
+                                    <!-- Inner -->
+                                    <div class="carousel-inner pb-5">
+                                        <!-- Single item -->
+                                        <div class="carousel-item active">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-lg-12 col-xl-8">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 d-flex justify-content-center">
+                                                            <img
+                                                                    src="https://koinursery.edu.vn/wp-content/uploads/2022/06/13-100x100.png"
+                                                                    class="rounded-circle shadow-1 mb-4 mb-lg-0"
+                                                                    alt="woman avatar"
+                                                                    width="150"
+                                                                    height="150"
+                                                            />
+                                                        </div>
+                                                        <div
+                                                                class="col-12 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0"
+                                                        >
+                                                            <h2 class="mb-4">
+                                                                Phụ huynh Nguyễn Quốc Thịnh
+                                                            </h2>
+                                                            <p  style="font-size: 16px;" class="mb-0 pb-3">
+                                                                Rất đắn đo việc lựa chọn trường cho con rồi cuối cùng mình đã chọn trường mầm non Cầu vòng nhỏ, đến hiện tại thấy rất hài lòng .
+                                                                Trường xanh sạch đẹp, các cô giáo rất thân thiện nhiệt tình chuyên nghiệp và trên hết là tận tâm chăm sóc các con. Trường có đa
+                                                                dạng các chương trình học trò chơi giúp con phát triển kĩ năng, con thì rất vui khi được đi học. Tuy thời gian đầu con có hay
+                                                                bệnh vặt nhưng được các cô chăm sóc kĩ + cho uống thuốc nên mẹ vẫn rất yên tâm khi gửi con.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Single item -->
+                                        <div class="carousel-item">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-lg-10 col-xl-8">
+                                                    <div class="row">
+                                                        <div
+                                                                class="col-lg-4 d-flex justify-content-center"
+                                                        >
+                                                            <img
+                                                                    src="https://koinursery.edu.vn/wp-content/uploads/2022/06/12-100x100.png"
+                                                                    class="rounded-circle shadow-1 mb-4 mb-lg-0"
+                                                                    alt="woman avatar"
+                                                                    width="150"
+                                                                    height="150"
+                                                            />
+                                                        </div>
+                                                        <div
+                                                                class="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0"
+                                                        >
+                                                            <h4 class="mb-4">
+                                                                Phụ huynh Ngọc Hà
+                                                            </h4>
+                                                            <p style="font-size: 16px;"  class="mb-0 pb-3">
+                                                                Trường mới, rất sạch và kỹ. lúc đầu lựa chọn mình cũng đắn đo do con mình hơi chậm sợ bị ăn hiếp. nhưng qua thời gian đã thấy đó là sự lựa chọn đúng đắn, con mình hoạt bát nói nhiều hơn.
+                                                                Chương trình học nhiều hoạt động và dinh dưỡng rất tốt. Bên cạnh đó có camera lúc nào cũng theo dõi con yêu được. Điều ấn tượng là các cô ở đây rất thân thiện vui vẻ và nụ cười lúc nào trên môi.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Single item -->
+                                        <div class="carousel-item">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-lg-10 col-xl-8">
+                                                    <div class="row">
+                                                        <div
+                                                                class="col-lg-4 d-flex justify-content-center"
+                                                        >
+                                                            <img
+                                                                    src="https://as1.ftcdn.net/v2/jpg/01/04/10/10/500_F_104101070_wbEDt3CmlzqnPbdmOlVCL7Q7yu9mCduz.jpg"
+                                                                    class="rounded-circle shadow-1 mb-4 mb-lg-0"
+                                                                    alt="woman avatar"
+                                                                    width="150"
+                                                                    height="150"
+                                                            />
+                                                        </div>
+                                                        <div
+                                                                class="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0"
+                                                        >
+                                                            <h4 class="mb-4">
+                                                                Phụ huynh Trần Văn Quyết
+                                                            </h4>
+                                                            <p style="font-size: 16px;" class="mb-0 pb-3">
+                                                                Điều mình ấn tượng nhất tại trung tâm không chỉ là bí quyết học tiếng Anh bổ ích mà còn là sự nhiệt tình tâm huyết từ thầy cô, và môi trường học tập truyền cảm hứng. Những điều này chính là động lực giúp các cháu cố gắng và cải thiện bản thân hơn. Tôi rất hài lòng về trung tâm.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Inner -->
+
+                                    <!-- Controls -->
+                                    <button
+                                            class="carousel-control-prev"
+                                            type="button"
+                                            data-mdb-target="#carouselDarkVariant"
+                                            data-mdb-slide="prev"
+                                    >
+                      <span
+                              class="carousel-control-prev-icon"
+                              aria-hidden="true"
+                      ></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button
+                                            class="carousel-control-next"
+                                            type="button"
+                                            data-mdb-target="#carouselDarkVariant"
+                                            data-mdb-slide="next"
+                                    >
+                      <span
+                              class="carousel-control-next-icon"
+                              aria-hidden="true"
+                      ></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                                <!-- Carousel wrapper -->
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4 pt-2">
+                            <i class="fas fa-quote-right fa-3x text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end of customer review        -->
+
+        <!-- tin tức        -->
+        <section class="news">
+            <div class="news-top">
+                <h1 class="heading">TIN TỨC - SỰ KIỆN</h1>
+                <h5 class="heading-description">Trường mầm non Cầu vòng nhỏ thường xuyên tổ chức các
+                    khóa bồi dưỡng trình độ chuyên môn và nâng cao
+                    phương pháp giảng dạy cho toàn thể giáo viên trong hệ thống
+                    nhằm bắt kịp xu hướng dạy và học tiên tiến trên thế giới.</h5>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-3 g-5 m-2 news-main">
+                <div class="col">
+                    <div class="card">
+                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h2 class="card-title">Card title</h2>
+                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/28-02-2022_14_50_06_giao-duc-cam-xuc-cho-tre-mam-non.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h2 class="card-title">Card title</h2>
+                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/080911caugian_20998.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h2 class="card-title">Card title</h2>
+                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/07/289590893_177316168009200_8289850621438250448_n.jpg  " class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h2 class="card-title">Card title</h2>
+                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/08/z3601128932506_83058334bf1451bf9f8f3bec381ddde8-2048x1152.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h2 class="card-title">Card title</h2>
+                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col text-center">
+                <a href="#" id="btn-xem-them" type="button" class="btn btn-danger">Xem thêm nhiều tin tức khác </a>
+            </div>
+        </section>
+        <!-- end of tin tức        -->
+
+        <!--        contact -->
+        <th:block th:replace="~{fragment/contact :: ${contact}}"></th:block>
+
+        <!-- End of contact us  -->
+    </div>
+    <th:block th:replace="~{fragment/footer :: ${footer}}"></th:block>
+</body>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
+</html>
