@@ -7,6 +7,7 @@ import com.example.mamnoncvn.chuongTrinhHoc.service.ChuongTrinhHocService;
 import com.example.mamnoncvn.customer.models.request.CreateCustomerRequest;
 import com.example.mamnoncvn.customer.service.CustomerService;
 import com.example.mamnoncvn.exception.NotFoundException;
+import com.example.mamnoncvn.feedback.models.request.CreateFeedbackRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +30,10 @@ public class ClientController {
     BlogService blogService;
 
 
-    @GetMapping(path = {"/", "/trangchu"})
-    public String trangchu() {
+    @GetMapping(path = {"/", })
+    public String trangchu(Model model) {
+        //CreateFeedbackRequest createFeedbackRequest = new CreateFeedbackRequest();
+        //model.addAttribute("createFeedbackRequest", new CreateFeedbackRequest());
         return "client/trangchu";
     }
 
@@ -93,11 +96,15 @@ public class ClientController {
 
 
     @GetMapping("contact")
-    public String contact(){
+    public String contact(Model model){
+        CreateFeedbackRequest createFeedbackRequest = new CreateFeedbackRequest();
+        model.addAttribute("createFeedbackRequest", createFeedbackRequest);
         return "client/contact";
     }
     @GetMapping("/gioithieu")
-    public String gioithieu() {
+    public String gioithieu(Model model) {
+        CreateFeedbackRequest createFeedbackRequest = new CreateFeedbackRequest();
+        model.addAttribute("createFeedbackRequest", createFeedbackRequest);
         return "client/gioithieu";
     }
 
@@ -106,7 +113,9 @@ public class ClientController {
         return "client/tuyensinh";
     }
     @GetMapping("/dangcapnhat")
-    public String dangcapnhat() {
+    public String dangcapnhat(Model model) {
+        CreateFeedbackRequest createFeedbackRequest = new CreateFeedbackRequest();
+        model.addAttribute("createFeedbackRequest", createFeedbackRequest);
         return "client/dangcapnhat";
     }
 

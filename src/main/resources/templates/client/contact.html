@@ -35,11 +35,71 @@
 <!-- SIDEBAR -->
 <th:block th:replace="~{fragment/header :: ${header}}"></th:block>
 
-<!-- Body -->
+
 <!-- Body -->
 <div class="content" style="height: auto;padding-top: 70px">
     <!--        contact -->
-    <th:block th:replace="~{fragment/contact :: ${contact}}"></th:block>
+
+    <!--  đăng kí tư vấn        -->
+    <div class="row" id="contatti">
+        <div class="container p-5 pb-5" >
+            <div class="row" style="height: 500px;">
+                <div class="col maps" >
+                    <iframe src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=M4-88 khu biệt thự manhattan glory vinhomes grand park&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+                <div id="insertForm" class="col">
+                    <h1 class="text-uppercase" style="font-size: 30px; color: white;">Liên hệ với chúng tôi</h1>
+                    <!-- sending request here -->
+                    <form th:action="@{/feedback/addFromClient}"  th:object="${createFeedbackRequest}" method="post"  accept-charset="utf-8">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input th:field="*{name}" type="text" class="form-control m-2 p-3 fs-3" placeholder="Họ và tên" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control m-2 p-3 fs-3" placeholder="Tiêu đề" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input th:field="*{email}" type="email" class="form-control m-2 p-3 fs-3" placeholder="Email" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input th:field="*{soDienThoai}" type="number" class="form-control m-2 p-3 fs-3" placeholder="Số điện thoại" minlength="10" maxlength="10" required>
+                                </div>
+                            </div>
+                            <div class="col-12 p-2 m-1">
+                                <div class="form-group">
+                                    <textarea th:field="*{content}" class="form-control m-2 p-3 fs-3" id="exampleFormControlTextarea1" placeholder="Nội dung" rows="3" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-light fs-3 m-2" type="submit">Gửi</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text-white" style="font-size: 1.6rem;">
+                        <h1 class="text-uppercase mt-4 font-weight-bold">Mầm non Cầu vòng nhỏ</h1>
+
+                        <i class="fas fa-phone mt-3"></i> <a href="tel:+">  0906 993 262</a><br>
+                        <i class="fa fa-envelope mt-3"></i> <a href="">hantt.dongtien@gmail.com</a><br>
+                        <i class="fas fa-location-pin mt-3"></i> M4-88, Khu biệt thự Manhattan Glory Vinhomes Grand Park, Nguyễn
+                        Xiển, Long Bình, Quận 9, TP. Thủ Đức<br>
+                        <div class="my-4">
+                            <a href="https://www.facebook.com/Mamnoncauvongnho.edu.vn"><i class="fab fa-facebook fa-3x pr-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  end of đăng kí tư vấn        -->
 </div>
 
 
@@ -51,4 +111,13 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"
 ></script>
+<script>
+    $(document).ready(function () {
+        $("#insertForm").submit(function(e){
+            //validate form before submitting here
+            alert("Cảm ơn quý phụ huynh đã phản hồi")
+            return true;
+        });
+    });
+</script>
 </html>

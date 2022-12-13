@@ -59,6 +59,12 @@ public class FeedbackController {
         feedbackService.save(createFeedbackRequest);
         return "redirect:/feedback/";
     }
+    @PostMapping(path = "/addFromClient",  consumes = "application/x-www-form-urlencoded")
+    public String addNewFeedbackFromClient(Model model,@Valid @ModelAttribute("createFeedbackRequest") CreateFeedbackRequest createFeedbackRequest) {
+
+        feedbackService.save(createFeedbackRequest);
+        return "redirect:/client/";
+    }
 
     @GetMapping("/deleteFeedback")
     public String deleteFeedback(@PathParam("id") Long id, Model model){
