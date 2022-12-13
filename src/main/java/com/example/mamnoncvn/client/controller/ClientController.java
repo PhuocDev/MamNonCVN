@@ -1,5 +1,7 @@
 package com.example.mamnoncvn.client.controller;
 
+import com.example.mamnoncvn.chuongTrinhHoc.entity.ChuongTrinhHoc;
+import com.example.mamnoncvn.chuongTrinhHoc.service.ChuongTrinhHocService;
 import com.example.mamnoncvn.customer.models.request.CreateCustomerRequest;
 import com.example.mamnoncvn.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/client")
@@ -14,11 +19,14 @@ public class ClientController {
 
     @Autowired
     CustomerService customerService;
+    @Autowired
+    ChuongTrinhHocService chuongTrinhHocService;
     @GetMapping(path = {"/", "/trangchu"})
     public String trangchu() {
         return "client/trangchu";
     }
 
+    //đã hoàn thành
     @GetMapping("/tuvan")
     public String tuvan(Model model) {
         CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest();
@@ -26,7 +34,19 @@ public class ClientController {
         return "client/tuvan";
     }
 
+    @GetMapping("/chuongtrinhhoc")
+    public String chuongtrinhhoc(Model model, @RequestParam(required = false) String keyword) {
+        List<ChuongTrinhHoc> chuongTrinhHocList = chuongTrinhHocService.getAll();
+        if (keyword != null) {
+            chuongTrinhHocList = chuongTrinhHocService.findAllByKeyword(keyword);
+        }
+        model.addAttribute("chuongTrinhHocList", chuongTrinhHocList);
 
+        //searching function
+        String searchKeyword = null;
+        model.addAttribute("keyword", searchKeyword);
+        return "client/chuongtrinhhoc";
+    }
 
     @GetMapping("/blog")
     public String blog(Model model) {
@@ -54,8 +74,5 @@ public class ClientController {
         return "client/dangcapnhat";
     }
 
-    @GetMapping("/chuongtrinhhoc")
-    public String chuongtrinhhoc() {
-        return "client/chuongtrinhhoc";
-    }
+
 }

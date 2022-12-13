@@ -41,64 +41,34 @@
         <section class="news">
             <!--search box-->
             <div class="row" style="margin-bottom: 5px; font-size: 30px; width: 100%; display:flex; justify-content: flex-end;" >
-                <form  th:action="@{/student/{keyword}(keyword = ${keyword})}" class="col-4 input-group fs-3" style="width: 400px; font-size: 25px; height: fit-content; margin-left: 3 0px;">
+                <form  th:action="@{/client/chuongtrinhhoc/{keyword}(keyword = ${keyword})}" class="col-4 input-group fs-3" style="width: 400px; font-size: 25px; height: fit-content; margin-left: 3 0px;">
                     <input  style="font-size: 25px; height: fit-content; width: 100px;" type="search" name="keyword"  class="form-control fs-3" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                     <button th:field="*{keyword}" type="submit" class="btn btn-danger fs-3">Tìm kiếm</button>
                 </form>
             </div>
 
             <!-- blog list -->
-            <div class="row row-cols-1 row-cols-sm-4 g-5 m-2 news-main">
-                <div class="col">
+            <div  class="row row-cols-1 row-cols-sm-4 g-5 m-2 news-main">
+                <div th:each="cth : ${chuongTrinhHocList}" class="col">
                     <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
+                        <img th:src="*{cth.getAnhBia()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h2 class="card-title">Chương trình ABC</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
-                            <a href="blogdetail.html" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/28-02-2022_14_50_06_giao-duc-cam-xuc-cho-tre-mam-non.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">Chương trình ABC</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
-                            <a href="blogdetail.html" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/080911caugian_20998.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">Chương trình ABC</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
+                            <h2 th:text="*{cth.getTenCTH()}" class="card-title">Chương trình ABC</h2>
+                            <p th:text="*{cth.getDescription()}" style="font-size: 16px;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
                             <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/07/289590893_177316168009200_8289850621438250448_n.jpg  " class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">Chương trình ABC</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/08/z3601128932506_83058334bf1451bf9f8f3bec381ddde8-2048x1152.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">Chương trình ABC</h2>
-                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col">-->
+<!--                    <div class="card">-->
+<!--                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">-->
+<!--                        <div class="card-body">-->
+<!--                            <h2 class="card-title">Chương trình ABC</h2>-->
+<!--                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>-->
+<!--                            <a href="blogdetail.html" class="btn btn-danger"><h5>Xem chi tiết</h5></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </section>
     </div>
