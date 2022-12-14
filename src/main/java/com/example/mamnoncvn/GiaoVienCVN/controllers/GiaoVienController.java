@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/giaovien")
+@RequestMapping("/admin/giaovien")
 public class GiaoVienController {
     @Autowired
     GiaoVienService giaoVienService;

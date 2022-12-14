@@ -25,7 +25,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping("/class")
+@RequestMapping("/admin/class")
 public class CVN_ClassController {
     @Autowired
     CVN_ClassService classService;

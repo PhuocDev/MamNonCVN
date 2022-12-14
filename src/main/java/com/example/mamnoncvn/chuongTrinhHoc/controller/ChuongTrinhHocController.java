@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cth")
+@RequestMapping("/admin/cth")
 public class ChuongTrinhHocController {
     @Autowired
     ChuongTrinhHocService chuongTrinhHocService;

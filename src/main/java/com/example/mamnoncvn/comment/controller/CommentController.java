@@ -16,7 +16,7 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/comment")
+@RequestMapping("/admin/comment")
 public class CommentController {
     @Autowired
     CommentService commentService;

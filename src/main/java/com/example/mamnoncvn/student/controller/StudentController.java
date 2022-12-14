@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/student")
+@RequestMapping("/admin/student")
 public class StudentController {
     @Autowired
     StudentService studentService;

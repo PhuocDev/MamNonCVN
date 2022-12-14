@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping("/customer")
+@RequestMapping("/admin/customer")
 public class CustomerController {
     @Autowired
     CustomerService customerService;

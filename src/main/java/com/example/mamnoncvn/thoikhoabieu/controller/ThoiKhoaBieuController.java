@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping("/tkb")
+@RequestMapping("/admin/tkb")
 public class ThoiKhoaBieuController {
 
     @Autowired

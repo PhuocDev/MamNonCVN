@@ -14,7 +14,7 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/feedback")
+@RequestMapping("/admin/feedback")
 public class FeedbackController {
     @Autowired
     FeedbackService feedbackService;

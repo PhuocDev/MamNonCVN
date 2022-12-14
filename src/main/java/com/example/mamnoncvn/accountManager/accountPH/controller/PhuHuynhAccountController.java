@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping( "phuhuynh")
+@RequestMapping( "/admin/phuhuynh")
 public class PhuHuynhAccountController {
     @Autowired
     PhuHuynhAccountService phuHuynhAccountService;
