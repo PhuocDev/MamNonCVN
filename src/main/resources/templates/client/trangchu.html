@@ -145,8 +145,8 @@
                     toàn diện và đồng hành cùng các bé từ những bước đầu tiên
                 </p>
             </div>
-            <div  class="course-main">
-                <div th:each="cth : ${cthList}" class="course-main-item">
+            <div  class="course-main" style="align-content: center; display: flex; justify-content: center">
+                <div th:each="cth : ${cthList}" class="course-main-item" style="width: 250px">
                     <a href="#" class="course-main-link ">
                         <img
                                 style="height: 240px; object-fit: cover;"
@@ -154,7 +154,7 @@
                                 alt="anhbiaCTH"
                                 class="course-main-link-img"
                         />
-                        <h2 th:text="*{cth.getTenCTH()}" class="course-main-link-heading viewCthDetailBtn">PRE NURSERY 12 – 24</h2>
+                        <h2 style="font-size: 1.7rem" th:text="*{cth.getTenCTH()}" class="course-main-link-heading viewCthDetailBtn">PRE NURSERY 12 – 24</h2>
                         <p th:text="*{cth.getId()}" hidden></p>
                     </a>
                 </div>

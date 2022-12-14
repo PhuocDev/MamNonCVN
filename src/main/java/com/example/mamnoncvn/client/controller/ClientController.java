@@ -37,14 +37,14 @@ public class ClientController {
         //model.addAttribute("createFeedbackRequest", new CreateFeedbackRequest());
         List<Blog> allBlog = blogService.findAll();
         List<Blog> blogList = new ArrayList<>();
-        for (int i = 0; i < Math.min(6, allBlog.size()); i++) {
+        for (int i = 0; i < Math.min(4, allBlog.size()); i++) {
             blogList.add(allBlog.get(i));
         }
         model.addAttribute("blogList", blogList);
 
         List<ChuongTrinhHoc> allCTH = chuongTrinhHocService.getAll();
         List<ChuongTrinhHoc> cthList = new ArrayList<>();
-        for (int i = 0; i < Math.min(6, allCTH.size()); i++) {
+        for (int i = 0; i < Math.min(4, allCTH.size()); i++) {
             cthList.add(allCTH.get(i));
         }
         model.addAttribute("cthList", cthList);
