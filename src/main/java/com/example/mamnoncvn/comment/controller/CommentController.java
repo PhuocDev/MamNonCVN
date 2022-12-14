@@ -61,12 +61,12 @@ public class CommentController {
     public String addNewComment(Model model,@Valid @ModelAttribute("createCommentRequest") CreateCommentRequest createCommentRequest) {
 
         commentService.save(createCommentRequest);
-        return "redirect:/comment/";
+        return "redirect:/admin/comment/";
     }
 
     @GetMapping("/deleteComment")
     public String deleteComment(@PathParam("id") Long id, Model model){
         commentService.deleteCommentById(id);
-        return "redirect:/comment/";
+        return "redirect:/admin/comment/";
     }
 }

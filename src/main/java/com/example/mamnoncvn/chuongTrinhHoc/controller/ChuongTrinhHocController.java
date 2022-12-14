@@ -52,17 +52,17 @@ public class ChuongTrinhHocController {
     @PostMapping(path = "/add",  consumes = "application/x-www-form-urlencoded")
     public String addNewChuongTrinhHoc(Model model,@Valid @ModelAttribute("createChuongTrinhHocRequest") CreateChuongTrinhHocRequest createChuongTrinhHocRequest) {
         chuongTrinhHocService.save(createChuongTrinhHocRequest);
-        return "redirect:/cth/";
+        return "redirect:/admin/cth/";
     }
     @PostMapping(path = "/update",  consumes = "application/x-www-form-urlencoded")
     public String updateChuongTrinhHoc(Model model,@Valid @ModelAttribute("updateChuongTrinhHocRequest") UpdateChuongTrinhHocRequest updateChuongTrinhHocRequest) {
         chuongTrinhHocService.updateChuongTrinhHoc(updateChuongTrinhHocRequest);
-        return "redirect:/cth/";
+        return "redirect:/admin/cth/";
     }
     @GetMapping("/deleteCTH")
     public String deleteChuongTrinhHoc(@PathParam("id") Long id, Model model){
         chuongTrinhHocService.deleteChuongTrinhHocById(id);
-        return "redirect:/cth/";
+        return "redirect:/admin/cth/";
     }
 
     @GetMapping("/createDB")

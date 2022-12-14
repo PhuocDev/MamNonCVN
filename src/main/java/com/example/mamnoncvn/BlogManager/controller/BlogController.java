@@ -68,7 +68,7 @@ public class BlogController {
     @PostMapping(path = "/add", consumes = "application/x-www-form-urlencoded")
     public String addBlog(@Valid @ModelAttribute("createBlogRequest") CreateBlogRequest createBlogRequest){
         blogService.save(createBlogRequest);
-        return "redirect:/blog/all";
+        return "redirect:/admin/blog/all";
     }
     @GetMapping("/viewBlog")
     public String showBlogAdmin(@PathParam("id") Long id, Model model) {
@@ -83,12 +83,12 @@ public class BlogController {
         Blog blog = blogService.findBlogById(id);
         if (blog == null ) throw new NotFoundException("Cannot found blog id: " + id);
         blogService.deleteBlogById(id);
-        return "redirect:/blog/all";
+        return "redirect:/admin/blog/all";
     }
 
     @PostMapping(path = "/updateBlog", consumes = "application/x-www-form-urlencoded")
     public String updateBlog(@Valid @ModelAttribute("updateBlogRequest") UpdateBlogRequest updateBlogRequest){
         blogService.update(updateBlogRequest);
-        return "redirect:/blog/all";
+        return "redirect:/admin/blog/all";
     }
 }

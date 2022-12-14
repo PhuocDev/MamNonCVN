@@ -84,17 +84,17 @@ public class StudentController {
     @PostMapping(path = "/add",  consumes = "application/x-www-form-urlencoded")
     public String addNewStudent(Model model,@Valid @ModelAttribute("createStudentRequest") CreateStudentRequest createStudentRequest) {
         studentService.insertNewStudent(createStudentRequest);
-        return "redirect:/student/";
+        return "redirect:/admin/student/";
     }
     @PostMapping(path = "/update",  consumes = "application/x-www-form-urlencoded")
     public String updateStudent(Model model,@Valid @ModelAttribute("updateStudentRequest") UpdateStudentRequest updateStudentRequest) {
         studentService.updateStudent(updateStudentRequest);
-        return "redirect:/student/";
+        return "redirect:/admin/student/";
     }
     @GetMapping("/deleteStudent")
     public String deleteStudent(@PathParam("id") Long id, Model model){
         studentService.deleteStudentById(id);
-        return "redirect:/student/";
+        return "redirect:/admin/student/";
     }
 
 }

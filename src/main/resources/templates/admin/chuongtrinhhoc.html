@@ -38,7 +38,7 @@
                         <div class="card-header">Thêm CTH mới</div>
                         <div class="card-body">
                             <h5 class="card-title">Điền thông tin CTH vào bên dưới:</h5>
-                            <form th:action="@{/cth/add}"  th:object="${createChuongTrinhHocRequest}" method="post"  accept-charset="utf-8">
+                            <form th:action="@{/admin/cth/add}"  th:object="${createChuongTrinhHocRequest}" method="post"  accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Tên CTH</label>
@@ -108,7 +108,7 @@
                         <div class="card-header">Cập nhật thông tin CTH</div>
                         <div class="card-body">
                             <h5 class="card-title">Cập nhật thông tin CTH vào bên dưới:</h5>
-                            <form  th:action="@{/cth/update}"  th:object="${updateChuongTrinhHocRequest}" method="post" accept-charset="utf-8">
+                            <form  th:action="@{/admin/cth/update}"  th:object="${updateChuongTrinhHocRequest}" method="post" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-5">
                                         <label th:for="text" class="form-label">Tên CTH</label>
@@ -186,7 +186,7 @@
 
                 <!--                search box-->
                 <div class="row" style="margin-bottom: 20px">
-                    <form  th:action="@{/cth/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                    <form  th:action="@{/admin/cth/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
                         <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                         <button th:field="*{keyword}" type="submit" class="btn btn-secondary">Search</button>
                     </form>
@@ -336,7 +336,7 @@
             if (confirm("Bạn có muốn xoá class id: " + $(this).parent().parent().parent().first().children().first().text())) {
                 $(this).parent().parent().parent().remove();
                 $.ajax({
-                    url: "http://localhost:8080/cth/deleteCTH?id=" + $(this).parent().parent().parent().first().children().first().text() ,
+                    url: "http://localhost:8080/admin/cth/deleteCTH?id=" + $(this).parent().parent().parent().first().children().first().text() ,
                     success: function(response) {
                         //do something
                     },

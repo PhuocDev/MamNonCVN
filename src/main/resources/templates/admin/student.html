@@ -37,7 +37,7 @@
                         <div class="card-header">Thêm học sinh mới</div>
                         <div class="card-body">
                             <h5 class="card-title">Điền thông tin học sinh mới vào bên dưới:</h5>
-                            <form th:action="@{/student/add}"  th:object="${createStudentRequest}" method="post" accept-charset="utf-8">
+                            <form th:action="@{/admin/student/add}"  th:object="${createStudentRequest}" method="post" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Tên học sinh</label>
@@ -126,7 +126,7 @@
                         <div class="card-header">Cập nhật thông tin học sinh</div>
                         <div class="card-body">
                             <h5 class="card-title">Cập nhật thông tin vào bên dưới:</h5>
-                            <form th:action="@{/student/update}"  th:object="${updateStudentRequest}" method="post" accept-charset="utf-8">
+                            <form th:action="@{/admin/student/update}"  th:object="${updateStudentRequest}" method="post" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Tên học sinh</label>
@@ -215,7 +215,7 @@
 
                 <!--                search box-->
                 <div class="row" style="margin-bottom: 20px">
-                    <form  th:action="@{/student/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                    <form  th:action="@{/admin/student/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
                         <input type="search" name="keyword"  class="form-control" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                         <select th:object="${category}" name="category" id="category" class="form-control">
                             <option th:value="all">Tìm kiếm theo</option>
@@ -361,7 +361,7 @@
             if (confirm("Bạn có muốn xoá student id: " + $(this).parent().parent().parent().first().children().first().text())) {
                 $(this).parent().parent().parent().remove();
                 $.ajax({
-                    url: "http://localhost:8080/student/deleteStudent?id=" + $(this).parent().parent().parent().first().children().first().text() ,
+                    url: "http://localhost:8080/admin/student/deleteStudent?id=" + $(this).parent().parent().parent().first().children().first().text() ,
                     success: function(response) {
                         //do something
                     },

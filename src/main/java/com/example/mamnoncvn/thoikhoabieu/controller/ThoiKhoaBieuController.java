@@ -58,17 +58,17 @@ public class ThoiKhoaBieuController {
     @PostMapping(path = "/add",  consumes = "application/x-www-form-urlencoded")
     public String addNewThoiKhoaBieu(Model model,@Valid @ModelAttribute("createThoiKhoaBieuRequest") CreateThoiKhoaBieuRequest createThoiKhoaBieuRequest) {
         thoiKhoaBieuService.save(createThoiKhoaBieuRequest);
-        return "redirect:/tkb/";
+        return "redirect:/admin/tkb/";
     }
     @PostMapping(path = "/update",  consumes = "application/x-www-form-urlencoded")
     public String updateThoiKhoaBieu(Model model,@Valid @ModelAttribute("updateThoiKhoaBieuRequest") UpdateThoiKhoaBieuRequest updateThoiKhoaBieuRequest) {
         thoiKhoaBieuService.updateThoiKhoaBieu(updateThoiKhoaBieuRequest);
-        return "redirect:/tkb/";
+        return "redirect:/admin/tkb/";
     }
     @GetMapping("/deleteTKB")
     public String deleteThoiKhoaBieu(@PathParam("id") Long id, Model model){
         thoiKhoaBieuService.deleteThoiKhoaBieuById(id);
-        return "redirect:/tkb/";
+        return "redirect:/admin/tkb/";
     }
 
     @GetMapping("/createDB")

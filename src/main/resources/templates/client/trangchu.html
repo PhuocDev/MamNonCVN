@@ -147,7 +147,7 @@
             </div>
             <div  class="course-main" style="align-content: center; display: flex; justify-content: center">
                 <div th:each="cth : ${cthList}" class="course-main-item" style="width: 250px">
-                    <a href="#" class="course-main-link ">
+                    <a class="course-main-link ">
                         <img
                                 style="height: 240px; object-fit: cover;"
                                 th:src="*{cth.getAnhBia()}"
@@ -415,7 +415,7 @@
                         <div class="card-body">
                             <h2 th:text="*{blog.getTitle()}" style="font-size: 1.5rem;" class="card-title">Card title</h2>
                             <p th:text="*{blog.getDescription()}" style=" font-size: 1.3rem; margin-bottom: 5px" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger"><h5>Xem chi tiết</h5></a>
+                            <a class="btn btn-danger viewBlogDetailBtn"><h5>Xem chi tiết</h5></a>
                             <p th:text="*{blog.getId()}" hidden></p>
                         </div>
                     </div>

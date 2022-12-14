@@ -66,18 +66,18 @@ public class PhuHuynhAccountController {
     {
         //CreatePhuHuynhAccountRequest phuHuynhAccountRequest = new CreatePhuHuynhAccountRequest(hoten, address, sdt,email,trangThai);
         phuHuynhAccountService.insertNewPHAccount(createPhuHuynhAccountRequest);
-        return "redirect:/phuhuynh/all";
+        return "redirect:/admin/phuhuynh/all";
     }
     @PostMapping(path = "/updatePH", consumes = "application/x-www-form-urlencoded")
     public String updatePH(@Valid @ModelAttribute("updatePhuHuynhRequest") UpdatePhuHuynhAccountRequest updatePhuHuynhAccountRequest)
     {
         phuHuynhAccountService.updatePHAccount(updatePhuHuynhAccountRequest);
-        return "redirect:/phuhuynh/all";
+        return "redirect:/admin/phuhuynh/all";
     }
 
     @GetMapping("/deletePH")
     public String deletePH(@RequestParam Long id) {
         phuHuynhAccountService.deletePHaccountId(id);
-        return "redirect:/phuhuynh/all";
+        return "redirect:/admin/phuhuynh/all";
     }
 }

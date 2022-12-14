@@ -39,7 +39,7 @@
                         <div class="card-header">Thêm blog mới</div>
                         <div class="card-body">
                             <h5 class="card-title">Điền thông tin blog vào bên dưới:</h5>
-                            <form th:action="@{/blog/add}"  th:object="${createBlogRequest}" method="post" name="insertForm" accept-charset="utf-8">
+                            <form th:action="@{/admin/blog/add}"  th:object="${createBlogRequest}" method="post" name="insertForm" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-9">
                                         <label  th:for="text" class="form-label">Tiêu đề</label>
@@ -90,7 +90,7 @@
                         <div class="card-header">Cập nhật  blog</div>
                         <div class="card-body">
                             <h5 class="card-title">Cập nhật thông tin  blog vào bên dưới:</h5>
-                            <form action="#"  th:action="@{/blog/updateBlog}"  th:object="${updateBlogRequest}"  method="post" name="updateForm" accept-charset="utf-8">
+                            <form action="#"  th:action="@{/admin/blog/updateBlog}"  th:object="${updateBlogRequest}"  method="post" name="updateForm" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-7">
                                         <label  th:for="text" class="form-label">Tiêu đề</label>
@@ -149,7 +149,7 @@
 
                 <!--                search box-->
                 <div class="row" style="margin-bottom: 20px">
-                    <form  th:action="@{/blog/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                    <form  th:action="@{/admin/blog/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
                         <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                         <button th:field="*{keyword}" type="submit" class="btn btn-secondary">Search</button>
                     </form>
@@ -233,6 +233,10 @@
         $("#addBlogBtn").click(function() {
             $("#updateForm").hide();
             $("#insertForm").toggle(500);
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
         });
 
         $(".updateBlogBtn").click(function() {
@@ -280,7 +284,7 @@
             if (confirm("Do you want to delete  Blog id: " + $(this).parent().parent().parent().first().children().first().text())) {
                 $(this).parent().parent().parent().remove();
                 $.ajax({
-                    url: "http://localhost:8080/blog/deleteBlog?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
+                    url: "http://localhost:8080/admin/blog/deleteBlog?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
                     success: function(response) {
                         //do something
                     },
@@ -292,7 +296,7 @@
         });
         // View button
         $(".viewBlogBtn").click(function() {
-            var url = "http://localhost:8080/blog/viewBlog?id=" + $(this).parent().parent().parent().first().children().first().text();
+            var url = "http://localhost:8080/admin/blog/viewBlog?id=" + $(this).parent().parent().parent().first().children().first().text();
             window.open(url, '_blank');
         });
 

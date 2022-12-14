@@ -60,22 +60,22 @@ public class CustomerController {
     @PostMapping(path = "/add",  consumes = "application/x-www-form-urlencoded")
     public String addNewcustomer(Model model,@Valid @ModelAttribute("createCustomerRequest") CreateCustomerRequest createCustomerRequest) {
         customerService.save(createCustomerRequest);
-        return "redirect:/customer/";
+        return "redirect:/admin/customer/";
     }
     @PostMapping(path = "/addFromClient",  consumes = "application/x-www-form-urlencoded")
     public String addNewcustomerFromClient(Model model,@Valid @ModelAttribute("createCustomerRequest") CreateCustomerRequest createCustomerRequest) {
         customerService.save(createCustomerRequest);
-        return "redirect:/";
+        return "redirect:/client/";
     }
     @PostMapping(path = "/update",  consumes = "application/x-www-form-urlencoded")
     public String updateCustomer(Model model,@Valid @ModelAttribute("updateCustomerRequest") UpdateCustomerRequest updateCustomerRequest) {
         customerService.updateCustomer(updateCustomerRequest);
-        return "redirect:/customer/";
+        return "redirect:/admin/customer/";
     }
     @GetMapping("/deleteCustomer")
     public String deleteCustomer(@PathParam("id") Long id, Model model){
         customerService.deleteCustomerById(id);
-        return "redirect:/customer/";
+        return "redirect:/admin/customer/";
     }
 
 }

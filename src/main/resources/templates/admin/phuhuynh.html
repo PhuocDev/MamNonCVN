@@ -37,7 +37,7 @@
                         <div class="card-header">Thêm tài khoản phụ huynh mới</div>
                         <div class="card-body">
                             <h5 class="card-title">Điền thông tin phụ huynh vào bên dưới:</h5>
-                            <form action="#" th:action="@{/phuhuynh/addPH}" th:object="${createPhuHuynhRequest}" method="post" name="insertForm" accept-charset="utf-8">
+                            <form action="#" th:action="@{/admin/phuhuynh/addPH}" th:object="${createPhuHuynhRequest}" method="post" name="insertForm" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-6">
                                         <label th:for="text" class="form-label">Họ tên Phụ huynh</label>
@@ -97,7 +97,7 @@
                         <div class="card-header">Cập nhật phụ huynh </div>
                         <div class="card-body">
                             <h5 class="card-title">Cập nhật thông tin phụ huynh vào bên dưới: </h5>
-                            <form action="#" th:action="@{/phuhuynh/updatePH}" th:object="${updatePhuHuynhRequest}" method="post" name="insertForm" accept-charset="utf-8">
+                            <form action="#" th:action="@{/admin/phuhuynh/updatePH}" th:object="${updatePhuHuynhRequest}" method="post" name="insertForm" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-6">
                                         <label th:for="text" class="form-label">Họ tên Phụ huynh</label>
@@ -157,7 +157,7 @@
 
                 <!--                search box-->
                 <div class="row" style="margin-bottom: 20px">
-                    <form  th:action="@{/phuhuynh/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                    <form  th:action="@{/admin/phuhuynh/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
                         <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                         <button th:field="*{keyword}" type="submit" class="btn btn-secondary">Search</button>
                     </form>
@@ -259,7 +259,7 @@
             if (confirm("Do you want to delete student id: " + $(this).parent().parent().parent().first().children().first().text())) {
                 $(this).parent().parent().parent().remove();
                 $.ajax({
-                    url: "http://localhost:8080/phuhuynh/deletePH?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
+                    url: "http://localhost:8080/admin/phuhuynh/deletePH?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
                     success: function(response) {
                         //do something
                     },

@@ -63,17 +63,17 @@ public class CVN_ClassController {
     @PostMapping(path = "/add",  consumes = "application/x-www-form-urlencoded")
     public String addNewClass(Model model,@Valid @ModelAttribute("createClassRequest") CreateClassRequest createClassRequest) {
         classService.save(createClassRequest);
-        return "redirect:/class/";
+        return "redirect:/admin/class/";
     }
     @PostMapping(path = "/update",  consumes = "application/x-www-form-urlencoded")
     public String updateClass(Model model,@Valid @ModelAttribute("updateClassRequest") UpdateClassRequest updateClassRequest) {
         classService.updateClass(updateClassRequest);
-        return "redirect:/class/";
+        return "redirect:/admin/class/";
     }
     @GetMapping("/deleteClass")
     public String deleteClass(@PathParam("id") Long id, Model model){
         classService.deleteClassById(id);
-        return "redirect:/blog/all";
+        return "redirect:/admin/blog/all";
     }
 
     @GetMapping("/createDB")
