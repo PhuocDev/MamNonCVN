@@ -50,4 +50,8 @@ public class CommentService {
     public List<Comment> findAllByKeyword(String keyword) {
         return commentRepository.findAllByKeyword(keyword);
     }
+
+    public List<Comment> findAllByBlogId(Long id) {
+        return commentRepository.findAllByBlogId(id);
+    }
 }

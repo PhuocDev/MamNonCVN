@@ -20,4 +20,11 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
             " or t.content like %?1% or t.name like %?1% " +
             " order by t.id asc", nativeQuery = true)
     List<Comment> findAllByKeyword(String keyword);
+
+    @Transactional
+    @Modifying
+    @Query(value = "select * from comment t where t.blog_id like %?1% " +
+            " order by t.id desc", nativeQuery = true)
+    List<Comment> findAllByBlogId(Long blogId);
+
 }

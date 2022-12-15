@@ -4,6 +4,10 @@ import com.example.mamnoncvn.BlogManager.entity.Blog;
 import com.example.mamnoncvn.BlogManager.service.BlogService;
 import com.example.mamnoncvn.chuongTrinhHoc.entity.ChuongTrinhHoc;
 import com.example.mamnoncvn.chuongTrinhHoc.service.ChuongTrinhHocService;
+import com.example.mamnoncvn.comment.Models.requests.CreateCommentRequest;
+import com.example.mamnoncvn.comment.controller.CommentController;
+import com.example.mamnoncvn.comment.entity.Comment;
+import com.example.mamnoncvn.comment.service.CommentService;
 import com.example.mamnoncvn.customer.models.request.CreateCustomerRequest;
 import com.example.mamnoncvn.customer.service.CustomerService;
 import com.example.mamnoncvn.exception.NotFoundException;
@@ -29,7 +33,8 @@ public class ClientController {
     ChuongTrinhHocService chuongTrinhHocService;
     @Autowired
     BlogService blogService;
-
+    @Autowired
+    CommentService commentService;
 
     @GetMapping(path = {"/" })
     public String showTrangchu(Model model) {
@@ -104,6 +109,18 @@ public class ClientController {
         Blog blog = blogService.findBlogById(id);
         if (blog == null)  throw new NotFoundException("Cannot found blog id: " + id);
         model.addAttribute("blog", blog);
+
+        CreateCommentRequest createCommentRequest = new CreateCommentRequest();
+        model.addAttribute("createCommentRequest", createCommentRequest);
+
+
+        List<Comment> commentList = null;
+        try {
+            commentList = commentService.findAllByBlogId(blog.getId());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        model.addAttribute("commentList", commentList);
         return "client/blogDetail";
     }
 

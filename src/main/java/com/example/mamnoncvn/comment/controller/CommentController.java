@@ -63,6 +63,12 @@ public class CommentController {
         commentService.save(createCommentRequest);
         return "redirect:/admin/comment/";
     }
+    @PostMapping(path = "/addFromClient",  consumes = "application/x-www-form-urlencoded")
+    public String addNewCommentFromClient(Model model,@Valid @ModelAttribute("createCommentRequest") CreateCommentRequest createCommentRequest) {
+
+        commentService.save(createCommentRequest);
+        return "redirect:/client/viewBlogDetail?id=" + createCommentRequest.getBlogId();
+    }
 
     @GetMapping("/deleteComment")
     public String deleteComment(@PathParam("id") Long id, Model model){
