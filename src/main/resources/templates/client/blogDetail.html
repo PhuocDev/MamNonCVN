@@ -35,29 +35,29 @@
 <!--Blog start here -->
 <div th:object="${blog}" class="content h-200" style="height: auto; padding: 50px;padding-top: 100px; width: 100%; box-sizing: border-box;">
     <div class="row">
-        <h1 th:text="*{getTitle()}" style="padding:10px;">LỄ TỐT NGHIỆP VÀ TỔNG KẾT NĂM HỌC 2021 – 2022</h1>
+        <h1  th:text="*{getTitle()}" style="padding:10px; font-size: 28px">LỄ TỐT NGHIỆP VÀ TỔNG KẾT NĂM HỌC 2021 – 2022</h1>
         <p id="blogId_hidden" th:text="*{getId()}" hidden></p>
         <p class="fs-3"> <i class="fas fa-pen"></i> By: <b th:text="*{getAuthor()}">Admin</b> &nbsp;&nbsp;&nbsp; <i class="fas fa-folder"></i> Category: <b th:text="*{getCategory()}">Tin tức</b> &nbsp;&nbsp; <i class="fas fa-calendar"></i> Ngày đăng: <b th:text="*{getDateModified()}">29/03/2022</b> </p>
     </div>
-    <div class="row text-center">
+    <div class="row text-center" style="justify-content: center">
         <img th:src="*{getThumbnail()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/08/z3601128932506_83058334bf1451bf9f8f3bec381ddde8-2048x1152.jpg"
              alt="image demo"
             style="width: 60%"
         >
     </div>
-    <div class="row">
+    <div class="row" style="justify-content: center">
         <h3 th:text="*{getDescription()}" class="m-5 p-5" style="background-color: antiquewhite; width: 90%;">
             Description here: Ngày 27/07/2022, Koi Nursery Quận 8 đã tổ chức buổi lễ tốt nghiệp và Lễ Tổng Kết năm học 2021-2022 với sự tham gia của Ban Lãnh Đạo Công ty, Ban Giám Hiệu, đội ngũ cán bộ nhân viên và Quý Phụ Huynh học sinh.
         </h3>
     </div>
-    <div class="row">
+    <div class="row" style="justify-content: center">
         <p th:text="*{getContent()}" id="blogContent" class="fs-3" hidden>Raw content hidden </p>
-        <div id="convertBlogContent" class="fs-3" style="width: 80%;"></div>
+        <div id="convertBlogContent" class="fs-3" style="width: 90%;"></div>
     </div>
 </div>
 
-<div class="row d-flex justify-content-center">
-    <div class="col-md-8 col-lg-6 fs-3 m-4" style="width:90%">
+<div class="row d-flex justify-content-center p-5 m-5">
+    <div class="col-md-8 col-lg-6 fs-3 m-4" style="width:100%">
         <div class="card shadow-0 border" style="background-color: #f0f2f5;">
             <h2 class="m-3 p-3">Mời quý phụ huynh để lại bình luận bên dưới:</h2>
             <div class="card-body p-4">
@@ -84,7 +84,7 @@
                 </th:block>
             </div>
         </div>
-        <!-- Form insert new student -->
+        <!-- Form insert new comment -->
         <div id="insertForm" class="col-lg-12 mt-4">
             <div class="card fs-3">
                 <div class="card-header">Thêm Comment mới</div>
@@ -108,8 +108,7 @@
                             <label th:for="blogId" class="form-label">Blog id</label>
                             <input th:field="*{blogId}" id="blogId" type="text" class="form-control" name="description" minlength="1" placeholder="32" required>
                         </div>
-                        <button type="submit" class="btn btn-primary fs-3"><i class="fas fa-save"></i> Save</button>
-                        <button type="submit" class="btn btn-danger fs-3"><i class="fas fa-undo"></i> Cancel</button>
+                        <button type="submit" class="btn btn-primary fs-3"><i class="fas fa-comment"></i>&nbsp;&nbsp; Commment</button>
                     </form>
                 </div>
             </div>
