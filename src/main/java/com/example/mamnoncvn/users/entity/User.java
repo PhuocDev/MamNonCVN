@@ -26,23 +26,26 @@ public class User {
     private String email;
 
     @Column(name = "so_dien_thoai")
-    @NotNull(message = "so dien thoai can not be null")
     private String soDienThoai;
 
     @Column(name = "status")
     @NotNull(message = "status cannot be null")
     private boolean status;
 
+    @Column(name = "user_role")
+    @NotNull(message = "role can not be null")
+    String role;
     public User() {
 
     }
 
-    public User(String username, String password, String email, String soDienThoai, boolean status) {
+    public User( String username, String password, String email, String soDienThoai, boolean status, String role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.soDienThoai = soDienThoai;
         this.status = status;
+        this.role = role;
     }
 
     public Long getId() {

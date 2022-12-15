@@ -20,13 +20,10 @@ public class CreateUserRequest {
 
     private String email;
 
-    @NotBlank(message = "so dien thoai can not be null/blank")
     private String soDienThoai;
 
-    @NotNull(message = "status cannot be null")
     private boolean status;
 
-    @NotNull(message = "ma chuc vu can not be null")
-    private Long maChucVu;
+    private String role;
 
 }

@@ -102,7 +102,7 @@
                         </div>
                         <div class="mb-3">
                             <label th:for="content" class="form-label">Mô tả</label>
-                            <textarea rows="3" th:field="*{content}" type="text" class="form-control fs-3" name="description" minlength="10" placeholder="Nội dung" required> </textarea>
+                            <textarea maxlength="100" rows="3" th:field="*{content}" type="text" class="form-control fs-3" name="description" minlength="10" placeholder="Nội dung" required> </textarea>
                         </div>
                         <div class="mb-2" hidden>
                             <label th:for="blogId" class="form-label">Blog id</label>
