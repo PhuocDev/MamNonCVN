@@ -12,6 +12,8 @@ import com.example.mamnoncvn.customer.models.request.CreateCustomerRequest;
 import com.example.mamnoncvn.customer.service.CustomerService;
 import com.example.mamnoncvn.exception.NotFoundException;
 import com.example.mamnoncvn.feedback.models.request.CreateFeedbackRequest;
+import com.example.mamnoncvn.thoikhoabieu.entity.ThoiKhoaBieu;
+import com.example.mamnoncvn.thoikhoabieu.service.ThoiKhoaBieuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,8 @@ public class ClientController {
     BlogService blogService;
     @Autowired
     CommentService commentService;
+    @Autowired
+    ThoiKhoaBieuService thoiKhoaBieuService;
 
     @GetMapping(path = {"/" })
     public String showTrangchu(Model model) {
@@ -123,7 +127,24 @@ public class ClientController {
         model.addAttribute("commentList", commentList);
         return "client/blogDetail";
     }
+    @GetMapping("/viewTkbDetail")
+    public String viewTkbDetail(Model model, @PathParam("id") Long id) {
+        ThoiKhoaBieu tkb = thoiKhoaBieuService.findThoiKhoaBieuByID(id);
+        if (tkb == null)  throw new NotFoundException("Cannot found tkb id: " + id);
+        model.addAttribute("tkb", tkb);
 
+        return "client/tkbDetail";
+    }
+
+    @GetMapping("/tkb")
+    public String tkbAll(Model model, @RequestParam(required = false) String keyword) {
+        List<ThoiKhoaBieu> tkbList = thoiKhoaBieuService.getAll();
+        if (keyword != null) tkbList = thoiKhoaBieuService.findAllByKeyword(keyword);
+        model.addAttribute("tkbList", tkbList);
+        String searchKeyword = null;
+        model.addAttribute("keyword", searchKeyword);
+        return "client/thoikhoabieu";
+    }
 
 
     @GetMapping("contact")
