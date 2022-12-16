@@ -388,15 +388,15 @@
                     nhằm bắt kịp xu hướng dạy và học tiên tiến trên thế giới.</h5>
             </div>
             <!-- blog list -->
-            <div class="row row-cols-1 row-cols-md-4 row-cols-sm-auto g-4 m-2 news-main" style="padding-right: 90px; padding-left: 90px;">
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-sm-2 row-cols-sm-auto g-4 m-2 news-main" style="padding-right: 90px; padding-left: 90px; box-sizing: border-box" >
                 <div th:each="blog : ${blogList}" class="col">
                     <div class="card" >
-                        <img style="height: 200px; object-fit: cover"
+                        <img style="height: 15rem; object-fit: cover"
                                 th:src="*{blog.getThumbnail()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
-                        <div class="card-body">
+                        <div class="card-body" style="height: auto">
                             <h2 th:text="*{blog.getTitle()}" style="font-size: 1.5rem;" class="card-title">Card title</h2>
                             <p th:text="*{blog.getDescription()}" style=" font-size: 1.3rem; margin-bottom: 5px; max-width: 230px;" class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a class="btn btn-danger viewBlogDetailBtn"><h5>Xem chi tiết</h5></a>
+                            <a class="btn btn-danger viewBlogDetailBtn" style=""><h5>Xem chi tiết</h5></a>
                             <p th:text="*{blog.getId()}" hidden></p>
                         </div>
                     </div>

@@ -33,24 +33,27 @@
 <!-- SIDEBAR -->
 <th:block th:replace="~{fragment/header :: ${header}}"></th:block>
 <!--Blog start here -->
-<div class="content h-200" style="height: auto; padding: 50px; padding-top: 70px">
-    <div class="row">
-        <h1 style="padding:10px;">Cập nhật các chương trình học tại Mầm non Cầu vòng nhỏ</h1>
-    </div>
+<div class="content h-200" style="height: auto; padding: 50px; padding-top: 70px"  >
+<!--    <div class="row" style="background-color: #eaeaf0;">-->
+<!--        <h1 style="padding:10px;font-weight: normal; text-align: center">Cập nhật các chương trình học tại Mầm non Cầu vòng nhỏ</h1>-->
+<!--    </div>-->
     <div class="row">
         <section class="news">
+            <div class="row" style="background-color: #eaeaf0;">
+                <h1 style="text-align: center">Cập nhật các chương trình học tại Mầm non Cầu vòng nhỏ</h1>
+            </div>
             <!--search box-->
-            <div class="row" style="margin-bottom: 5px; font-size: 30px; width: 100%; display:flex; justify-content: flex-end;" >
-                <form  th:action="@{/client/chuongtrinhhoc/{keyword}(keyword = ${keyword})}" class="col-4 input-group fs-3" style="width: 400px; font-size: 25px; height: fit-content; margin-left: 3 0px;">
+            <div class="row" style="margin-bottom: 5px; padding-right: 92px; margin-top: 10px; font-size: 30px; width: 100%; display:flex; justify-content: flex-end;" >
+                <form  th:action="@{/client/chuongtrinhhoc/{keyword}(keyword = ${keyword})}" class="col-md-4 input-group fs-3" style="width: 400px; font-size: 25px; height: fit-content; margin-left: 30px;">
                     <input  style="font-size: 25px; height: fit-content; width: 100px;" type="search" name="keyword"  class="form-control fs-3" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                     <button th:field="*{keyword}" type="submit" class="btn btn-danger fs-3">Tìm kiếm</button>
                 </form>
             </div>
 
             <!-- blog list -->
-            <div  class="row row-cols-1 row-cols-sm-4 g-5 m-2 news-main" style="padding-right: 90px; padding-left: 90px;">
+            <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5 m-2 news-main" style="padding-right: 90px; padding-left: 90px;">
                 <div th:each="cth : ${chuongTrinhHocList}" class="col">
-                    <div class="card">
+                    <div class="card" style="height: 340px">
                         <img    style="height: 200px; object-fit: cover"
                                 th:src="*{cth.getAnhBia()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
                         <div class="card-body">
