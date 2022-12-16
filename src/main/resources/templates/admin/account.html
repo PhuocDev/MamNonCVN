@@ -37,34 +37,34 @@
                         <div class="card-header">Thêm tài khoản quản trị viên mới</div>
                         <div class="card-body">
                             <h5 class="card-title">Điền thông tin quản trị viên vào bên dưới:</h5>
-                            <form action="#" th:action="@{/admin/user/add}" th:object="${createUserRequest}" method="post" name="insertForm" accept-charset="utf-8">
+                            <form th:action="@{/admin/user/add}" th:object="${createUserRequest}" method="post" accept-charset="utf-8">
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-6">
-                                        <label th:for="text" class="form-label">Username</label>
+                                        <label class="form-label">Username</label>
                                         <input th:field="*{username}" type="text" class="form-control" name="username" minlength="4" placeholder="" required>
                                     </div>
                                     <div class="mb-3 col-md-3">
-                                        <label th:for="text" class="form-label">Số điện thoại</label>
-                                        <input th:field="*{soDienThoai}" type="text" class="form-control" name="sdt" minlength="10" maxlength="10" placeholder="Số điện thoại" required>
+                                        <label class="form-label">Số điện thoại</label>
+                                        <input th:field="*{soDienThoai}" type="text" class="form-control" name="sdt" maxlength="10"  placeholder="0987654321" >
                                     </div>
                                     <div class="mb-3 col-md-3">
-                                        <label th:for="city" class="form-label">E-MAIL</label>
-                                        <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="name@gmail.com" required>
+                                        <label class="form-label">E-MAIL</label>
+                                        <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="name@gmail.com" >
                                     </div>
                                 </div>
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
-                                        <label th:for="text" class="form-label">Mật khẩu</label>
+                                        <label class="form-label">Mật khẩu</label>
                                         <input id="matKhauInsert" th:field="*{password}" type="password" class="form-control" name="username" minlength="4"  maxlength="50" placeholder="" required>
                                     </div>
                                     <div class="mb-3 col-md-3">
-                                        <label th:for="text" class="form-label">Nhập lại mật khẩu</label>
-                                        <input id="nhapLaiMatKhauInsert" type="password" class="form-control" name="sdt" minlength="4" maxlength="50"  required>
+                                        <label class="form-label">Nhập lại mật khẩu</label>
+                                        <input id="nhapLaiMatKhauInsert" type="password" class="form-control" minlength="4" maxlength="50"  required>
                                     </div>
                                 </div>
                                 <div class="row g-2">
                                     <div class="mb-3 col-md-3">
-                                        <label th:for="city" class="form-label">Trạng thái</label>
+                                        <label class="form-label">Trạng thái</label>
                                         <!-- <input type="text" class="form-control" name="thoiGianRanh" placeholder="" required> -->
                                         <select th:field="*{status}" name="trangThai"  class="form-control">
                                             <option value="true" >Hoạt động</option>
@@ -93,7 +93,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Điền thông tin vào bên dưới:</h5>
                             <form action="#" th:action="@{/admin/user/update}" th:object="${updatePasswordRequest}" method="post" name="insertForm" accept-charset="utf-8">
-                                <div class="row g-2">
+                                <div class="row g-2 fs-5">
                                     <div class="mb-3 col-md-6">
                                         <label th:for="password" class="form-label">Mật khẩu cũ</label>
                                         <input id="oldPassword" th:field="*{oldPassword}" type="password" class="form-control" minlength="4" placeholder="" required>
@@ -101,7 +101,7 @@
                                     </div>
                                     <p id="OldPasswordHidden"></p>
                                 </div>
-                                <div class="row g-2">
+                                <div class="row g-2 fs-5">
                                     <div class="mb-3 col-md-6">
                                         <label th:for="password" class="form-label">Mật khẩu mới</label>
                                         <input id="newPasswordUpdate" th:field="*{newPassword}" type="password" class="form-control" minlength="4" placeholder="" required>
@@ -133,7 +133,7 @@
                                             <th>SDT</th>
                                             <th>Trạng thái</th>
                                             <th>Role</th>
-                                            <th hidden>Password</th>
+                                            <th >Password</th>
                                             <th> </th>
                                         </tr>
                                         </thead>
@@ -145,7 +145,7 @@
                                             <td th:text="*{qtv.getSoDienThoai()}"></td>
                                             <td th:text="(*{qtv.isStatus()}==true)?'Đang hoạt động':'Ngừng hoạt động'"></td>
                                             <td th:text="*{qtv.getRole()}"></td>
-                                            <td th:text="*{qtv.getPassword()}" hidden></td>
+                                            <td th:text="*{qtv.getPassword()}" ></td>
                                             <th>
                                                 <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
                                                     <button type="button" class="btn btn-primary updateUserBtn">Update</button>

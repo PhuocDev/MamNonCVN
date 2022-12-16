@@ -33,15 +33,15 @@
 <!-- SIDEBAR -->
 <th:block th:replace="~{fragment/header :: ${header}}"></th:block>
 <!--Blog start here -->
-<div th:object="${chuongtrinhhoc}" class="content h-200" style="height: auto; padding: 50px;padding-top: 70px; width: 100%; box-sizing: border-box;">
-    <div class="row">
-        <h1 th:text="*{tenCTH}" style="padding:10px;">LỄ TỐT NGHIỆP VÀ TỔNG KẾT NĂM HỌC 2021 – 2022</h1>
+<div th:object="${chuongtrinhhoc}" class="content h-200" style="height: auto; padding: 50px;padding-top: 100px; width: 100%; box-sizing: border-box;">
+    <div class="row" style="padding-left: 60px">
+        <h1 th:text="*{tenCTH}" style="padding:10px; font-size: 28px">LỄ TỐT NGHIỆP VÀ TỔNG KẾT NĂM HỌC 2021 – 2022</h1>
         <p class="fs-3"> <i class="fas fa-pen"></i> By: <b>Admin</b> &nbsp;&nbsp;&nbsp; <i class="fas fa-folder"></i> Category: <b>Chương trình học</b> &nbsp;&nbsp;
             <i class="fas fa-calendar"></i> Ngày đăng: <b th:text="*{ngayDang}">29/03/2022</b>&nbsp;&nbsp;
             <i class="fas fa-calendar-check"></i> Ngày áp dụng: <b th:text="*{ngayBatDau}">29/03/2022</b>
         </p>
     </div>
-    <div class="row text-center">
+    <div class="row text-center" style="justify-content: center">
         <img th:src="*{getAnhBia()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/08/z3601128932506_83058334bf1451bf9f8f3bec381ddde8-2048x1152.jpg"
              alt="image demo"
              style="width: 60%"
@@ -52,9 +52,9 @@
             Description here: Ngày 27/07/2022, Koi Nursery Quận 8 đã tổ chức buổi lễ tốt nghiệp và Lễ Tổng Kết năm học 2021-2022 với sự tham gia của Ban Lãnh Đạo Công ty, Ban Giám Hiệu, đội ngũ cán bộ nhân viên và Quý Phụ Huynh học sinh.
         </h3>
     </div>
-    <div class="row">
+    <div class="row" style="justify-content: center">
         <p th:text="*{getNoiDung()}" id="blogContent" class="fs-3" hidden>Raw content </p>
-        <div id="convertBlogContent" class="fs-3">Converted content </div>
+        <div id="convertBlogContent" class="fs-3" style="width: 90%;">Converted content </div>
     </div>
 </div>
 <th:block th:replace="~{fragment/footer :: ${footer}}"></th:block>

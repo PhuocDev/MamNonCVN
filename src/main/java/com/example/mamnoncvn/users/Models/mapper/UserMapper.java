@@ -8,10 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class UserMapper {
 
-    public static BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
     public static User convertCreateRequestToEntity(User user,CreateUserRequest createUserRequest) {
         user.setEmail(createUserRequest.getEmail());
-        user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
+        user.setPassword(createUserRequest.getPassword());
         user.setSoDienThoai(createUserRequest.getSoDienThoai());
         user.setStatus(createUserRequest.isStatus());
         user.setUsername(createUserRequest.getUsername());

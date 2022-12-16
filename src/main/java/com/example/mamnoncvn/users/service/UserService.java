@@ -39,7 +39,7 @@ public class UserService {
     }
     public void updatePassword(UpdatePasswordRequest updatePasswordRequest){
             User user = userRepository.findById(updatePasswordRequest.getUserId()).get();
-            user.setPassword(bCryptPasswordEncoder.encode(updatePasswordRequest.getNewPassword()));
+            user.setPassword(updatePasswordRequest.getNewPassword());
             userRepository.saveAndFlush(user);
     }
     public void deleteUserById(Long id) {
@@ -48,10 +48,12 @@ public class UserService {
         } else throw new NotFoundException("Not found user id: "+ id);
     }
 
-    public static BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     public boolean checkPass(UpdatePasswordRequest updatePasswordRequest) {
-        if (userRepository.findById(updatePasswordRequest.getUserId()).get().getPassword().equals(bCryptPasswordEncoder.encode(updatePasswordRequest.getOldPassword()))){
+        String oldPass = userRepository.findById(updatePasswordRequest.getUserId()).get().getPassword();
+        String oldPasswordToConfirm = updatePasswordRequest.getOldPassword();
+        if (oldPass.equals(oldPasswordToConfirm)){
             return true;
         } else return false;
     }
+
 }

@@ -34,7 +34,7 @@
 <th:block th:replace="~{fragment/header :: ${header}}"></th:block>
 <!--Blog start here -->
 <div th:object="${blog}" class="content h-200" style="height: auto; padding: 50px;padding-top: 100px; width: 100%; box-sizing: border-box;">
-    <div class="row">
+    <div class="row" style="padding-left: 60px">
         <h1  th:text="*{getTitle()}" style="padding:10px; font-size: 28px">LỄ TỐT NGHIỆP VÀ TỔNG KẾT NĂM HỌC 2021 – 2022</h1>
         <p id="blogId_hidden" th:text="*{getId()}" hidden></p>
         <p class="fs-3"> <i class="fas fa-pen"></i> By: <b th:text="*{getAuthor()}">Admin</b> &nbsp;&nbsp;&nbsp; <i class="fas fa-folder"></i> Category: <b th:text="*{getCategory()}">Tin tức</b> &nbsp;&nbsp; <i class="fas fa-calendar"></i> Ngày đăng: <b th:text="*{getDateModified()}">29/03/2022</b> </p>

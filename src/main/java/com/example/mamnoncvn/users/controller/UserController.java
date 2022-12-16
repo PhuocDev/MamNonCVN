@@ -7,12 +7,10 @@ import com.example.mamnoncvn.users.service.UserService;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
@@ -37,7 +35,7 @@ public class UserController {
         userService.insertNewUser(createUserRequest);
         return "redirect:/admin/user/";
     }
-    @GetMapping("/")
+    @GetMapping(path = {"/", "/all"})
     public String indexUser(Model model) {
         CreateUserRequest createUserRequest = new CreateUserRequest();
         UpdatePasswordRequest updatePasswordRequest = new UpdatePasswordRequest();
@@ -48,16 +46,17 @@ public class UserController {
         model.addAttribute("userList", userList);
         return "admin/account";
     }
-    @PostMapping(path = "/add",  consumes = "application/x-www-form-urlencoded")
+    @RequestMapping(path = "/add", method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded")
     public String addNewUser(Model model, @Valid @ModelAttribute("createUserRequest")
                              CreateUserRequest createUserRequest) {
-        System.out.println(createUserRequest.toString());
         userService.insertNewUser(createUserRequest);
         return "redirect:/admin/user/";
     }
+
     @PostMapping(path = "/update",  consumes = "application/x-www-form-urlencoded")
     public String updatePassword(Model model, @Valid @ModelAttribute("updatePasswordRequest")
                                  UpdatePasswordRequest updatePasswordRequest){
+        System.out.println( updatePasswordRequest.getOldPassword());
         if(!userService.checkPass(updatePasswordRequest)) {
             return "error";
         }else {
