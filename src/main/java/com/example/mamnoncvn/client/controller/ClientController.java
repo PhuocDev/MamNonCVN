@@ -101,7 +101,7 @@ public class ClientController {
     }
     @GetMapping("/blog_all")
     public String blogAll(Model model, @RequestParam(required = false) String keyword) {
-        List<Blog> blogList = blogService.findAll();
+        List<Blog> blogList = blogService.findAllByCategory("blog");
         if (keyword != null) blogList = blogService.findAllBlogs(keyword);
         model.addAttribute("blogList", blogList);
         String searchKeyword = null;
