@@ -73,4 +73,7 @@ public class BlogService {
     public List<Blog> findAllInOneCategory(String category, String keyword) {
         return blogRepository.findAllInOneCategory(keyword, category);
     }
+    public Blog findLatestBlogByCategory(String category){
+        return blogRepository.findLatestBlogByCategory(category);
+    }
 }

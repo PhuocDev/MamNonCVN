@@ -116,8 +116,6 @@ public class ClientController {
 
         CreateCommentRequest createCommentRequest = new CreateCommentRequest();
         model.addAttribute("createCommentRequest", createCommentRequest);
-
-
         List<Comment> commentList = null;
         try {
             commentList = commentService.findAllByBlogId(blog.getId());
@@ -157,7 +155,20 @@ public class ClientController {
     public String gioithieu(Model model) {
         CreateFeedbackRequest createFeedbackRequest = new CreateFeedbackRequest();
         model.addAttribute("createFeedbackRequest", createFeedbackRequest);
-        return "client/gioithieu";
+        Blog blog = blogService.findLatestBlogByCategory("gioithieu");
+        if (blog != null)  {
+            model.addAttribute("blog", blog);
+            CreateCommentRequest createCommentRequest = new CreateCommentRequest();
+            model.addAttribute("createCommentRequest", createCommentRequest);
+            List<Comment> commentList = null;
+            try {
+                commentList = commentService.findAllByBlogId(blog.getId());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            model.addAttribute("commentList", commentList);
+            return "client/blogDetail";
+        } else return "client/gioithieu";
     }
 
     @GetMapping("/tuyensinh")
@@ -170,6 +181,74 @@ public class ClientController {
         model.addAttribute("createFeedbackRequest", createFeedbackRequest);
         return "client/dangcapnhat";
     }
+    @GetMapping("/thucdon")
+    public String thucdon(Model model, @RequestParam(required = false) String keyword) {
+        List<Blog> blogList = blogService.findAllByCategory("thucdon");
+        if (keyword != null) blogList = blogService.findAllInOneCategory("thucdon", keyword);
+        model.addAttribute("blogList", blogList);
+        String searchKeyword = null;
+        model.addAttribute("keyword", searchKeyword);
+        return "client/blog";
+    }
+    @GetMapping("/quytrinhtuyensinh")
+    public String quytrinhTS(Model model) {
+        CreateFeedbackRequest createFeedbackRequest = new CreateFeedbackRequest();
+        model.addAttribute("createFeedbackRequest", createFeedbackRequest);
+        Blog blog = blogService.findLatestBlogByCategory("tuyensinh");
+        if (blog != null)  {
+            model.addAttribute("blog", blog);
+            CreateCommentRequest createCommentRequest = new CreateCommentRequest();
+            model.addAttribute("createCommentRequest", createCommentRequest);
+            List<Comment> commentList = null;
+            try {
+                commentList = commentService.findAllByBlogId(blog.getId());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            model.addAttribute("commentList", commentList);
+            return "client/blogDetail";
+        } else return "client/dangcapnhat";
+    }
+    @GetMapping("/hocphi")
+    public String hocphithamkhao(Model model) {
+        CreateFeedbackRequest createFeedbackRequest = new CreateFeedbackRequest();
+        model.addAttribute("createFeedbackRequest", createFeedbackRequest);
+        Blog blog = blogService.findLatestBlogByCategory("hocphi");
+        if (blog != null)  {
+            model.addAttribute("blog", blog);
+            CreateCommentRequest createCommentRequest = new CreateCommentRequest();
+            model.addAttribute("createCommentRequest", createCommentRequest);
+            List<Comment> commentList = null;
+            try {
+                commentList = commentService.findAllByBlogId(blog.getId());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            model.addAttribute("commentList", commentList);
+            return "client/blogDetail";
+        } else return "client/dangcapnhat";
+    }
+
+    @GetMapping("/tuyendung")
+    public String tuyendung(Model model) {
+        CreateFeedbackRequest createFeedbackRequest = new CreateFeedbackRequest();
+        model.addAttribute("createFeedbackRequest", createFeedbackRequest);
+        Blog blog = blogService.findLatestBlogByCategory("tuyendung");
+        if (blog != null)  {
+            model.addAttribute("blog", blog);
+            CreateCommentRequest createCommentRequest = new CreateCommentRequest();
+            model.addAttribute("createCommentRequest", createCommentRequest);
+            List<Comment> commentList = null;
+            try {
+                commentList = commentService.findAllByBlogId(blog.getId());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            model.addAttribute("commentList", commentList);
+            return "client/blogDetail";
+        } else return "client/dangcapnhat";
+    }
+
 
 
 }

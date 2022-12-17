@@ -28,7 +28,12 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
             " order by b.id desc  ", nativeQuery = true)
     List<Blog> findAllByCategory(String keyword);
 
-    @Query(value = "select * from blog b where b.category like %?2% and (b.title like %?1% or b.content like %?1%) " +
+    @Query(value = "select * from blog b where b.category like %?2% and (b.title like %?1% or b.description like %?1%) " +
             " order by b.id desc ", nativeQuery = true)
     List<Blog> findAllInOneCategory( String keyword, String category);
+
+    @Query(value =
+            "select * from blog where blog.category like %?1% "+
+            " order by blog.date_created desc limit 1 ", nativeQuery = true)
+    Blog findLatestBlogByCategory(String category);
 }
