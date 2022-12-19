@@ -2,7 +2,9 @@ package com.example.mamnoncvn.users.controller;
 
 import com.example.mamnoncvn.users.Models.request.CreateUserRequest;
 import com.example.mamnoncvn.users.Models.request.UpdatePasswordRequest;
+import com.example.mamnoncvn.users.entity.AdminEmail;
 import com.example.mamnoncvn.users.entity.User;
+import com.example.mamnoncvn.users.repository.AdminEmailRepository;
 import com.example.mamnoncvn.users.service.UserService;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    AdminEmailRepository adminEmailRepository;
 
     @GetMapping("/createDB")
     public String createDB(Model model){
@@ -50,6 +54,10 @@ public class UserController {
     public String addNewUser(Model model, @Valid @ModelAttribute("createUserRequest")
                              CreateUserRequest createUserRequest) {
         userService.insertNewUser(createUserRequest);
+        AdminEmail adminEmail = new AdminEmail(createUserRequest.getEmail());
+        if (!adminEmailRepository.existsByEmail(createUserRequest.getEmail())){
+            adminEmailRepository.save(adminEmail);
+        }
         return "redirect:/admin/user/";
     }
 

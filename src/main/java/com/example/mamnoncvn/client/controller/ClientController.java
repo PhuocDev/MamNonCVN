@@ -8,12 +8,20 @@ import com.example.mamnoncvn.comment.Models.requests.CreateCommentRequest;
 import com.example.mamnoncvn.comment.controller.CommentController;
 import com.example.mamnoncvn.comment.entity.Comment;
 import com.example.mamnoncvn.comment.service.CommentService;
+import com.example.mamnoncvn.customer.entity.Customer;
 import com.example.mamnoncvn.customer.models.request.CreateCustomerRequest;
 import com.example.mamnoncvn.customer.service.CustomerService;
 import com.example.mamnoncvn.exception.NotFoundException;
 import com.example.mamnoncvn.feedback.models.request.CreateFeedbackRequest;
+import com.example.mamnoncvn.mailSender.EmailService;
+import com.example.mamnoncvn.mailSender.EmailServiceImp;
+import com.example.mamnoncvn.mailSender.Mail;
 import com.example.mamnoncvn.thoikhoabieu.entity.ThoiKhoaBieu;
 import com.example.mamnoncvn.thoikhoabieu.service.ThoiKhoaBieuService;
+import com.example.mamnoncvn.users.entity.AdminEmail;
+import com.example.mamnoncvn.users.entity.User;
+import com.example.mamnoncvn.users.repository.AdminEmailRepository;
+import com.example.mamnoncvn.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.websocket.server.PathParam;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -249,6 +258,37 @@ public class ClientController {
         } else return "client/dangcapnhat";
     }
 
+    @Autowired
+    EmailService emailService;
+
+    @Autowired
+    AdminEmailRepository adminEmailRepository;
+
+    @GetMapping("/sendMailDemo")
+    public String sendMail(Model model){
+        Customer customer = customerService.getAll().get(0);
+        List<AdminEmail> adminEmailList = adminEmailRepository.findAll();
+        Mail mail = new Mail();
+        mail.setSubject("Một phụ huynh vừa đăng kí tư vấn");
+
+        for (int i =0; i< adminEmailList.size();i++){
+            mail.setRecipient(adminEmailList.get(i).getEmail());
+            mail.setAttachment(null);
+            mail.setMsgBody("Thông tin khách hàng" +
+                    "\nTên khách hàng: " + customer.getTenPhuHuynh() +
+                    "\nTên bé: " + customer.getTenBe() +
+                    "\nĐộ tuổi: " + customer.getTuoiBe() +
+                    "\nSố điện thoại: " + customer.getSoDienThoai()+
+                    "\nĐịa chỉ: " + customer.getDiaChi() +
+                    "\nNgày đăng kí: " + LocalDateTime.now()
+            );
+            emailService.sendSimpleMail(mail);
+        }
+
+        CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest();
+        model.addAttribute("createCustomerRequest", createCustomerRequest);
+        return "client/tuvan";
+    }
 
 
 }
