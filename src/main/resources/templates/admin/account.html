@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Account</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+
+        <!-- end of navbar navigation -->
+        <div class="content">
+            <div class="container">
+                <div class="page-title" style="margin-bottom: 20px;">
+                    <h3>Quản trị viên management</h3>
+                </div>
+
+                <!-- Form insert new student -->
+                <div id="insertForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Thêm tài khoản quản trị viên mới</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin quản trị viên vào bên dưới:</h5>
+                            <form th:action="@{/admin/user/add}" th:object="${createUserRequest}" method="post" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Username</label>
+                                        <input th:field="*{username}" type="text" class="form-control" name="username" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label class="form-label">Số điện thoại</label>
+                                        <input th:field="*{soDienThoai}" type="text" class="form-control" name="sdt" maxlength="10"  placeholder="0987654321" >
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label class="form-label">E-MAIL</label>
+                                        <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="name@gmail.com" >
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label class="form-label">Mật khẩu</label>
+                                        <input id="matKhauInsert" th:field="*{password}" type="password" class="form-control" name="username" minlength="4"  maxlength="50" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label class="form-label">Nhập lại mật khẩu</label>
+                                        <input id="nhapLaiMatKhauInsert" type="password" class="form-control" minlength="4" maxlength="50"  required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label class="form-label">Trạng thái</label>
+                                        <!-- <input type="text" class="form-control" name="thoiGianRanh" placeholder="" required> -->
+                                        <select th:field="*{status}" name="trangThai"  class="form-control">
+                                            <option value="true" >Hoạt động</option>
+                                            <option value="false">Ngừng hoạt động</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label class="form-label">Role</label>
+                                        <!-- <input type="text" class="form-control" name="thoiGianRanh" placeholder="" required> -->
+                                        <select th:field="*{role}" name="role"  class="form-control">
+                                            <option value="modifier" >Quản trị viên</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="button" id="cancelInsert" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Update password                -->
+                <div id="updateForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Cập nhật mật khẩu</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin vào bên dưới:</h5>
+                            <form action="#" th:action="@{/admin/user/update}" th:object="${updatePasswordRequest}" method="post" name="insertForm" accept-charset="utf-8">
+                                <div class="row g-2 fs-5">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="password" class="form-label">Mật khẩu cũ</label>
+                                        <input id="oldPassword" th:field="*{oldPassword}" type="password" class="form-control" minlength="4" placeholder="" required>
+                                        <input class="mb-3 col-md-6" id="userIdUpdate" th:field="*{userId}" hidden>
+                                    </div>
+                                    <p id="OldPasswordHidden"></p>
+                                </div>
+                                <div class="row g-2 fs-5">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="password" class="form-label">Mật khẩu mới</label>
+                                        <input id="newPasswordUpdate" th:field="*{newPassword}" type="password" class="form-control" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="password" class="form-label">Nhập lại mật khẩu mới</label>
+                                        <input id="nhapLaiNewPasswordUpdate" type="password" class="form-control" minlength="4" placeholder="" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
+                                <button type="button" id="cancelUpdate" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Content                   -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">QTV account list</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Mã QTV</th>
+                                            <th>Username</th>
+                                            <th>EMAIL</th>
+                                            <th>SDT</th>
+                                            <th>Trạng thái</th>
+                                            <th>Role</th>
+                                            <th >Password</th>
+                                            <th> </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="qtv : ${userList}">
+                                            <th scope="row" th:text="*{qtv.getId()}"></th>
+                                            <td th:text="*{qtv.getUsername()}"></td>
+                                            <td th:text="*{qtv.getEmail()}"></td>
+                                            <td th:text="*{qtv.getSoDienThoai()}"></td>
+                                            <td th:text="(*{qtv.isStatus()}==true)?'Đang hoạt động':'Ngừng hoạt động'"></td>
+                                            <td th:text="*{qtv.getRole()}"></td>
+                                            <td th:text="*{qtv.getPassword()}" ></td>
+                                            <th>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="button" class="btn btn-primary updateUserBtn">Update</button>
+                                                    <button type="button" class="btn btn-danger deleteStudentBtn">Del</button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" colspan="9" style="text-align: right;">
+                                                <button type="button" id="addUserBtn" class="btn btn-primary">Thêm quản trị viên</button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+
+    $(document).ready(function() {
+
+        $("#insertForm").hide();
+        $("#updateForm").hide();
+        $("#addUserBtn").click(function() {
+            $("#updateForm").hide();
+            $("#insertForm").toggle(500);
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
+        });
+
+        $(".updateUserBtn").click(function() {
+            $("#insertForm").hide();
+            $("#updateForm").show(100);
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
+            $("#userIdUpdate").val($(this).parent().parent().parent().first().children().first().text());
+            $("#oldPasswordHidden").val($(this).parent().parent().parent().first().children().first().next().next().
+            next().next().next().next().text());
+        });
+
+        // Delete button
+        $(".deleteStudentBtn").click(function() {
+            //get infor of student to delete here
+            if (confirm("Do you want to delete user id: " + $(this).parent().parent().parent().first().children().first().text())) {
+                $(this).parent().parent().parent().remove();
+                $.ajax({
+                    url: "http://localhost:8080/admin/user/deleteUser?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
+                    success: function(response) {
+                        //do something
+                    },
+                    error: function(xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        });
+
+        $("#cancelUpdate").click(function (){
+            $("#updateForm").hide();
+        });
+        $("#cancelInsert").click(function (){
+            $("#insertForm").hide();
+        });
+
+        $("#insertForm").submit(function(e){
+            if ($("#matKhauInsert").val() != $("#nhapLaiMatKhauInsert").val()) {
+                alert("Vui lòng nhập lại mật khẩu!");
+                return false;
+            } else if ($("#matKhauInsert").val().length <= 5 ) {
+                alert("Mật khẩu không hợp lệ!");
+                return false;
+            }
+            else return true;
+        });
+        $("#updateForm").submit(function(e){
+            if ($("#newPasswordUpdate").val() != $("#nhapLaiNewPasswordUpdate").val()) {
+                alert("Vui lòng nhập lại mật khẩu!");
+                return false;
+            }
+            else return true;
+        });
+
+    });
+</script>
+
+</html>

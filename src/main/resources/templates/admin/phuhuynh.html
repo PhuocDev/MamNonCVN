@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Phụ huynh</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+
+        <!-- end of navbar navigation -->
+        <div class="content">
+            <div class="container">
+                <div class="page-title" style="margin-bottom: 20px;">
+                    <h3>Phụ huynh management</h3>
+                </div>
+
+                <!-- Form insert new student -->
+                <div id="insertForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Thêm tài khoản phụ huynh mới</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin phụ huynh vào bên dưới:</h5>
+                            <form action="#" th:action="@{/admin/phuhuynh/addPH}" th:object="${createPhuHuynhRequest}" method="post" name="insertForm" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="text" class="form-label">Họ tên Phụ huynh</label>
+                                        <input th:field="*{tenPhuHuynh}" type="text" class="form-control" name="username" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Số điện thoại</label>
+                                        <input th:field="*{soDienThoai}" type="text" class="form-control" name="sdt" minlength="10" maxlength="10" placeholder="Số điện thoại" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="city" class="form-label">E-MAIL</label>
+                                        <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="name@gmail.com" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="text" class="form-label">Username</label>
+                                        <input th:field="*{username}" type="text" class="form-control" name="username" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Mật khẩu</label>
+                                        <input id="matKhauInsert" th:field="*{password}" type="password" class="form-control" name="username" minlength="4"  maxlength="50" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Nhập lại mật khẩu</label>
+                                        <input id="nhapLaiMatKhauInsert" type="password" class="form-control" name="sdt" minlength="4" maxlength="50"  required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="address" class="form-label">Địa chỉ</label>
+                                    <input th:field="*{diaChi}" type="text" class="form-control" name="address" minlength="10" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" required>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="city" class="form-label">Student ID:</label>
+                                        <input th:field="*{studentId}" type="number" class="form-control" minlength="1" maxlength="5" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="city" class="form-label">Trạng thái</label>
+                                        <!-- <input type="text" class="form-control" name="thoiGianRanh" placeholder="" required> -->
+                                        <select th:field="*{enable}" name="trangThai"  class="form-control">
+                                            <option value="true" >Hoạt động</option>
+                                            <option value="false">Ngừng hoạt động</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="button" id="cancelInsert" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form update new student -->
+                <div id="updateForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Cập nhật phụ huynh </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Cập nhật thông tin phụ huynh vào bên dưới: </h5>
+                            <form action="#" th:action="@{/admin/phuhuynh/updatePH}" th:object="${updatePhuHuynhRequest}" method="post" name="insertForm" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="text" class="form-label">Họ tên Phụ huynh</label>
+                                        <input id="tenPhuHuynhUpdate" th:field="*{tenPhuHuynh}" type="text" class="form-control" name="username" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Số điện thoại</label>
+                                        <input id="sdtUpdate" th:field="*{soDienThoai}" type="tel" class="form-control" name="sdt" minlength="10" maxlength="10" placeholder="Số điện thoại" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="city" class="form-label">E-MAIL</label>
+                                        <input id="emailUpdate" th:field="*{email}" type="email" class="form-control" name="email" placeholder="name@gmail.com" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="text" class="form-label">Username</label>
+                                        <input id="usernameUpdate" th:field="*{username}" type="text" class="form-control" name="username" minlength="4" placeholder="" required>
+                                    </div>
+<!--                                    <div class="mb-3 col-md-3">-->
+<!--                                        <label th:for="text" class="form-label">Mật khẩu</label>-->
+<!--                                        <input th:field="*{password}" type="password" class="form-control" name="username" minlength="4"  maxlength="50" placeholder="" required>-->
+<!--                                    </div>-->
+<!--                                    <div class="mb-3 col-md-3">-->
+<!--                                        <label th:for="text" class="form-label">Nhập lại mật khẩu</label>-->
+<!--                                        <input  type="password" class="form-control" name="sdt" minlength="4" maxlength="50"  required>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="address" class="form-label">Địa chỉ</label>
+                                    <input id="diaChiUpdate" th:field="*{diaChi}" type="text" class="form-control" name="address" minlength="10" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" required>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="city" class="form-label">Student ID:</label>
+                                        <input id="studentIdUpdate" th:field="*{studentId}" type="number" class="form-control" minlength="1" maxlength="5" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="city" class="form-label">Trạng thái</label>
+                                        <!-- <input type="text" class="form-control" name="thoiGianRanh" placeholder="" required> -->
+                                        <select id="statusUpdate" th:field="*{enable}" name="trangThai"  class="form-control">
+                                            <option value="true" >Hoạt động</option>
+                                            <option value="false">Ngừng hoạt động</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-4" hidden>
+                                        <label  class="form-label">Phụ huynh ID</label>
+                                        <input id="idUpdate" th:field="*{id}" type="text" class="form-control" >
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="button" id="cancelUpdate" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--                search box-->
+                <div class="row" style="margin-bottom: 20px">
+                    <form  th:action="@{/admin/phuhuynh/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                        <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
+                        <button th:field="*{keyword}" type="submit" class="btn btn-secondary">Search</button>
+                    </form>
+                </div>
+                <!-- Content                   -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">Teacher list</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Mã PH</th>
+                                            <th>Username</th>
+                                            <th>Họ tên</th>
+                                            <th>EMAIL</th>
+                                            <th>SDT</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Mã học sinh</th>
+                                            <th>Trạng thái</th>
+                                            <th> </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="phuhuynh : ${phuHuynhAccountList}">
+                                            <th scope="row" th:text="*{phuhuynh.getId()}"></th>
+                                            <td th:text="*{phuhuynh.getUsername()}"></td>
+                                            <td th:text="*{phuhuynh.getTenPhuHuynh()}"></td>
+                                            <td th:text="*{phuhuynh.getEmail()}"></td>
+                                            <td th:text="*{phuhuynh.getSoDienThoai()}"></td>
+                                            <td th:text="*{phuhuynh.getDiaChi()}"></td>
+                                            <td th:text="*{phuhuynh.getStudentId()}"></td>
+                                            <td th:text="(*{phuhuynh.isEnable()}==true)?'Đang hoạt động':'Ngừng hoạt động'"></td>
+                                            <th>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="button" class="btn btn-primary updatePhuHuynhBtn">Fix</button>
+                                                    <button type="button" class="btn btn-danger deleteStudentBtn">Del</button>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" colspan="9" style="text-align: right;">
+                                                <button type="button" id="addPhuHuynhBtn" class="btn btn-primary">Thêm phụ huynh</button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+
+    $(document).ready(function() {
+
+        $("#insertForm").hide();
+        $("#updateForm").hide();
+        $("#addPhuHuynhBtn").click(function() {
+            $("#updateForm").hide();
+            $("#insertForm").toggle(500);
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
+        });
+
+        $(".updatePhuHuynhBtn").click(function() {
+            $("#insertForm").hide();
+            $("#updateForm").show(100);
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
+            $("#idUpdate").val($(this).parent().parent().parent().first().children().first().text());
+            $("#showIdUpdate").hide();
+            $("#usernameUpdate").val($(this).parent().parent().parent().first().children().first().next().text());
+               $("#tenPhuHuynhUpdate").val($(this).parent().parent().parent().first().children().first().next().next().text());
+               $("#emailUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().text());
+               $("#sdtUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().text());
+               $("#diaChiUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
+               $("#studentIdUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().text());
+            $("#statusUpdate").val(($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text() == 'Đang hoạt động')?'true':'false');
+        });
+
+        // Delete button
+        $(".deleteStudentBtn").click(function() {
+            //get infor of student to delete here
+            if (confirm("Do you want to delete student id: " + $(this).parent().parent().parent().first().children().first().text())) {
+                $(this).parent().parent().parent().remove();
+                $.ajax({
+                    url: "http://localhost:8080/admin/phuhuynh/deletePH?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
+                    success: function(response) {
+                        //do something
+                    },
+                    error: function(xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        });
+
+        $("#cancelUpdate").click(function (){
+            $("#updateForm").hide();
+        });
+        $("#cancelInsert").click(function (){
+            $("#insertForm").hide();
+        });
+
+        $("#insertForm").submit(function(e){
+            if ($("#matKhauInsert").val() != $("#nhapLaiMatKhauInsert").val()) {
+                alert("Vui lòng nhập lại mật khẩu!");
+                return false;
+            } else if ($("#matKhauInsert").val().length <= 5 ) {
+                alert("Mật khẩu không hợp lệ!");
+                return false;
+            }
+            else return true;
+        });
+
+    });
+</script>
+
+</html>

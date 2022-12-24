@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Feedback management</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/airdatepicker/css/datepicker.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+
+        <!-- end of navbar navigation -->
+        <div class="content">
+            <div class="container">
+                <div class="page-title" style="margin-bottom: 20px;">
+                    <h3>Feedback management</h3>
+                </div>
+                <!-- Form insert new student -->
+                <div id="insertForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Thêm Feedback mới</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin Feedback vào bên dưới:</h5>
+                            <form th:action="@{/admin/feedback/add}"  th:object="${createFeedbackRequest}" method="post"  accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Họ tên</label>
+                                        <input th:field="*{name}" type="text" class="form-control" name="name" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="text" class="form-label">Email</label>
+                                        <input th:field="*{email}" type="email" class="form-control" id="emailInsert" name="emailInsert" placeholder="hoTen@gmail.com" >
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label th:for="text" class="form-label">Số điện thoại</label>
+                                        <input th:field="*{soDienThoai}" type="tel" class="form-control" id="soDienThoaiInsert" name="sdt" placeholder="0987654321" minlength="10" maxlength="10"  required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="content" class="form-label">Nội dung feedback</label>
+                                    <input th:field="*{content}" type="text" class="form-control" name="description" minlength="10" placeholder="Nội dung" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--                search box-->
+                <div class="row" style="margin-bottom: 20px">
+                    <form  th:action="@{/admin/feedback/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                        <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
+                        <button th:field="*{keyword}" type="submit" class="btn btn-secondary">Search</button>
+                    </form>
+                </div>
+                <!-- Content                   -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">Feedback list</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Mã Feedback</th>
+                                            <th>Họ tên</th>
+                                            <th>Email</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Nội dung</th>
+                                            <th>Ngày gửi</th>
+                                            <th> </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="feedback : ${feedbackList}">
+                                            <th scope="row" th:text="*{feedback.getId()}">123</th>
+                                            <td th:text="*{feedback.getName()}"></td>
+                                            <td th:text="*{feedback.getEmail()}"></td>
+                                            <td th:text="*{feedback.getSoDienThoai()}"></td>
+                                            <td th:text="*{feedback.getContent()}"></td>
+                                            <td th:text="*{feedback.getDateCreated()}"></td>
+                                            <th>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="button" class="btn btn-danger deleteFeedbackBtn">Del</button>
+                                                </div>
+                                            </th>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row" colspan="10" style="text-align: right;">
+                                                <button type="button" id="addFeedbackBtn" class="btn btn-primary">Thêm Feedback (demo)</button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/datepicker.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/i18n/datepicker.en.js}"></script>
+<script th:src="@{/vendor/mdtimepicker/mdtimepicker.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+    $(document).ready(function() {
+        $("#insertForm").hide();
+        $("#addFeedbackBtn").click(function() {
+            $("#insertForm").toggle(500);
+
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
+        });
+
+        $("#cancelBtnInsert").click(function (){
+            $("#insertForm").hide();
+        });
+        // Delete button
+        $(".deleteFeedbackBtn").click(function() {
+            //get infor of Class to delete here
+            if (confirm("Bạn có muốn xoá feedback id: " + $(this).parent().parent().parent().first().children().first().text())) {
+                $(this).parent().parent().parent().remove();
+                $.ajax({
+                    url: "http://localhost:8080/admin/feedback/deleteFeedback?id=" + $(this).parent().parent().parent().first().children().first().text() ,
+                    success: function(response) {
+                        //do something
+                    },
+                    error: function(xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        });
+
+        $("#insertForm").submit(function(e){
+            //validate form before submitting here
+            return true;
+        });
+
+    });
+
+</script>
+
+</html>

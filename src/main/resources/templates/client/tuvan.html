@@ -1,0 +1,117 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/assets/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/assets/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/assets/contactUs.css}">
+    <link rel="stylesheet" th:href="@{/css/assets/tuvan.css}">
+
+    <!--    for  bootstrap-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css" />
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous" />
+    <title>Trang chủ</title>
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+
+</head>
+
+<body>
+<!-- SIDEBAR -->
+<th:block th:replace="~{fragment/header :: ${header}}"></th:block>
+
+<!-- Body -->
+<div class="content" style="height: auto; padding:30px;padding-top: 70px">
+    <div class="row fs-1">
+        <!-- Form insert new student -->
+        <div id="insertForm" class="col-lg-12 fs-3 p-3">
+            <div class="card">
+                <div class="card-header">ĐĂNG KÝ NHẬN TƯ VẤN</div>
+                <div class="card-body">
+                    <h2 class="card-title">Anh chị cần tư vấn điền thông tin vào bên dưới nhé!</h2>
+                    <form th:action="@{/admin/customer/addFromClient}" th:object="${createCustomerRequest}" method="post" accept-charset="utf-8">
+                        <div class="row g-2">
+                            <div class="mb-3 col-md-3">
+                                <label th:for="text" class="form-label">Họ tên của bé</label>
+                                <input th:field="*{tenBe}" type="text" class="form-control" name="tenBeInsert" minlength="4" placeholder="" required>
+                            </div>
+                            <div class="mb-3 col-md-3">
+                                <label th:for="age" class="form-label">Độ tuổi</label>
+                                <select th:field="*{tuoiBe}" name="tuoiBeInsert" id="tuoiBeInsert" class="form-control">
+                                    <option value="2">Từ 2 - 3 tuổi</option>
+                                    <option value="3">Từ 3 - 4 tuổi</option>
+                                    <option value="4">Từ 4 - 5 tuổi</option>
+                                    <option value="1">Dưới 2 tuổi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="mb-3 col-md-3">
+                                <label th:for="text" class="form-label">Họ tên phụ huynh</label>
+                                <input th:field="*{tenPhuHuynh}" type="text" class="form-control" id="tenPhuHuynhInsert" name="tenPhuHuynh" minlength="4" placeholder="" required>
+                            </div>
+                            <div class="mb-3 col-md-3">
+                                <label th:for="text" class="form-label">Nghề nghiệp</label>
+                                <input th:field="*{ngheNghiep}" type="text" class="form-control" id="ngheNghiepInsert" name="ngheNghiep" minlength="4" placeholder="" required>
+                            </div>
+                            <div class="mb-3 col-md-2">
+                                <label th:for="text" class="form-label">Số điện thoại</label>
+                                <input th:field="*{soDienThoai}" type="tel" class="form-control" id="soDienThoaiInsert" name="sdt" placeholder="0987654321" minlength="10" maxlength="10"  required>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                                <label th:for="text" class="form-label">Email</label>
+                                <input th:field="*{email}" type="email" class="form-control" id="emailInsert" name="emailInsert" placeholder="hoTen@gmail.com" >
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label th:for="address" class="form-label">Địa chỉ</label>
+                            <input th:field="*{diaChi}" type="text" class="form-control" id="diaChiInsert" name="address" placeholder="Ex: Số 12, Linh Trung, Thủ Đức" minlength="10" required>
+                        </div>
+                        <div class="mb-3">
+                            <label th:for="note" class="form-label">Ghi chú</label>
+                            <input th:field="*{diaChi}" type="text" class="form-control" id="ghiChuInsert" name="ghiChuInsert" placeholder="Thông tin bổ sung" >
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-mail-bulk"></i> Đăng ký nhận tư vấn</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--footer-->
+<th:block th:replace="~{fragment/footer :: ${footer}}"></th:block>
+</body>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
+
+<script>
+    $(document).ready(function () {
+        $("#insertForm").submit(function(e){
+            if (confirm("Xác nhận đăng kí nhận thông tin tư vấn" )) {
+                alert("Cảm ơn bạn đã đăng ký, nhân viên Cầu vòng nhỏ sẽ liên hệ bạn ngay!")
+                return true;
+            }
+            else return false;
+        });
+    });
+</script>
+</html>

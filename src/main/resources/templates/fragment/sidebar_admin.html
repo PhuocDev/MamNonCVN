@@ -1,25 +1,46 @@
 <nav id="sidebar" class="active">
     <div class="sidebar-header">
-        <img th:src="@{/img/bootstraper-logo.png}" alt="bootraper logo" class="app-logo">
+        <a th:href="@{/client/}">
+            <img th:src="@{/img/bootstraper-logo.png}" alt="bootraper logo" class="app-logo">
+        </a>
     </div>
     <ul class="list-unstyled components text-secondary">
         <li>
-            <a th:href="@{/}"><i class="fas fa-home"></i> Dashboard</a>
+            <a th:href="@{/admin/}"><i class="fas fa-home"></i> Dashboard</a>
         </li>
         <li>
-            <a href="student.html"><i class="fas fa-user-friends"></i> Student</a>
+            <a th:href="@{/admin/student/}"><i class="fas fa-user-friends"></i>Học sinh</a>
         </li>
         <li>
-            <a href="#"><i class="fas fa-chalkboard-teacher"></i> Class</a>
+            <a th:href="@{/admin/class/}"><i class="fas fa-chalkboard-teacher"></i>Lớp học</a>
         </li>
         <li>
-            <a href="POstudent.html"><i class="fas fa-user-clock"></i> PO Student</a>
+            <a th:href="@{/admin/giaovien/}"><i class="fas fa-user-tie"></i>Giáo viên</a>
         </li>
         <li>
-            <a th:href="@{/giaovien/}"><i class="fas fa-user-tie"></i> Teacher</a>
+            <a th:href="@{/admin/blog/}"><i class="fas fa-blog"></i> Blog</a>
         </li>
         <li>
-            <a href="#"><i class="fas fa-user-circle"></i> Account</a>
+            <a th:href="@{/admin/comment/}"><i class="fas fa-blogger-b"></i>Bình luận</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/feedback/}"><i class="fas fa-envelope-open"></i>Feedback</a>
+        </li>
+
+        <li>
+            <a th:href="@{/admin/customer/}"><i class="fas fa-user-plus"></i>Khách hàng</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/tkb/}"><i class="fas fa-chess-board"></i>Thời khóa biểu</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/cth/}"><i class="fas fa-boxes"></i>Chương trình học</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/phuhuynh/}"><i class="fas fa-person-booth"></i>Phụ huynh</a>
+        </li>
+        <li>
+            <a th:href="@{/admin/user/}"><i class="fas fa-user-circle"></i>Account</a>
         </li>
     </ul>
 </nav>

@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/giaovien")
+@RequestMapping("/admin/giaovien")
 public class GiaoVienController {
     @Autowired
     GiaoVienService giaoVienService;
@@ -40,7 +40,7 @@ public class GiaoVienController {
     {
         CreateGiaoVienRequest giaoVienRequest = new CreateGiaoVienRequest(hoten, address, sdt,email,trangThai);
         giaoVienService.addNewGiaoVien(giaoVienRequest);
-        return "redirect:/giaovien/all";
+        return "redirect:/admin/giaovien/all";
     }
     //lưu ý phải sử dụng @ModelAttribute để phân biệt các request body
     @PostMapping(path = "/addGV", consumes = "application/x-www-form-urlencoded")
@@ -48,19 +48,19 @@ public class GiaoVienController {
     {
         //CreateGiaoVienRequest giaoVienRequest = new CreateGiaoVienRequest(hoten, address, sdt,email,trangThai);
         giaoVienService.addNewGiaoVien(giaoVienRequest);
-        return "redirect:/giaovien/all";
+        return "redirect:/admin/giaovien/all";
     }
     @PostMapping(path = "/updateGV", consumes = "application/x-www-form-urlencoded")
     public String updateGV(@Valid @ModelAttribute("updateGiaovienRequest") UpdateGiaoVienRequest updateGiaoVienRequest)
     {
         //CreateGiaoVienRequest giaoVienRequest = new CreateGiaoVienRequest(hoten, address, sdt,email,trangThai);
         giaoVienService.updateGiaoVien(updateGiaoVienRequest);
-        return "redirect:/giaovien/all";
+        return "redirect:/admin/giaovien/all";
     }
     @GetMapping("/deleteGV")
     public String deleteGV(@RequestParam Long id) {
         giaoVienService.deleteGiaoVienById(id);
-        return "redirect:/giaovien/all";
+        return "redirect:/admin/giaovien/all";
     }
 
 }

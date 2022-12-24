@@ -1,0 +1,95 @@
+
+<link rel="stylesheet" th:href="@{/css/assets/header.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<section class="navigation sticky" style=" z-index: 100;">
+    <div class="nav-container fs-3">
+        <div class="brand">
+            <a href="/client/" >Little Rainbow</a>
+        </div>
+        <nav>
+            <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+            <ul class="nav-list">
+                <li>
+                    <a href="/client/">Trang chủ</a>
+                </li>
+                <li>
+                    <a href="/client/gioithieu">Giới thiệu</a>
+                </li>
+                <li>
+                    <a href="#!">Tuyển sinh</a>
+                    <ul class="nav-dropdown">
+                        <li>
+                            <a href="/client/quytrinhtuyensinh">Quy trình tuyển sinh</a>
+                        </li>
+                        <li>
+                            <a href="/client/tuvan">Đăng kí tư vấn</a>
+                        </li>
+                        <li>
+                            <a href="/client/tuyensinh">Đăng kí nhập học</a>
+                        </li>
+                        <li>
+                            <a href="/client/hocphi">Học phí tham khảo</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/client/chuongtrinhhoc">Chương trình học</a>
+                </li>
+                <li>
+                    <a href="#!">Hoạt động</a>
+                    <ul class="nav-dropdown">
+                        <li>
+                            <a href="/client/blog_thongbao">Thông báo - Sự kiện</a>
+                        </li>
+                        <li>
+                            <a href="/client/tkb">Thời khóa biểu</a>
+                        </li>
+                        <li>
+                            <a href="/client/thucdon">Thực đơn</a>
+                        </li>
+                        <li>
+                            <a href="/client/blog_all">Blog</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#!">Liên hệ</a>
+                    <ul class="nav-dropdown">
+                        <li>
+                            <a href="/client/contact">Chăm sóc khách hàng</a>
+                        </li>
+                        <li>
+                            <a href="/client/tuyendung">Tuyển dụng</a>
+                        </li>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+<script>
+    (function($) { // Begin jQuery
+        $(function() { // DOM ready
+            // If a link has a dropdown, add sub menu toggle.
+            $('nav ul li a:not(:only-child)').click(function(e) {
+                $(this).siblings('.nav-dropdown').toggle();
+                // Close one dropdown when selecting another
+                $('.nav-dropdown').not($(this).siblings()).hide();
+                e.stopPropagation();
+            });
+            // Clicking away from dropdown will remove the dropdown class
+            $('html').click(function() {
+                $('.nav-dropdown').hide();
+            });
+            // Toggle open and close nav styles on click
+            $('#nav-toggle').click(function() {
+                $('nav ul').slideToggle();
+            });
+            // Hamburger to X toggle
+            $('#nav-toggle').on('click', function() {
+                this.classList.toggle('active');
+            });
+        }); // end DOM ready
+    })(jQuery); // end jQuery
+</script>

@@ -1,0 +1,123 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/assets/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/assets/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/assets/contactUs.css}">
+    <link rel="stylesheet" th:href="@{/css/assets/tuvan.css}">
+
+    <!--    for  bootstrap-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css" />
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous" />
+    <title>Trang chủ</title>
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+
+</head>
+
+<body>
+<!-- SIDEBAR -->
+<th:block th:replace="~{fragment/header :: ${header}}"></th:block>
+
+
+<!-- Body -->
+<div class="content" style="height: auto;padding-top: 70px">
+    <!--        contact -->
+
+    <!--  đăng kí tư vấn        -->
+    <div class="row" id="contatti">
+        <div class="container p-5 pb-5" >
+            <div class="row" style="height: 500px;">
+                <div class="col maps" >
+                    <iframe src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=M4-88 khu biệt thự manhattan glory vinhomes grand park&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+                <div id="insertForm" class="col">
+                    <h1 class="text-uppercase" style="font-size: 30px; color: white;">Liên hệ với chúng tôi</h1>
+                    <!-- sending request here -->
+                    <form th:action="@{/admin/feedback/addFromClient}"  th:object="${createFeedbackRequest}" method="post"  accept-charset="utf-8">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input th:field="*{name}" type="text" class="form-control m-2 p-3 fs-3" placeholder="Họ và tên" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control m-2 p-3 fs-3" placeholder="Tiêu đề" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input th:field="*{email}" type="email" class="form-control m-2 p-3 fs-3" placeholder="Email" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input th:field="*{soDienThoai}" type="number" class="form-control m-2 p-3 fs-3" placeholder="Số điện thoại" minlength="10" maxlength="10" required>
+                                </div>
+                            </div>
+                            <div class="col-12 p-2 m-1">
+                                <div class="form-group">
+                                    <textarea th:field="*{content}" class="form-control m-2 p-3 fs-3" id="exampleFormControlTextarea1" placeholder="Nội dung" rows="3" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-light fs-3 m-2" type="submit">Gửi</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text-white" style="font-size: 1.6rem;">
+                        <h1 class="text-uppercase mt-4 font-weight-bold">Mầm non Cầu vòng nhỏ</h1>
+
+                        <i class="fas fa-phone mt-3"></i> <a href="tel:+">  0906 993 262</a><br>
+                        <i class="fa fa-envelope mt-3"></i> <a href="">hantt.dongtien@gmail.com</a><br>
+                        <i class="fas fa-location-pin mt-3"></i> M4-88, Khu biệt thự Manhattan Glory Vinhomes Grand Park, Nguyễn
+                        Xiển, Long Bình, Quận 9, TP. Thủ Đức<br>
+                        <div class="my-4">
+                            <a href="https://www.facebook.com/Mamnoncauvongnho.edu.vn"><i class="fab fa-facebook fa-3x pr-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  end of đăng kí tư vấn        -->
+</div>
+
+
+<!--footer-->
+<th:block th:replace="~{fragment/footer :: ${footer}}"></th:block>
+</body>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
+<script>
+    $(document).ready(function () {
+        $("#insertForm").submit(function(e){
+            //validate form before submitting here
+            alert("Cảm ơn quý phụ huynh đã phản hồi")
+            return true;
+        });
+    });
+</script>
+</html>

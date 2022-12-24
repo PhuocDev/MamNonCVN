@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CTH management</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/airdatepicker/css/datepicker.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+
+        <!-- end of navbar navigation -->
+        <div class="content">
+            <div class="container">
+                <div class="page-title" style="margin-bottom: 20px;">
+                    <h3>CTH management</h3>
+                </div>
+                <!-- Form insert new student -->
+                <div id="insertForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Thêm CTH mới</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin CTH vào bên dưới:</h5>
+                            <form th:action="@{/admin/cth/add}"  th:object="${createChuongTrinhHocRequest}" method="post"  accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Tên CTH</label>
+                                        <input th:field="*{tenCTH}" type="text" class="form-control" name="tenCTH" minlength="4" placeholder="CTH lớp chồi tuần 23" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="city" class="form-label">Mã lớp</label>
+                                        <select th:field="*{maLop}" name="doTuoi" id="doTuoi" class="form-control">
+                                            <option th:each="cvnClass : ${danhSachLop}"
+                                                    th:text="${cvnClass.getId()+ ' - ' + cvnClass.getName()}"
+                                                    th:value="${cvnClass.getId()}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="description" class="form-label">Mô tả</label>
+                                    <input th:field="*{description}" type="text" class="form-control" name="description" minlength="10" placeholder="Tóm tắt thông tin CTH" required>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="formFile" class="form-label">Ảnh bìa</label>
+                                        <input th:field="*{anhBia}" type="text" class="form-control" name="anhBia" placeholder="anhBia.jpeg" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày bắt đầu</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{ngayBatDau}" type="text" id="insertNgayBatDau" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Khai giảng">
+                                            <small class="form-text text-muted">You can change the month, year, and date</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày kết thúc</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{ngayKetThuc}" type="text" id="insertNgayKetThuc" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Kết thúc">
+                                            <small class="form-text text-muted">You can change the month, year, and date</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="content" class="form-label">Mô tả</label>
+                                    <textarea th:field="*{noiDung}" name="content" id="editor" class="form-control">
+                                                &lt;p&gt;This is some sample content.&lt;/p&gt;
+                                            </textarea>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="status" class="form-label">Trạng thái</label>
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="true">Hoạt động</option>
+                                            <option value="false">Ngừng hoạt động</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form update new CTH -->
+                <div id="updateForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Cập nhật thông tin CTH</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Cập nhật thông tin CTH vào bên dưới:</h5>
+                            <form  th:action="@{/admin/cth/update}"  th:object="${updateChuongTrinhHocRequest}" method="post" accept-charset="utf-8">
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-5">
+                                        <label th:for="text" class="form-label">Tên CTH</label>
+                                        <input th:field="*{tenCTH}" id="tenCTHUpdate" type="text" class="form-control" name="tenCTH" minlength="4" placeholder="CTH chồi tuần 23" required>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="maLop" class="form-label">Mã lớp</label>
+                                        <select th:field="*{maLop}" name="maLop" id="maLopUpdate" class="form-control">
+                                            <option th:each="cvnClass : ${danhSachLop}"
+                                                    th:text="${cvnClass.getId()+ ' - ' + cvnClass.getName()}"
+                                                    th:value="${cvnClass.getId()}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-3" hidden>
+                                        <label th:for="text" class="form-label">ID CTH</label>
+                                        <input th:field="*{id}" id="idCTHUpdate" type="text" class="form-control" name="tenCTH" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="description" class="form-label">Mô tả</label>
+                                    <input th:field="*{description}" id="descriptionUpdate" type="text" class="form-control" name="description" minlength="10" placeholder="Tóm tắt thông tin CTH" required>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="formFile" class="form-label">Ảnh bìa</label>
+                                        <input th:field="*{anhBia}" id="anhBiaUpdate" type="text" class="form-control" name="anhBia" placeholder="anhBia.jpeg" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày bắt đầu</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{ngayBatDau}" type="text" id="ngayBatDauUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Ngày áp dụng">
+                                            <small class="form-text text-muted">You can change the month, year, and date</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày kết thúc</label>
+                                        <div class="mb-3">
+                                            <input th:field="*{ngayKetThuc}" type="text" id="ngayKetThucUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Kết thúc">
+                                            <small class="form-text text-muted">You can change the month, year, and date</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="text" class="form-label">Ngày đăng</label>
+                                        <div class="mb-3">
+                                            <input type="text" id="ngayDangUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Kết thúc">
+                                            <small class="form-text text-muted">You can change the month, year, and date</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="content" class="form-label">Mô tả</label>
+                                    <textarea th:field="*{noiDung}" name="content" id="editorUpdate" class="form-control" field="*{noiDung}" required>
+                                                &lt;p&gt;This is some sample content.&lt;/p&gt;
+                                            </textarea>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="mb-3 col-md-3">
+                                        <label th:for="status" class="form-label">Trạng thái</label>
+                                        <select name="status" id="trangThaiUpdate" class="form-control">
+                                            <option value="true">Đang áp dụng</option>
+                                            <option value="false">Ngừng áp dụng</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--                search box-->
+                <div class="row" style="margin-bottom: 20px">
+                    <form  th:action="@{/admin/cth/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                        <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
+                        <button th:field="*{keyword}" type="submit" class="btn btn-secondary">Search</button>
+                    </form>
+                </div>
+                <!-- Content                   -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">CTH list</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Mã CTH</th>
+                                            <th>Tên CTH</th>
+                                            <th>Mô tả</th>
+                                            <th>Ngày bắt đầu</th>
+                                            <th>Ngày kết thúc</th>
+                                            <th>Mã lớp</th>
+                                            <th>Trạng thái</th>
+                                            <th hidden>Ảnh bìa</th>
+                                            <th hidden>Nội dung</th>
+                                            <th hidden>Ngày đăng</th>
+                                            <th> </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="cth : ${danhSachCTH}">
+                                            <th scope="row" th:text="*{cth.getId()}">123</th>
+                                            <td th:text="*{cth.getTenCTH()}"></td>
+                                            <td th:text="*{cth.getDescription()}">Mô tả ngắn gọn</td>
+                                            <td th:text="*{cth.getNgayBatDau()}"></td>
+                                            <td th:text="*{cth.getNgayKetThuc()}"></td>
+                                            <td th:text="*{cth.getMaLop()}"></td>
+                                            <td th:text="(*{cth.isStatus()== true})?'Đang áp dụng':'Ngừng áp dụng'">Đang hiện</td>
+                                            <td th:text="*{cth.getAnhBia()}" hidden>anhBia</td>
+                                            <td th:text="*{cth.getNoiDung()}" hidden>nội dung</td>
+                                            <td th:text="*{cth.getNgayDang()}" hidden></td>
+                                            <th>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                    <button type="button" class="btn btn-primary updateCTHBtn">Fix</button>
+                                                    <button type="button" class="btn btn-danger deleteCTHBtn">Del</button>
+                                                </div>
+                                            </th>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row" colspan="10" style="text-align: right;">
+                                                <button type="button" id="addCTHBtn" class="btn btn-primary">Thêm CTH</button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/datepicker.min.js}"></script>
+<script th:src="@{/vendor/airdatepicker/js/i18n/datepicker.en.js}"></script>
+<script th:src="@{/vendor/mdtimepicker/mdtimepicker.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+
+</script>
+<script>
+    $(document).ready(function() {
+        $("#insertForm").hide();
+        $("#updateForm").hide();
+        $("#addCTHBtn").click(function() {
+            $("#updateForm").hide();
+            $("#insertForm").toggle(500);
+
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
+        });
+        $(".updateCTHBtn").click(function() {
+            $("#insertForm").hide();
+            $("#updateForm").show();
+            $("#idCTHUpdate").val($(this).parent().parent().parent().first().children().first().text());
+            $("#tenCTHUpdate").val($(this).parent().parent().parent().first().children().first().next().text());
+            $("#descriptionUpdate").val($(this).parent().parent().parent().first().children().first().next().next().text());
+            $("#ngayBatDauUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().text());
+            $("#ngayKetThucUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().text());
+            $("#maLopUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().text());
+            $("#ngayDangUpdate").val( $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().next().text());
+            $("#trangThaiUpdate").val("true");
+            $("#anhBiaUpdate").val($(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().text());
+            //content update here
+            var content = $(this).parent().parent().parent().first().children().first().next().next().next().next().next().next().next().next().text();
+            ClassicEditor
+                .create( document.querySelector( '#editorUpdate' ), {
+                    htmlEmbed: {
+                        showPreviews: true,
+                        sanitizeHtml: ( inputHtml ) => {
+                            // Strip unsafe elements and attributes, e.g.:
+                            // the `<script>` elements and `on*` attributes.
+                            const outputHtml = sanitize( inputHtml );
+                            return {
+                                html: outputHtml,
+                                // true or false depending on whether the sanitizer stripped anything.
+                                hasChanged: true
+                            };
+                        }
+                    }
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+            document.getElementById('editorUpdate').innerHTML = content;
+            //console.log("number of textarea: " + $("textarea").length);
+            //console.log($("#editorUpdate").next().prop("tagName"));
+            if ($("#editorUpdate").next().prop("tagName") === 'DIV') {
+                $("#editorUpdate").next().remove();
+            }
+
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
+        });
+        $("#cancelBtnUpdate").click(function (){
+            $("#updateForm").hide();
+        });
+        $("#cancelBtnInsert").click(function (){
+            $("#insertForm").hide();
+        });
+        // Delete button
+        $(".deleteCTHBtn").click(function() {
+            //get infor of Class to delete here
+            if (confirm("Bạn có muốn xoá class id: " + $(this).parent().parent().parent().first().children().first().text())) {
+                $(this).parent().parent().parent().remove();
+                $.ajax({
+                    url: "http://localhost:8080/admin/cth/deleteCTH?id=" + $(this).parent().parent().parent().first().children().first().text() ,
+                    success: function(response) {
+                        //do something
+                    },
+                    error: function(xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        });
+        $('#insertNgayBatDau').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#insertNgayKetThuc').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#ngayBatDauUpdate').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+        $('#ngayKetThucUpdate').datepicker({
+            dateFormat: 'yyyy-mm-dd'
+        }).val();
+
+        $("#insertForm").submit(function(e){
+            if (Date.parse($('#insertNgayBatDau').val()) >= Date.parse($('#insertNgayKetThuc').val())) {
+                alert("Ngày bắt đầu phải diễn ra trước ngày kết thúc");
+                return false;
+            }
+            else return true;
+        });
+
+        $("#updateForm").submit(function(e){
+            if (Date.parse($('#ngayBatDauUpdate').val()) >= Date.parse($('#ngayKetThucUpdate').val())) {
+                alert("Ngày bat dau phải diễn ra trước ngày kết thúc");
+                return false;
+            }
+            else return true;
+        });
+    });
+
+</script>
+
+</html>
