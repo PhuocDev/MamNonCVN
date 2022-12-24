@@ -38,12 +38,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .username(account.getUsername())
                     .password(account.getPassword()).roles(account.getRole()).build());
         }
+
 //        users.add(User.withDefaultPasswordEncoder()
 //                .username("admin")
 //                .password("admin").roles("manager").build());
-//        users.add(User.withDefaultPasswordEncoder()
-//                .username("phuoc")
-//                .password("phuoc").roles("manager").build());
+        users.add(User.withDefaultPasswordEncoder()
+                .username("phuoc")
+                .password("phuoc").roles("admin").build());
 //        users.add(User.withDefaultPasswordEncoder()
 //                .username("thuha")
 //                .password("thuha123").roles("manager").build());
