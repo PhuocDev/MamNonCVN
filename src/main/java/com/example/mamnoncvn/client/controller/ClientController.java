@@ -13,6 +13,7 @@ import com.example.mamnoncvn.customer.models.request.CreateCustomerRequest;
 import com.example.mamnoncvn.customer.service.CustomerService;
 import com.example.mamnoncvn.exception.NotFoundException;
 import com.example.mamnoncvn.feedback.models.request.CreateFeedbackRequest;
+import com.example.mamnoncvn.feedback.service.FeedbackService;
 import com.example.mamnoncvn.mailSender.EmailService;
 import com.example.mamnoncvn.mailSender.EmailServiceImp;
 import com.example.mamnoncvn.mailSender.Mail;
@@ -25,10 +26,9 @@ import com.example.mamnoncvn.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -271,7 +271,7 @@ public class ClientController {
         Mail mail = new Mail();
         mail.setSubject("Một phụ huynh vừa đăng kí tư vấn");
 
-        for (int i =0; i< adminEmailList.size();i++){
+        for (int i =0; i < 2; i++){
             mail.setRecipient(adminEmailList.get(i).getEmail());
             mail.setAttachment(null);
             mail.setMsgBody("Thông tin khách hàng" +
@@ -290,5 +290,95 @@ public class ClientController {
         return "client/tuvan";
     }
 
+
+
+    @PostMapping(path = "/comment/addFromClient",  consumes = "application/x-www-form-urlencoded")
+    public String addNewCommentFromClient(Model model,@Valid @ModelAttribute("createCommentRequest") CreateCommentRequest createCommentRequest) {
+        commentService.save(createCommentRequest);
+        return "redirect:/client/viewBlogDetail?id=" + createCommentRequest.getBlogId();
+    }
+    @PostMapping(path = "/customer/addFromClient",  consumes = "application/x-www-form-urlencoded")
+    public String addNewcustomerFromClient(Model model,@Valid @ModelAttribute("createCustomerRequest") CreateCustomerRequest createCustomerRequest) {
+        customerService.save(createCustomerRequest);
+        try {
+            List<AdminEmail> adminEmailList = adminEmailRepository.findAll();
+            Mail mail = new Mail();
+            mail.setSubject("Một phụ huynh vừa đăng kí tư vấn");
+            if (adminEmailList.size() >= 1) {
+                for (int i = 0; i < adminEmailList.size(); i++) {
+                    mail.setRecipient(adminEmailList.get(i).getEmail());
+                    mail.setAttachment(null);
+                    mail.setMsgBody("Thông tin khách hàng" +
+                            "\nTên khách hàng: " + createCustomerRequest.getTenPhuHuynh() +
+                            "\nTên bé: " + createCustomerRequest.getTenBe() +
+                            "\nĐộ tuổi: " + createCustomerRequest.getTuoiBe() +
+                            "\nSố điện thoại: " + createCustomerRequest.getSoDienThoai() +
+                            "\nĐịa chỉ: " + createCustomerRequest.getDiaChi() +
+                            "\nGhi chú: " + createCustomerRequest.getGhiChu() +
+                            "\nNgày đăng kí: " + LocalDateTime.now()
+                    );
+                    emailService.sendSimpleMail(mail);
+                }
+            } else {
+                mail.setRecipient("nhuphuoc.bui@gmail.com");
+                mail.setAttachment(null);
+                mail.setMsgBody("Hiện tại danh sách admin chưa có, vui lòng bổ sung admin\n" +
+                        "Thông tin khách hàng" +
+                        "\nTên khách hàng: " + createCustomerRequest.getTenPhuHuynh() +
+                        "\nTên bé: " + createCustomerRequest.getTenBe() +
+                        "\nĐộ tuổi: " + createCustomerRequest.getTuoiBe() +
+                        "\nSố điện thoại: " + createCustomerRequest.getSoDienThoai() +
+                        "\nĐịa chỉ: " + createCustomerRequest.getDiaChi() +
+                        "\nGhi chú: " + createCustomerRequest.getGhiChu() +
+                        "\nNgày đăng kí: " + LocalDateTime.now()
+                );
+                emailService.sendSimpleMail(mail);
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return "redirect:/client/";
+    }
+    @Autowired
+    FeedbackService feedbackService;
+    @PostMapping(path = "/feedback/addFromClient",  consumes = "application/x-www-form-urlencoded")
+    public String addNewFeedbackFromClient(Model model,@Valid @ModelAttribute("createFeedbackRequest") CreateFeedbackRequest createFeedbackRequest) {
+
+        feedbackService.save(createFeedbackRequest);
+        try {
+            List<AdminEmail> adminEmailList = adminEmailRepository.findAll();
+            Mail mail = new Mail();
+            mail.setSubject("Một khách hàng đang cần liên hệ");
+            if (adminEmailList.size()>= 1) {
+                for (int i =0; i< adminEmailList.size();i++){
+                    mail.setRecipient(adminEmailList.get(i).getEmail());
+                    mail.setAttachment(null);
+                    mail.setMsgBody("Thông tin khách hàng" +
+                            "\nTên khách hàng: " + createFeedbackRequest.getName()+
+                            "\nEmail: " + createFeedbackRequest.getEmail() +
+                            "\nSố điện thoại: " + createFeedbackRequest.getSoDienThoai()+
+                            "\nNội dung: " + createFeedbackRequest.getContent() +
+                            "\nNgày đăng kí: " + LocalDateTime.now()
+                    );
+                    emailService.sendSimpleMail(mail);
+                }
+            } else {
+                mail.setRecipient("nhuphuoc.bui@gmail.com");
+                mail.setAttachment(null);
+                mail.setMsgBody("Hiện tại danh sách quản trị viên đang trống, vui lòng bổ sung" +
+                        "Thông tin khách hàng" +
+                        "\nTên khách hàng: " + createFeedbackRequest.getName()+
+                        "\nEmail: " + createFeedbackRequest.getEmail() +
+                        "\nSố điện thoại: " + createFeedbackRequest.getSoDienThoai()+
+                        "\nNội dung: " + createFeedbackRequest.getContent() +
+                        "\nNgày đăng kí: " + LocalDateTime.now()
+                );
+                emailService.sendSimpleMail(mail);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return "redirect:/client/";
+    }
 
 }

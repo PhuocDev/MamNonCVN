@@ -89,7 +89,7 @@
             <div class="card fs-3">
                 <div class="card-header">Thêm Comment mới</div>
                 <div class="card-body">
-                    <form th:action="@{/admin/comment/addFromClient}"  th:object="${createCommentRequest}" method="post"  accept-charset="utf-8">
+                    <form th:action="@{/client/comment/addFromClient}"  th:object="${createCommentRequest}" method="post"  accept-charset="utf-8">
                         <div class="row g-2">
                             <div class="mb-3 col-md-3">
                                 <label th:for="text" class="form-label">Họ tên</label>
