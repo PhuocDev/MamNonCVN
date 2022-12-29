@@ -10,33 +10,67 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/client/report")
 public class ReportController {
 
     //export to excel
     @Autowired
-    StudentService studentService;
-    @GetMapping("/excel1")
-    public void exportIntoExcelFile(HttpServletResponse response) throws IOException {
-        response.setContentType("application/octet-stream");
-//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-//        String currentDateTime = dateFormatter.format(new Date());
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=student" + "123" + ".xlsx";
-        response.setHeader(headerKey, headerValue);
+    ExcelService fileService;
 
-        List<Student> listOfStudents = studentService.getAll();
-        ExcelGenerator generator = new ExcelGenerator(listOfStudents);
-        generator.generateExcelFile(response);
+    @GetMapping("/student-download")
+    public ResponseEntity<Resource> getStudentFile() {
+        int nameInsert =  (int)(Math.random()*(99999-10000+1)+10000);
+        String filename = "studentReport" + nameInsert + ".xlsx";
+        InputStreamResource file = new InputStreamResource(fileService.load_exportStudentExcel());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
+    }
+    @GetMapping("/class-download")
+    public ResponseEntity<Resource> getClassFileReport() {
+        int nameInsert =  (int)(Math.random()*(99999-10000+1)+10000);
+        String filename = "classReport" + nameInsert + ".xlsx";
+        InputStreamResource file = new InputStreamResource(fileService.load_exportClassExcel());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
     }
 
-    @GetMapping("/excel2")
-    public void testExcel() {
-        List<Student> studentList = studentService.getAll();
-        ExcelGenerator.tutorialsToExcel(studentList);
+    @GetMapping("/teacher-download")
+    public ResponseEntity<Resource> getTeacherFileReport() {
+        int nameInsert =  (int)(Math.random()*(99999-10000+1)+10000);
+        String filename = "teacherReport" + nameInsert + ".xlsx";
+        InputStreamResource file = new InputStreamResource(fileService.load_exportTeachersExcel());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
     }
 
+    @GetMapping("/cth-download")
+    public ResponseEntity<Resource> getCTHFileReport() {
+        int nameInsert =  (int)(Math.random()*(99999-10000+1)+10000);
+        String filename = "cthReport" + nameInsert + ".xlsx";
+        InputStreamResource file = new InputStreamResource(fileService.load_exportCTHExcel());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
+    }
 }

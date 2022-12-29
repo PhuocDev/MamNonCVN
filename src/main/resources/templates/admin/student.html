@@ -46,7 +46,7 @@
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Ngày sinh</label>
                                         <div class="mb-3">
-                                            <input th:field="*{ngaySinh}" type="text" id="insertNgaySinh" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="2020-01-01">
+                                            <input th:field="*{ngaySinh}" type="date" id="insertNgaySinh" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="2020-01-01">
                                         </div>
                                     </div>
                                     <div class="mb-3 col-md-2">
@@ -96,7 +96,7 @@
                                     <div class="mb-3 col-md-2">
                                         <label th:for="text" class="form-label">Ngày nhập học</label>
                                         <div class="mb-3">
-                                            <input th:field="*{ngayNhapHoc}" type="text" id="insertNgayNhapHoc" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" placeholder="01/01/2022" aria-describedby="datepicker">
+                                            <input th:field="*{ngayNhapHoc}" type="date" id="insertNgayNhapHoc" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" placeholder="01/01/2022" aria-describedby="datepicker">
                                         </div>
                                     </div>
                                     <div class="mb-3 col-md-4">
@@ -135,7 +135,7 @@
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Ngày sinh</label>
                                         <div class="mb-3">
-                                            <input th:field="*{ngaySinh}" type="text" id="ngaySinhUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="2020-01-01">
+                                            <input th:field="*{ngaySinh}" type="date" id="ngaySinhUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="2020-01-01">
                                         </div>
                                     </div>
                                     <div class="mb-3 col-md-2">
@@ -185,7 +185,7 @@
                                     <div class="mb-3 col-md-2">
                                         <label th:for="text" class="form-label">Ngày nhập học</label>
                                         <div class="mb-3">
-                                            <input th:field="*{ngayNhapHoc}" type="text" id="ngayNhapHocUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" placeholder="01/01/2022" aria-describedby="datepicker">
+                                            <input th:field="*{ngayNhapHoc}" type="date" id="ngayNhapHocUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" placeholder="01/01/2022" aria-describedby="datepicker">
                                         </div>
                                     </div>
                                     <div class="mb-3 col-md-4">
@@ -207,7 +207,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary "><i class="fas fa-save"></i> Save</button>
-                                <button id="cancleBtnUpdate" type="submit" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
+                                <button id="cancleBtnUpdate" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</button>
                             </form>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
 
                 <!--                search box-->
                 <div class="row" style="margin-bottom: 20px">
-                    <form  th:action="@{/admin/student/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                    <form  th:action="@{/admin/student/{keyword}(keyword = ${keyword})}" class="col-8 input-group" style="width: 600px; margin-top: 30px; margin-left: 0px">
                         <input type="search" name="keyword"  class="form-control" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                         <select th:object="${category}" name="category" id="category" class="form-control">
                             <option th:value="all">Tìm kiếm theo</option>
@@ -225,7 +225,9 @@
                             <option th:value="all">Tất cả</option>
                         </select>
                         <button th:field="*{keyword}" type="submit" class="btn btn-secondary">Search</button>
+                        <a th:href="@{/client/report/student-download}" class=" btn btn-success" style="margin-left: 30px">Xuất file Excel</a>
                     </form>
+
                 </div>
                 <!-- Content                -->
                 <div class="row">
@@ -304,6 +306,12 @@
 </body>
 <script>
     $(document).ready(function() {
+        $("#cancelBtnInsert").click(function (){
+            $("#insertForm").hide();
+        });
+        $("#cancelBtnUpdate").click(function (){
+            $("#updateForm").hide();
+        });
         $("#insertForm").hide();
         $("#updateForm").hide();
         $("#addStudentBtn").click(function() {
