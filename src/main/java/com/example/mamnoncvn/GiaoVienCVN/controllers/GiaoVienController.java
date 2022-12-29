@@ -2,12 +2,20 @@ package com.example.mamnoncvn.GiaoVienCVN.controllers;
 import com.example.mamnoncvn.GiaoVienCVN.models.request.*;
 import com.example.mamnoncvn.GiaoVienCVN.entity.GiaoVien;
 import com.example.mamnoncvn.GiaoVienCVN.service.GiaoVienService;
+import com.example.mamnoncvn.users.Models.request.ChangePasswordForQTV;
+import com.example.mamnoncvn.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -61,6 +69,40 @@ public class GiaoVienController {
     public String deleteGV(@RequestParam Long id) {
         giaoVienService.deleteGiaoVienById(id);
         return "redirect:/admin/giaovien/all";
+    }
+
+    @GetMapping(path = "/changePasswordForQTV")
+    public String updatePasswordForQTV(Model model){
+        //for changing password for qtv
+        ChangePasswordForQTV changePasswordForQTV = new ChangePasswordForQTV();
+        model.addAttribute("changePasswordForQTV", changePasswordForQTV);
+        return "admin/doiMatKhau";
+    }
+    @Autowired
+    UserService userService;
+    @PostMapping(path = "/changePasswordForQTVPost",  consumes = "application/x-www-form-urlencoded")
+    public String updatePassword(Model model, @Valid @ModelAttribute("changePasswordForQTV") ChangePasswordForQTV changePasswordForQTV) throws Exception {
+        //for changing password for qtv
+        if (userService.updatePasswordForQTV(changePasswordForQTV)) {
+            userDetailsServiceBean();
+            return "redirect:/login?logout";
+        } else return "error";
+    }
+
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        // add users in List
+        List<UserDetails> users = new ArrayList<UserDetails>();
+        List<com.example.mamnoncvn.users.entity.User> userList = userService.getAll();
+        for (com.example.mamnoncvn.users.entity.User account : userList) {
+            System.out.println(account.getUsername() + " " + account.getPassword());
+            users.add(User.withDefaultPasswordEncoder()
+                    .username(account.getUsername())
+                    .password(account.getPassword()).roles(account.getRole()).build());
+        }
+        users.add(User.withDefaultPasswordEncoder()
+                .username("phuoc")
+                .password("phuoc").roles("admin").build());
+        return new InMemoryUserDetailsManager(users);
     }
 
 }

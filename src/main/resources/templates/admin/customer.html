@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Customer manager</title>
+    <title>Customer admin</title>
     <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
     <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
     <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
@@ -246,6 +246,10 @@
         });
 
         $(".updateClassBtn").click(function() {
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
             var idUpdate = $(this).parent().parent().parent().first().children().first().text();
             var tenBeUpdate = $(this).parent().parent().parent().first().children().first().next().text();
             var tuoiBeUpdate = $(this).parent().parent().parent().first().children().first().next().next().text();

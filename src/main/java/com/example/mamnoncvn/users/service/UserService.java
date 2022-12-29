@@ -2,6 +2,7 @@ package com.example.mamnoncvn.users.service;
 
 import com.example.mamnoncvn.exception.NotFoundException;
 import com.example.mamnoncvn.users.Models.mapper.UserMapper;
+import com.example.mamnoncvn.users.Models.request.ChangePasswordForQTV;
 import com.example.mamnoncvn.users.Models.request.CreateUserRequest;
 import com.example.mamnoncvn.users.Models.request.UpdatePasswordRequest;
 import com.example.mamnoncvn.users.Models.request.UpdateUserRequest;
@@ -56,4 +57,14 @@ public class UserService {
         } else return false;
     }
 
+    public boolean updatePasswordForQTV(ChangePasswordForQTV changePasswordForQTV) {
+        User oldUser = userRepository.findByUsername(changePasswordForQTV.getUsername());
+        if (oldUser!= null) {
+            if (oldUser.getPassword().equals(changePasswordForQTV.getOldPassword())){
+                oldUser.setPassword(changePasswordForQTV.getNewPassword());
+                userRepository.saveAndFlush(oldUser);
+                return true;
+            } else return false;
+        } else return false;
+    }
 }

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>QTV Account</title>
+    <link th:href="@{/vendor/fontawesome/css/fontawesome.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/solid.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome/css/brands.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/flagiconcss/css/flag-icon.min.css}" rel="stylesheet">
+    <link th:href="@{/css/master.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <th:block th:replace="~{fragment/sidebar_admin :: ${sidebar}}"></th:block>
+    <div id="body" class="active">
+        <!-- navbar navigation component -->
+        <th:block th:replace="~{fragment/navbar_admin :: ${navbar}}"></th:block>
+
+        <!-- end of navbar navigation -->
+        <div class="content">
+            <div class="container">
+                <div class="page-title" style="margin-bottom: 20px;">
+                    <h3>ĐỔI MẬT KHẨU</h3>
+                </div>
+                <!-- Update password                -->
+                <div id="updateForm" class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Cập nhật mật khẩu</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Điền thông tin vào bên dưới:</h5>
+                            <form action="#" th:action="@{/admin/giaovien/changePasswordForQTVPost}" th:object="${changePasswordForQTV}" method="post" name="insertForm" accept-charset="utf-8">
+                                <div class="row g-2 fs-5">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="username" class="form-label">Username: </label>
+                                        <input id="username" th:field="*{username}" type="text" class="form-control" minlength="4" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2 fs-5">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="password" class="form-label">Mật khẩu cũ</label>
+                                        <input id="oldPassword" th:field="*{oldPassword}" type="password" class="form-control" minlength="4" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2 fs-5">
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="password" class="form-label">Mật khẩu mới</label>
+                                        <input id="newPasswordUpdate" th:field="*{newPassword}" type="password" class="form-control" minlength="4" placeholder="" required>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label th:for="password" class="form-label">Nhập lại mật khẩu mới</label>
+                                        <input id="nhapLaiNewPasswordUpdate" type="password" class="form-control" minlength="4" placeholder="" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+<script>
+
+    $(document).ready(function() {
+
+
+        $("#insertForm").submit(function(e){
+            if ($("#matKhauInsert").val() != $("#nhapLaiMatKhauInsert").val()) {
+                alert("Vui lòng nhập lại mật khẩu!");
+                return false;
+            } else if ($("#matKhauInsert").val().length <= 5 ) {
+                alert("Mật khẩu không hợp lệ!");
+                return false;
+            }
+            else return true;
+        });
+        $("#updateForm").submit(function(e){
+            if ($("#newPasswordUpdate").val() != $("#nhapLaiNewPasswordUpdate").val()) {
+                alert("Vui lòng nhập lại mật khẩu!");
+                return false;
+            }
+            else return true;
+        });
+
+    });
+</script>
+
+</html>

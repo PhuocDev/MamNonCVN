@@ -29,7 +29,7 @@
         <div class="content">
             <div class="container">
                 <div class="page-title" style="margin-bottom: 20px;">
-                    <h3>Class management</h3>
+                    <h3>QUẢN LÝ DANH SÁCH LỚP</h3>
                 </div>
                 <!-- Form insert new student -->
                 <div id="insertForm" class="col-lg-12">
@@ -142,14 +142,14 @@
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Ngày khai giảng</label>
                                         <div class="mb-3">
-                                            <input th:field="*{dateStarted}" id="khaiGiangUpdate" type="text" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Khai giảng" required>
+                                            <input th:field="*{dateStarted}" id="khaiGiangUpdate" type="date" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Khai giảng" required>
                                             <small class="form-text text-muted">You can change the month, year, and date</small>
                                         </div>
                                     </div>
                                     <div class="mb-3 col-md-3">
                                         <label th:for="text" class="form-label">Ngày kết thúc</label>
                                         <div class="mb-3">
-                                            <input th:field="*{dateEnded}" type="text" id="ketThucUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Kết thúc" required>
+                                            <input th:field="*{dateEnded}" type="date" id="ketThucUpdate" data-format="YYYY-MM-DD" class="form-control datepicker-here" data-language="en" aria-describedby="datepicker" placeholder="Kết thúc" required>
                                             <small class="form-text text-muted">You can change the month, year, and date</small>
                                         </div>
                                     </div>
@@ -199,9 +199,10 @@
                 </div>
                 <!--                search box-->
                 <div class="row" style="margin-bottom: 20px">
-                    <form  th:action="@{/admin/class/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 400px; margin-top: 30px; margin-left: 0px">
+                    <form  th:action="@{/admin/class/{keyword}(keyword = ${keyword})}" class="col-4 input-group" style="width: 600px; margin-top: 30px; margin-left: 0px">
                         <input type="search" name="keyword"  class="form-control rounded" placeholder="Search" maxlength="30" aria-label="Search" aria-describedby="search-addon" />
                         <button th:field="*{keyword}" type="submit" class="btn btn-secondary">search</button>
+                        <a th:href="@{/client/report/class-download}" class=" btn btn-success" style="margin-left: 30px">Xuất file Excel</a>
                     </form>
                 </div>
                 <!-- Content -->
@@ -309,6 +310,10 @@
             })
         });
         $(".updateClassBtn").click(function() {
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
             $("#insertForm").hide();
             $("#updateForm").show();
             $("#idUpdate").val($(this).parent().parent().parent().first().children().first().text());

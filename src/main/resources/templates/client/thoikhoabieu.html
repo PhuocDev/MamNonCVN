@@ -60,13 +60,21 @@
             <!-- tkb list -->
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4  g-5 m-2 news-main">
                 <div th:each="tkb : ${tkbList}" class="col">
-                    <div class="card" style="height: 220px">
+                    <div class="card" style="height: auto">
+<!--                        <img    style="height: 200px; object-fit: cover"-->
+<!--                                th:src="*{tkb.getAnhBia()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">-->
+<!--                        <div class="card-body">-->
+<!--                            <h2 th:text="*{tkb.getTenTKB()}" style="font-size: 1.5rem;" class="card-title">Card title</h2>-->
+<!--                            <p th:text="*{tkb.getDescription()}" style="font-size: 1.3rem;" class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--                            <a href="#" class="btn btn-danger viewTkbDetailBtn"><h5>Xem chi tiết</h5></a>-->
+<!--                            <p th:text="*{tkb.getId()}" hidden></p>-->
+<!--                        </div>-->
                         <img    style="height: 200px; object-fit: cover"
                                 th:src="*{tkb.getAnhBia()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h2 th:text="*{tkb.getTenTKB()}" style="font-size: 1.5rem;" class="card-title">Card title</h2>
-                            <p th:text="*{tkb.getDescription()}" style="font-size: 1.3rem;" class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger viewTkbDetailBtn"><h5>Xem chi tiết</h5></a>
+                            <p th:text="*{tkb.getDescription()}" style="font-size: 1.3rem;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-danger viewBlogDetailBtn"><h5>Xem chi tiết</h5></a>
                             <p th:text="*{tkb.getId()}" hidden></p>
                         </div>
                     </div>

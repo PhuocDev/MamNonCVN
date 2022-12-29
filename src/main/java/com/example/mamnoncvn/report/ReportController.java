@@ -2,13 +2,16 @@ package com.example.mamnoncvn.report;
 
 import com.example.mamnoncvn.student.entity.Student;
 import com.example.mamnoncvn.student.service.StudentService;
+import com.example.mamnoncvn.users.Models.request.ChangePasswordForQTV;
+import com.example.mamnoncvn.users.entity.User;
+import com.example.mamnoncvn.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -20,7 +23,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
@@ -73,4 +75,5 @@ public class ReportController {
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
                 .body(file);
     }
+
 }

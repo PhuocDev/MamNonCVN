@@ -52,6 +52,7 @@ public class ThoiKhoaBieuService {
         thoiKhoaBieu.setNgayKetThuc(updateThoiKhoaBieuRequest.getNgayKetThuc());
         thoiKhoaBieu.setNgayDang(LocalDate.now());
         thoiKhoaBieu.setTenTKB(updateThoiKhoaBieuRequest.getTenTKB());
+        thoiKhoaBieu.setMaLop(updateThoiKhoaBieuRequest.getMaLop());
         thoiKhoaBieuRepository.saveAndFlush(thoiKhoaBieu);
 
         return thoiKhoaBieu;
