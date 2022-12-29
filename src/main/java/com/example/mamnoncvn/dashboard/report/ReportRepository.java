@@ -41,19 +41,15 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 //    @Transactional
 //    @Modifying
     //@Query(value = "select count(*) from blog t ", nativeQuery = true)
-    @Query(value =
+    @Query(value = //"SET sql_mode = '' " +
             "select sum(total) from ( " +
-            "select b.name, (b.tuition*count(a.ten_hoc_sinh)) as total " +
+            "select b.name, (b.tuition *count(a.ten_hoc_sinh)) as total " +
             "from student a inner join class b " +
             "on a.class_id = b.id " +
             "group by b.name " +
             ") total "
             , nativeQuery = true)
     Long getTotalIncomeThisMonth();
-
-
-
-
 
 
 }

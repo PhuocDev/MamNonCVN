@@ -221,7 +221,7 @@
             if (confirm("Do you want to delete student id: " + $(this).parent().parent().parent().first().children().first().text())) {
                 $(this).parent().parent().parent().remove();
                 $.ajax({
-                    url: "http://localhost:8080/admin/giaovien/deleteGV?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
+                    url: "/admin/giaovien/deleteGV?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
                     success: function(response) {
                         //do something
                     },

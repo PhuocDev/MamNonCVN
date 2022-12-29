@@ -103,7 +103,7 @@
             if (confirm("Do you want to delete  Blog id: " + $(this).parent().parent().parent().first().children().first().text())) {
                 $(this).parent().parent().parent().remove();
                 $.ajax({
-                    url: "http://localhost:8080/blog/deleteBlog?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
+                    url: "/blog/deleteBlog?id=" + $(this).parent().parent().parent().first().children().first().text()  ,
                     success: function(response) {
                         //do something
 

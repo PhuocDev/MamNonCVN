@@ -78,7 +78,7 @@
 <script>
     $(document).ready(function (){
         $(".viewCthDetailBtn").click(function() {
-            var url = "http://localhost:8080/client/viewCthDetail?id=" + $(this).next().text();
+            var url = "/client/viewCthDetail?id=" + $(this).next().text();
             //window.open(url, '_blank');
             window.location.href = url;
         });

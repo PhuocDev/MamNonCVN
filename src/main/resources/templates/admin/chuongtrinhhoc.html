@@ -338,7 +338,7 @@
             if (confirm("Bạn có muốn xoá class id: " + $(this).parent().parent().parent().first().children().first().text())) {
                 $(this).parent().parent().parent().remove();
                 $.ajax({
-                    url: "http://localhost:8080/admin/cth/deleteCTH?id=" + $(this).parent().parent().parent().first().children().first().text() ,
+                    url: "/admin/cth/deleteCTH?id=" + $(this).parent().parent().parent().first().children().first().text() ,
                     success: function(response) {
                         //do something
                     },
