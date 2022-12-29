@@ -17,6 +17,9 @@ import com.example.mamnoncvn.feedback.service.FeedbackService;
 import com.example.mamnoncvn.mailSender.EmailService;
 import com.example.mamnoncvn.mailSender.EmailServiceImp;
 import com.example.mamnoncvn.mailSender.Mail;
+import com.example.mamnoncvn.report.ExcelGenerator;
+import com.example.mamnoncvn.student.entity.Student;
+import com.example.mamnoncvn.student.service.StudentService;
 import com.example.mamnoncvn.thoikhoabieu.entity.ThoiKhoaBieu;
 import com.example.mamnoncvn.thoikhoabieu.service.ThoiKhoaBieuService;
 import com.example.mamnoncvn.users.entity.AdminEmail;
@@ -28,10 +31,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -117,6 +125,7 @@ public class ClientController {
         model.addAttribute("keyword", searchKeyword);
         return "client/blog";
     }
+
     @GetMapping("/viewBlogDetail")
     public String viewBlogDetail(Model model, @PathParam("id") Long id) {
         Blog blog = blogService.findBlogById(id);
@@ -380,5 +389,8 @@ public class ClientController {
         }
         return "redirect:/client/";
     }
+
+
+
 
 }
