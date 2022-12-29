@@ -28,7 +28,7 @@
             <div class="content">
                 <div class="container">
                     <div class="page-title" style="margin-bottom: 20px;">
-                        <h3>Teacher management</h3>
+                        <h3>Quản lý giáo viên</h3>
                     </div>
 
                     <!-- Form insert new student -->
@@ -121,7 +121,15 @@
                             </div>
                         </div>
                     </div>
+                    <!--     searching               -->
+                    <div class="row" style="margin-bottom: 20px; text-align: right; width: 80%">
+                        <form  th:action="@{#}" class="input-group" style="width: 100%; text-align: right; left:80%;">
+                            <div style="text-align: right;">
+                                <a th:href="@{/client/report/teacher-download}" class=" btn btn-success" style="margin-left: 30px">Xuất file Excel</a>
+                            </div>
+                        </form>
 
+                    </div>
                     <!-- Content                   -->
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
@@ -184,7 +192,7 @@
         $("#updateForm").hide();
         $("#addStudentBtn").click(function() {
             $("#updateForm").hide();
-            $("#insertForm").toggle(500);
+            $("#insertForm").show(500);
             //scroll to top
             $('body,html').animate({
                 scrollTop: 10
@@ -192,6 +200,10 @@
         });
 
         $(".updateStudentBtn").click(function() {
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
             $("#insertForm").hide();
             $("#updateForm").show(100);
             $("#idUpdate").val($(this).parent().parent().parent().first().children().first().text());
