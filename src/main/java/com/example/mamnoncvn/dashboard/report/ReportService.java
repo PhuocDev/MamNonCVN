@@ -17,7 +17,7 @@ public class ReportService {
             report.setSupportRequest(reportRepository.getTotalSupportRequestThisMonth());
             report.setTotalTeacher(reportRepository.getTotalTeacher());
             report.setMonthlyIncome(reportRepository.getTotalIncomeThisMonth().toString());
-            System.out.println(report.toString());
+            System.out.println(reportRepository.totalIncomeThisMonth().toString());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -43,7 +43,7 @@
                 <h1 style="text-align: center">Cập nhật các chương trình học tại Mầm non Cầu vòng nhỏ</h1>
             </div>
             <!--search box-->
-            <div class="row" style="margin-bottom: 5px; padding-right: 92px; margin-top: 10px; font-size: 30px; width: 100%; display:flex; justify-content: flex-end;" >
+            <div class="row" style="margin-bottom: 5px; margin-top: 10px; font-size: 30px; width: 100%; display:flex; justify-content: flex-end;" >
                 <form  th:action="@{/client/chuongtrinhhoc/{keyword}(keyword = ${keyword})}" class="col-md-4 input-group fs-3" style="width: 400px; font-size: 25px; height: fit-content; margin-left: 30px;">
                     <input  style="font-size: 25px; height: fit-content; width: 100px;" type="search" name="keyword"  class="form-control fs-3" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                     <button th:field="*{keyword}" type="submit" class="btn btn-danger fs-3">Tìm kiếm</button>
@@ -51,15 +51,35 @@
             </div>
 
             <!-- blog list -->
-            <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5 m-2 news-main" style="padding-right: 90px; padding-left: 90px;">
+            <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5 m-2 news-main" style="">
                 <div th:each="cth : ${chuongTrinhHocList}" class="col">
                     <div class="card" style="height: 340px">
                         <img    style="height: 200px; object-fit: cover"
                                 th:src="*{cth.getAnhBia()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h2 th:text="*{cth.getTenCTH()}" class="card-title" style="font-size: 1.6rem">Chương trình ABC</h2>
-                            <p th:text="*{cth.getDescription()}" style="font-size: 1.4rem;" class="card-text">Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger viewCthDetailBtn"><h5>Xem chi tiết</h5></a>
+                            <h2 th:text="*{cth.getTenCTH()}" class="card-title" style="
+                                  font-size: 1.6rem;
+                                  text-overflow: ellipsis;
+                                  width: 100%;
+                                  display: inline-block;
+                                  white-space: nowrap;
+                                  overflow: hidden;
+                            ">Chương trình ABC</h2>
+                            <p th:text="*{cth.getDescription()}"
+                               style="font-size:1.4rem;
+                               -webkit-box-orient: vertical;
+                                display: -webkit-box;
+                                  -webkit-line-clamp: 2;
+                                  overflow: hidden;
+                                  text-overflow: ellipsis;
+                                  white-space: normal;
+                                  " class="card-text">
+                                Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
+                            <a style="
+                                   position: absolute;
+                                   left: 10px;
+                                   bottom:   10px;
+                            " href="#" class="btn btn-danger viewCthDetailBtn"><h5>Xem chi tiết</h5></a>
                             <p th:text="*{cth.getId()}" hidden></p>
                         </div>
                     </div>

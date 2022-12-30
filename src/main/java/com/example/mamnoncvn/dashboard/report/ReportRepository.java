@@ -1,5 +1,6 @@
 package com.example.mamnoncvn.dashboard.report;
 
+import lombok.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -41,15 +42,22 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 //    @Transactional
 //    @Modifying
     //@Query(value = "select count(*) from blog t ", nativeQuery = true)
-    @Query(value = //"SET sql_mode = '' " +
-            "select sum(total) from ( " +
-            "select b.name, (b.tuition *count(a.ten_hoc_sinh)) as total " +
-            "from student a inner join class b " +
-            "on a.class_id = b.id " +
-            "group by b.name " +
-            ") total "
+
+    @Query(value =
+            "select sum(total) from (select b.name, (4500000 * count(a.ten_hoc_sinh)) " +
+                    " as total " +
+                    " from student a inner join class b on a.class_id = b.id \n" +
+                    "\t\t\tgroup by b.name\n" +
+                    "\t) as total"
             , nativeQuery = true)
-    Long getTotalIncomeThisMonth();
+    Integer getTotalIncomeThisMonth();
+
+
+    @Query(value = "select sum(total) from (select b.name, (4500000 * count(a.ten_hoc_sinh)) as total" +
+            " from student a inner join class b on a.class_id = b.id " +
+            "group by b.name " +
+            ") as total", nativeQuery = true)
+    Float totalIncomeThisMonth();
 
 
 }

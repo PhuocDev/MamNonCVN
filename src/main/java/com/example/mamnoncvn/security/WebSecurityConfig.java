@@ -81,7 +81,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         List<UserDetails> users = new ArrayList<UserDetails>();
         List<com.example.mamnoncvn.users.entity.User> userList = userService.getAll();
         for (com.example.mamnoncvn.users.entity.User account : userList) {
-            System.out.println(account.getUsername() + " - " + account.getPassword());
             users.add(User.withDefaultPasswordEncoder()
                     .username(account.getUsername())
                     .password(account.getPassword()).roles(account.getRole()).build());
