@@ -50,13 +50,12 @@
                 <h1 style="text-align: center">Cập nhật các sự kiện và thông báo tại Mầm non Cầu vòng nhỏ</h1>
             </div>
             <!--search box-->
-            <div style="margin-bottom: 5px; margin-top: 10px; font-size: 30px; width: 100%; display:flex; justify-content: flex-end;" >
-                <form  th:action="@{/client/blog_all/{keyword}(keyword = ${keyword})}" class="col-4 input-group fs-3" style="width: 400px; font-size: 25px; height: fit-content; margin-left: 30px;">
+            <div class="row" style="margin-bottom: 5px; margin-top: 10px; font-size: 30px; width: 100%; display:flex; justify-content: flex-end;" >
+                <form  th:action="@{/client/blog_all/{keyword}(keyword = ${keyword})}" class="col-md-4 input-group fs-3" style="width: 400px; font-size: 25px; height: fit-content; margin-left: 30px;">
                     <input  style="font-size: 25px; height: fit-content; width: 100px;" type="search" name="keyword"  class="form-control fs-3" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                     <button th:field="*{keyword}" type="submit" class="btn btn-danger fs-3">Tìm kiếm</button>
                 </form>
             </div>
-
             <!-- blog list -->
             <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5 m-2 news-main" style="">
                 <div th:each="blog : ${blogList}" class="col">

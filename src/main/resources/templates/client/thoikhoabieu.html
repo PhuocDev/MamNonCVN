@@ -50,45 +50,46 @@
                 <h1 style="text-align: center">Cập nhật thời khóa biểu của từng lớp</h1>
             </div>
             <!--search box-->
-            <div style="margin-bottom: 5px; padding-right: 92px; margin-top: 10px; font-size: 30px; width: 100%; display:flex; justify-content: flex-end;" >
-                <form  th:action="@{/client/tkb/{keyword}(keyword = ${keyword})}" class="col-4 input-group fs-3" style="width: 400px; font-size: 25px; height: fit-content; margin-left: 30px;">
+            <div class="row" style="margin-bottom: 5px; margin-top: 10px; font-size: 30px; width: 100%; display:flex; justify-content: flex-end;" >
+                <form  th:action="@{/client/tkb/{keyword}(keyword = ${keyword})}" class="col-md-4 input-group fs-3" style="width: 400px; font-size: 25px; height: fit-content; margin-left: 30px;">
                     <input  style="font-size: 25px; height: fit-content; width: 100px;" type="search" name="keyword"  class="form-control fs-3" placeholder="Search" maxlength="50" aria-label="Search" aria-describedby="search-addon" />
                     <button th:field="*{keyword}" type="submit" class="btn btn-danger fs-3">Tìm kiếm</button>
                 </form>
             </div>
-
-            <!-- tkb list -->
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4  g-5 m-2 news-main">
+            <!-- blog list -->
+            <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5 m-2 news-main" style="">
                 <div th:each="tkb : ${tkbList}" class="col">
-                    <div class="card" style="height: auto">
-<!--                        <img    style="height: 200px; object-fit: cover"-->
-<!--                                th:src="*{tkb.getAnhBia()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">-->
-<!--                        <div class="card-body">-->
-<!--                            <h2 th:text="*{tkb.getTenTKB()}" style="font-size: 1.5rem;" class="card-title">Card title</h2>-->
-<!--                            <p th:text="*{tkb.getDescription()}" style="font-size: 1.3rem;" class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--                            <a href="#" class="btn btn-danger viewTkbDetailBtn"><h5>Xem chi tiết</h5></a>-->
-<!--                            <p th:text="*{tkb.getId()}" hidden></p>-->
-<!--                        </div>-->
+                    <div class="card" style="height: 340px">
                         <img    style="height: 200px; object-fit: cover"
                                 th:src="*{tkb.getAnhBia()}" src="https://koinursery.edu.vn/wp-content/uploads/2022/06/Make-the-food-fun-for-kids.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h2 th:text="*{tkb.getTenTKB()}" style="font-size: 1.5rem;" class="card-title">Card title</h2>
-                            <p th:text="*{tkb.getDescription()}" style="font-size: 1.3rem;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-danger viewBlogDetailBtn"><h5>Xem chi tiết</h5></a>
+                            <h2 th:text="*{tkb.getTenTKB()}" class="card-title" style="
+                                  font-size: 1.6rem;
+                                  text-overflow: ellipsis;
+                                  width: 100%;
+                                  display: inline-block;
+                                  white-space: nowrap;
+                                  overflow: hidden;
+                            ">Chương trình ABC</h2>
+                            <p th:text="*{tkb.getDescription()}"
+                               style="font-size:1.4rem;
+                               -webkit-box-orient: vertical;
+                                display: -webkit-box;
+                                  -webkit-line-clamp: 2;
+                                  overflow: hidden;
+                                  text-overflow: ellipsis;
+                                  white-space: normal;
+                                  " class="card-text">
+                                Some quick example text to build on the Chương trình ABC and make up the bulk of the card's content.</p>
+                            <a style="
+                                   position: absolute;
+                                   left: 10px;
+                                   bottom:   10px;
+                            " href="#" class="btn btn-danger viewBlogDetailBtn"><h5>Xem chi tiết</h5></a>
                             <p th:text="*{tkb.getId()}" hidden></p>
                         </div>
                     </div>
                 </div>
-                <!--                <div class="col">-->
-                <!--                    <div class="card">-->
-                <!--                        <img src="https://koinursery.edu.vn/wp-content/uploads/2022/06/28-02-2022_14_50_06_giao-duc-cam-xuc-cho-tre-mam-non.jpg" class="card-img-top" alt="...">-->
-                <!--                        <div class="card-body">-->
-                <!--                            <h2 class="card-title">Card title</h2>-->
-                <!--                            <p style="font-size: 16px;" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                <!--                            <a href="tkbdetail.html" class="btn btn-danger"><h5>Xem chi tiết</h5></a>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
             </div>
         </section>
     </div>

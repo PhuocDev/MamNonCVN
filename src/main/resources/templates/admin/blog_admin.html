@@ -240,6 +240,10 @@
         });
 
         $(".updateBlogBtn").click(function() {
+            //scroll to top
+            $('body,html').animate({
+                scrollTop: 10
+            })
             $("#insertForm").hide();
             $("#updateForm").show(100);
             $("#idUpdate").val($(this).parent().parent().parent().first().children().first().text());
